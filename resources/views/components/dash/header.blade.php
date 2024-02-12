@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler-flags.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler-payments.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler-vendors.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/demo.min.css?1684106062') }} " rel="stylesheet" />
     <!-- Font Awesome -->
-    <link href="./dist/fontawesome-free-6.5.1-web/css/all.css" rel="stylesheet">
+    <link href="{{ asset('dist/fontawesome-free-6.5.1-web/css/all.css') }} " rel="stylesheet">
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -37,7 +37,7 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href=".">
-                <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="{{ asset('static/logo.svg') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
         <div class="navbar-nav flex-row order-md-last">
@@ -196,7 +196,7 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
-                    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                    <span class="avatar avatar-sm" style="background-image: url('static/avatars/000m.jpg')"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>Paweł Kuna</div>
                         <div class="mt-1 small text-muted">UI Designer</div>
@@ -204,11 +204,11 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="#" class="dropdown-item">Status</a>
-                    <a href="./profile.html" class="dropdown-item">Profile</a>
+                    <a href="{{ asset('profile.html') }} " class="dropdown-item">Profile</a>
                     <a href="#" class="dropdown-item">Feedback</a>
                     <div class="dropdown-divider"></div>
-                    <a href="./settings.html" class="dropdown-item">Settings</a>
-                    <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                    <a href="{{ asset('settings.html') }} " class="dropdown-item">Settings</a>
+                    <a href="{{ asset('sign-in.html') }}" class="dropdown-item">Logout</a>
                 </div>
             </div>
         </div>
