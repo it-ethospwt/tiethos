@@ -8,6 +8,9 @@ use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
+use App\Http\Controllers\produkController;
+use App\Models\product;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,4 +39,10 @@ Route::prefix('users')->middleware(['isadmin'])->group(function () {
     Route::delete('/delete/{id}', [AdminController::class, 'users_delete'])->name('admin.users.delete')->middleware('auth');
 });
 
-Route::get('produk', [App\Http\Controllers\produkController::class, "index"]);
+//ROUTE PRODUCT
+Route::get('produk', [produkController::class, "index"]);
+Route::get('tambah', [produkController::class, "tambah_product"]);
+Route::post('store', [produkController::class, "store_product"]);
+Route::get('edit/{id}', [produkController::class, 'edit_product']);
+Route::put('storeEdit/{id}', [produkController::class, 'store_edit_product']);
+Route::get('hapus/{id}', [produkController::class, "destroy_product"]);

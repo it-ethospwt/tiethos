@@ -9,13 +9,13 @@
     <link rel="icon" type="image/x-icon" href="{!! asset('static') !!}/photo_profile/default.png" />
     <title>Tiethos - {{$jdl}}</title>
     <!-- CSS files -->
-    <link href="{{asset('./dist/css/tabler.min.css?1684106062')}}" rel="stylesheet" />
-    <link href="{{asset('./dist/css/tabler-flags.min.css?1684106062')}}" rel="stylesheet" />
-    <link href="{{asset('./dist/css/tabler-payments.min.css?1684106062')}}" rel="stylesheet" />
-    <link href="{{asset('./dist/css/tabler-vendors.min.css?1684106062')}}" rel="stylesheet" />
-    <link href="{{asset('./dist/css/demo.min.css?1684106062')}}" rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler-flags.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler-payments.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/tabler-vendors.min.css?1684106062') }} " rel="stylesheet" />
+    <link href="{{ asset('dist/css/demo.min.css?1684106062') }} " rel="stylesheet" />
     <!-- Font Awesome -->
-    <link href="{{asset('./dist/fontawesome-free-6.5.1-web/css/all.css')}}" rel="stylesheet">
+    <link href="{{ asset('dist/fontawesome-free-6.5.1-web/css/all.css') }} " rel="stylesheet">
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -30,7 +30,6 @@
 </head>
 
 <body>
-
     <header class="navbar navbar-expand-md d-print-none">
         <div class="container-xl">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
@@ -39,7 +38,7 @@
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                 <a href=".">
-                    <img src="{{asset('./static/logo.svg')}}" width="110" height="32" alt="Tabler"
+                    <img src="{{ asset('static/logo.svg') }}" width="110" height="32" alt="Tabler"
                         class="navbar-brand-image">
                 </a>
             </h1>
@@ -78,17 +77,17 @@
                         <img class="avatar avatar-sm" src="{{asset('./static/avatars/000m.jpg')}}" width="110"
                             height="32" alt="Tabler" class="navbar-brand-image">
                         <div class="d-none d-xl-block ps-2">
-                            <div class="d-none d-xl-block ps-2">
-                                <div>{{ Auth::user()->name }}</div>
-                                <div class="mt-1 small text-muted">{{ Auth::user()->role }}</div>
+                            <div>{{ Auth::user()->name }}</div>
+                            <div class="mt-1 small text-muted">{{ Auth::user()->role }}
                             </div>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="./profile.html" class="dropdown-item">Profile</a>
+                        <a href="" class="dropdown-item">Profile</a>
                         <a href="{{ route ('logout')}}" class="dropdown-item">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+</body>
