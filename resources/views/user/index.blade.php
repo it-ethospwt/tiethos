@@ -27,11 +27,10 @@
         <!-- Page body -->
         <div class="page-body">
             <div class="container-lg">
-                <!-- <div class="row row-deck row-cards"> -->
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"> Data User</h3>
+                            <h3 class="card-title">Data User</h3>
                         </div>
                         <div class="card-body">
                             <div class="btn-tambahUser mt-2 mb-5">
