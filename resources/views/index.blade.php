@@ -1,1053 +1,221 @@
-<!doctype html>
-<html lang="en">
+<!-- CSS DataTables Responsive -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
-    <!-- CSS files -->
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet" />
-    <style>
-        @import url('https://rsms.me/inter/inter.css');
+<style>
+    .status-online {
+        background-color: green;
+        color: white;
+        /* Untuk mengubah warna teks agar lebih terlihat pada latar belakang hijau */
+        padding: 2px 5px;
+        /* Menambahkan sedikit padding agar lebih terlihat */
+        border-radius: 5px;
+        /* Memberikan sedikit sudut membulat */
+    }
 
-        :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-        }
+    .status-offline {
+        background-color: red;
+        color: white;
+        /* Untuk mengubah warna teks agar lebih terlihat pada latar belakang merah */
+        padding: 2px 5px;
+        /* Menambahkan sedikit padding agar lebih terlihat */
+        border-radius: 5px;
+        /* Memberikan sedikit sudut membulat */
+    }
+</style>
 
-        body {
-            font-feature-settings: "cv03", "cv04", "cv11";
-        }
-    </style>
-</head>
 
-<body>
-    <script src="./dist/js/demo-theme.min.js?1684106062"></script>
-    <div class="page">
-        <!-- Navbar -->
-        @include('dash.header')
-        @include('dash.menu')
-        <div class="page-wrapper">
-            <!-- Page header -->
-            <div class="page-header d-print-none">
-                <div class="container-xl">
-                    <div class="row g-2 align-items-center">
-                        <div class="col">
-                            <!-- Page pre-title -->
-                            <h2 class="page-title">
-                                Dashboard
-                            </h2>
-                        </div>
+<div class="page">
+    <!-- Navbar -->
+    @include('dash.header')
+    @include('dash.menu')
+    <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+            <div class="container-xl">
+                <div class="row g-2 align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <h2 class="page-title">
+                            Dashboard
+                        </h2>
                     </div>
                 </div>
             </div>
-            <!-- Page body -->
-            <div class="page-body">
-                <div class="container-xl">
-                    <div class="row row-deck row-cards">
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="subheader">Sales</div>
-                                        <div class="ms-auto lh-1">
-                                            <div class="dropdown">
-                                                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item active" href="#">Last 7 days</a>
-                                                    <a class="dropdown-item" href="#">Last 30 days</a>
-                                                    <a class="dropdown-item" href="#">Last 3 months</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="h1 mb-3">75%</div>
-                                    <div class="d-flex mb-2">
-                                        <div>Conversion rate</div>
-                                        <div class="ms-auto">
-                                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                                7%
-                                                <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 17l6 -6l4 4l8 -8" />
-                                                    <path d="M14 7l7 0l0 7" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar bg-primary" style="width: 75%" role="progressbar"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                            aria-label="75% Complete">
-                                            <span class="visually-hidden">75% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="subheader">Revenue</div>
-                                        <div class="ms-auto lh-1">
-                                            <div class="dropdown">
-                                                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item active" href="#">Last 7 days</a>
-                                                    <a class="dropdown-item" href="#">Last 30 days</a>
-                                                    <a class="dropdown-item" href="#">Last 3 months</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-baseline">
-                                        <div class="h1 mb-0 me-2">$4,300</div>
-                                        <div class="me-auto">
-                                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                                8%
-                                                <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 17l6 -6l4 4l8 -8" />
-                                                    <path d="M14 7l7 0l0 7" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="chart-revenue-bg" class="chart-sm"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="subheader">New clients</div>
-                                        <div class="ms-auto lh-1">
-                                            <div class="dropdown">
-                                                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item active" href="#">Last 7 days</a>
-                                                    <a class="dropdown-item" href="#">Last 30 days</a>
-                                                    <a class="dropdown-item" href="#">Last 3 months</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-baseline">
-                                        <div class="h1 mb-3 me-2">6,782</div>
-                                        <div class="me-auto">
-                                            <span class="text-yellow d-inline-flex align-items-center lh-1">
-                                                0%
-                                                <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M5 12l14 0" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div id="chart-new-clients" class="chart-sm"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="subheader">Active users</div>
-                                        <div class="ms-auto lh-1">
-                                            <div class="dropdown">
-                                                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item active" href="#">Last 7 days</a>
-                                                    <a class="dropdown-item" href="#">Last 30 days</a>
-                                                    <a class="dropdown-item" href="#">Last 3 months</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-baseline">
-                                        <div class="h1 mb-3 me-2">2,986</div>
-                                        <div class="me-auto">
-                                            <span class="text-green d-inline-flex align-items-center lh-1">
-                                                4%
-                                                <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M3 17l6 -6l4 4l8 -8" />
-                                                    <path d="M14 7l7 0l0 7" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div id="chart-active-users" class="chart-sm"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Invoices</h3>
-                                </div>
-                                <div class="card-body border-bottom py-3">
-                                    <div class="d-flex">
-                                        <div class="text-muted">
-                                            Show
-                                            <div class="mx-2 d-inline-block">
-                                                <input type="text" class="form-control form-control-sm" value="8"
-                                                    size="3" aria-label="Invoices count">
-                                            </div>
-                                            entries
-                                        </div>
-                                        <div class="ms-auto text-muted">
-                                            Search:
-                                            <div class="ms-2 d-inline-block">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    aria-label="Search invoice">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table card-table table-vcenter text-nowrap datatable">
-                                        <thead>
-                                            <tr>
-                                                <th class="w-1"><input class="form-check-input m-0 align-middle"
-                                                        type="checkbox" aria-label="Select all invoices"></th>
-                                                <th class="w-1">No.
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-sm icon-thick" width="24" height="24"
-                                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M6 15l6 -6l6 6" />
-                                                    </svg>
-                                                </th>
-                                                <th>Nama</th>
-                                                <th>Posisi</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input class="form-check-input m-0 align-middle" type="checkbox"
-                                                        aria-label="Select invoice"></td>
-                                                <td><span class="text-muted">1</span></td>
-                                                <td><a href="invoice.html" class="text-reset" tabindex="-1">IT Ethos</a>
-                                                </td>
-                                                <td>
-                                                    Admin Magang
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-success me-1"></span> Online
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="card-footer d-flex align-items-center">
-                                    <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of
-                                        <span>16</span> entries
-                                    </p>
-                                    <ul class="pagination m-0 ms-auto">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M15 6l-6 6l6 6" />
-                                                </svg>
-                                                prev
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                next
-                                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M9 6l6 6l-6 6" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        Jquery Datatable
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="table" id="table1">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>Posisi</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1.</td>
-                                                    <td>Rizal</td>
-                                                    <td>Admin Magang</td>
-                                                    <td><span class="badge bg-success me-1"></span> Online</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @include('dash.footer')
         </div>
-    </div>
-    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">New report</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name="example-text-input"
-                            placeholder="Your report name">
-                    </div>
-                    <label class="form-label">Report type</label>
-                    <div class="form-selectgroup-boxes row mb-3">
-                        <div class="col-lg-6">
-                            <label class="form-selectgroup-item">
-                                <input type="radio" name="report-type" value="1" class="form-selectgroup-input" checked>
-                                <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                    <span class="me-3">
-                                        <span class="form-selectgroup-check"></span>
-                                    </span>
-                                    <span class="form-selectgroup-label-content">
-                                        <span class="form-selectgroup-title strong mb-1">Simple</span>
-                                        <span class="d-block text-muted">Provide only basic data needed for the
-                                            report</span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <div class="col-lg-6">
-                            <label class="form-selectgroup-item">
-                                <input type="radio" name="report-type" value="1" class="form-selectgroup-input">
-                                <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                    <span class="me-3">
-                                        <span class="form-selectgroup-check"></span>
-                                    </span>
-                                    <span class="form-selectgroup-label-content">
-                                        <span class="form-selectgroup-title strong mb-1">Advanced</span>
-                                        <span class="d-block text-muted">Insert charts and additional advanced analyses
-                                            to be inserted in the report</span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="mb-3">
-                                <label class="form-label">Report url</label>
-                                <div class="input-group input-group-flat">
-                                    <span class="input-group-text">
-                                        https://tabler.io/reports/
-                                    </span>
-                                    <input type="text" class="form-control ps-0" value="report-01" autocomplete="off">
+        <!-- Page body -->
+        <div class="page-body">
+            <div class="container-xl">
+                <div class="row row-deck row-cards" style="justify-content: space-between;">
+                    <div class="col-sm-6 col-lg-3">
+                        <div style="width: 278px; height: 125px; position: relative">
+                            <div
+                                style="width: 248px; height: 118px; left: 30px; top: 0px; position: absolute; background: #FEB602; border-radius: 5px; border: 1px #DCE0E5 solid">
+                            </div>
+                            <div
+                                style="width: 272px; height: 118px; left: 0px; top: 7px; position: absolute; background: white; border-radius: 5px; border: 1px #DCE0E5 solid">
+                            </div>
+                            <div
+                                style="left: 17px; top: 60px; position: absolute; color: #1F2024; font-size: 25px; font-family: Poppins; font-weight: 500; word-wrap: break-word">
+                                {{ $totalUsers }}</div>
+                            <div
+                                style="left: 17px; top: 34px; position: absolute; color: #667382; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">
+                                Total User </div>
+                            <div style="width: 42px; height: 42px; left: 217px; top: 44px; position: absolute">
+                                <div style="width: 42px; height: 42px; left: 0px; top: 0px; position: absolute"></div>
+                                <div
+                                    style="width: 14px; height: 14px; left: 8.75px; top: 5.25px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                                <div
+                                    style="width: 21px; height: 10.50px; left: 5.25px; top: 26.25px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                                <div
+                                    style="width: 5.26px; height: 13.56px; left: 28px; top: 5.48px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                                <div
+                                    style="width: 5.25px; height: 10.24px; left: 31.50px; top: 26.51px; position: absolute; border: 2px #ACB2B9 solid">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="mb-3">
-                                <label class="form-label">Visibility</label>
-                                <select class="form-select">
-                                    <option value="1" selected>Private</option>
-                                    <option value="2">Public</option>
-                                    <option value="3">Hidden</option>
-                                </select>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div style="width: 278px; height: 125px; position: relative">
+                            <div
+                                style="width: 248px; height: 118px; left: 30px; top: 0px; position: absolute; background: #1CA0E1; border-radius: 5px; border: 1px #DCE0E5 solid">
+                            </div>
+                            <div
+                                style="width: 272px; height: 118px; left: 0px; top: 7px; position: absolute; background: white; border-radius: 5px; border: 1px #DCE0E5 solid">
+                            </div>
+                            <div
+                                style="left: 17px; top: 60px; position: absolute; color: #1F2024; font-size: 25px; font-family: Poppins; font-weight: 500; word-wrap: break-word">
+                                53</div>
+                            <div
+                                style="left: 17px; top: 34px; position: absolute; color: #667382; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">
+                                Total List Produk </div>
+                            <div style="width: 42px; height: 42px; left: 219px; top: 44px; position: absolute">
+                                <div style="width: 42px; height: 42px; left: 0px; top: 0px; position: absolute"></div>
+                                <div
+                                    style="width: 28px; height: 31.50px; left: 7px; top: 5.25px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                                <div
+                                    style="width: 14px; height: 7.88px; left: 21px; top: 13.12px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                                <div
+                                    style="width: 0px; height: 15.75px; left: 21px; top: 21px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                                <div
+                                    style="width: 14px; height: 7.88px; left: 7px; top: 13.12px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Client name</label>
-                                <input type="text" class="form-control">
+                    <div class="col-sm-6 col-lg-3">
+                        <div style="width: 278px; height: 125px; position: relative">
+                            <div
+                                style="width: 248px; height: 118px; left: 30px; top: 0px; position: absolute; background: #2FB344; border-radius: 5px; border: 1px #DCE0E5 solid">
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Reporting period</label>
-                                <input type="date" class="form-control">
+                            <div
+                                style="width: 272px; height: 118px; left: 0px; top: 7px; position: absolute; background: white; border-radius: 5px; border: 1px #DCE0E5 solid">
                             </div>
+                            <div style="width: 42px; height: 42px; left: 217px; top: 46px; position: absolute">
+                                <div style="width: 42px; height: 42px; left: 0px; top: 0px; position: absolute"></div>
+                                <div
+                                    style="width: 24.50px; height: 24.50px; left: 12.25px; top: 5.25px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                                <div
+                                    style="width: 24.50px; height: 24.50px; left: 5.25px; top: 12.25px; position: absolute; border: 2px #ACB2B9 solid">
+                                </div>
+                            </div>
+                            <div
+                                style="left: 17px; top: 60px; position: absolute; color: #1F2024; font-size: 25px; font-family: Poppins; font-weight: 500; word-wrap: break-word">
+                                25</div>
+                            <div
+                                style="left: 17px; top: 34px; position: absolute; color: #667382; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">
+                                Total Content </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div>
-                                <label class="form-label">Additional information</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">User Yang Sedang Aktif</h3>
+                            </div>
+                            <div class="card-body">
+                                <!-- Table -->
+                                <table id="table-userAktif" class="display nowrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Posisi</th>
+                                            <th>Last Seen</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $onlineUsersCount = 0; @endphp
+                                        @foreach($users as $u)
+                                        @if($u->last_seen >= now()->subMinutes(2))
+                                        <tr>
+                                            <td scope="row">{{ ++$onlineUsersCount }}.</td>
+                                            <td>{{ $u->name }}</td>
+                                            <td>{{ $u->email }}</td>
+                                            <td>
+                                                {{ Carbon\Carbon::parse($u->last_seen)->diffForHumans()}}
+                                            </td>
+                                            <td>
+                                                <span class="status-online">
+                                                    Online
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                <!-- /Table -->
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-                        Cancel
-                    </a>
-                    <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 5l0 14" />
-                            <path d="M5 12l14 0" />
-                        </svg>
-                        Create new report
-                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Libs JS -->
-    <script src="./dist/libs/apexcharts/dist/apexcharts.min.js?1684106062" defer></script>
-    <script src="./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062" defer></script>
-    <script src="./dist/libs/jsvectormap/dist/maps/world.js?1684106062" defer></script>
-    <script src="./dist/libs/jsvectormap/dist/maps/world-merc.js?1684106062" defer></script>
-    <!-- Tabler Core -->
-    <script src="./dist/js/tabler.min.js?1684106062" defer></script>
-    <script src="./dist/js/demo.min.js?1684106062" defer></script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenue-bg'), {
-      		chart: {
-      			type: "area",
-      			fontFamily: 'inherit',
-      			height: 40.0,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		dataLabels: {
-      			enabled: false,
-      		},
-      		fill: {
-      			opacity: .16,
-      			type: 'solid'
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      			curve: "smooth",
-      		},
-      		series: [{
-      			name: "Profits",
-      			data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
-      		}],
-      		tooltip: {
-      			theme: 'dark'
-      		},
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			axisBorder: {
-      				show: false,
-      			},
-      			type: 'datetime',
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-      		],
-      		colors: [tabler.getColor("primary")],
-      		legend: {
-      			show: false,
-      		},
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-new-clients'), {
-      		chart: {
-      			type: "line",
-      			fontFamily: 'inherit',
-      			height: 40.0,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		stroke: {
-      			width: [2, 1],
-      			dashArray: [0, 3],
-      			lineCap: "round",
-      			curve: "smooth",
-      		},
-      		series: [{
-      			name: "May",
-      			data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 4, 46, 39, 62, 51, 35, 41, 67]
-      		},{
-      			name: "April",
-      			data: [93, 54, 51, 24, 35, 35, 31, 67, 19, 43, 28, 36, 62, 61, 27, 39, 35, 41, 27, 35, 51, 46, 62, 37, 44, 53, 41, 65, 39, 37]
-      		}],
-      		tooltip: {
-      			theme: 'dark'
-      		},
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			type: 'datetime',
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-      		],
-      		colors: [tabler.getColor("primary"), tabler.getColor("gray-600")],
-      		legend: {
-      			show: false,
-      		},
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {
-      		chart: {
-      			type: "bar",
-      			fontFamily: 'inherit',
-      			height: 40.0,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		plotOptions: {
-      			bar: {
-      				columnWidth: '50%',
-      			}
-      		},
-      		dataLabels: {
-      			enabled: false,
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: [{
-      			name: "Profits",
-      			data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
-      		}],
-      		tooltip: {
-      			theme: 'dark'
-      		},
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			axisBorder: {
-      				show: false,
-      			},
-      			type: 'datetime',
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-      		],
-      		colors: [tabler.getColor("primary")],
-      		legend: {
-      			show: false,
-      		},
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-mentions'), {
-      		chart: {
-      			type: "bar",
-      			fontFamily: 'inherit',
-      			height: 240,
-      			parentHeightOffset: 0,
-      			toolbar: {
-      				show: false,
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      			stacked: true,
-      		},
-      		plotOptions: {
-      			bar: {
-      				columnWidth: '50%',
-      			}
-      		},
-      		dataLabels: {
-      			enabled: false,
-      		},
-      		fill: {
-      			opacity: 1,
-      		},
-      		series: [{
-      			name: "Web",
-      			data: [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 12, 5, 8, 22, 6, 8, 6, 4, 1, 8, 24, 29, 51, 40, 47, 23, 26, 50, 26, 41, 22, 46, 47, 81, 46, 6]
-      		},{
-      			name: "Social",
-      			data: [2, 5, 4, 3, 3, 1, 4, 7, 5, 1, 2, 5, 3, 2, 6, 7, 7, 1, 5, 5, 2, 12, 4, 6, 18, 3, 5, 2, 13, 15, 20, 47, 18, 15, 11, 10, 0]
-      		},{
-      			name: "Other",
-      			data: [2, 9, 1, 7, 8, 3, 6, 5, 5, 4, 6, 4, 1, 9, 3, 6, 7, 5, 2, 8, 4, 9, 1, 2, 6, 7, 5, 1, 8, 3, 2, 3, 4, 9, 7, 1, 6]
-      		}],
-      		tooltip: {
-      			theme: 'dark'
-      		},
-      		grid: {
-      			padding: {
-      				top: -20,
-      				right: 0,
-      				left: -4,
-      				bottom: -4
-      			},
-      			strokeDashArray: 4,
-      			xaxis: {
-      				lines: {
-      					show: true
-      				}
-      			},
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			axisBorder: {
-      				show: false,
-      			},
-      			type: 'datetime',
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19', '2020-07-20', '2020-07-21', '2020-07-22', '2020-07-23', '2020-07-24', '2020-07-25', '2020-07-26'
-      		],
-      		colors: [tabler.getColor("primary"), tabler.getColor("primary", 0.8), tabler.getColor("green", 0.8)],
-      		legend: {
-      			show: false,
-      		},
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:on
-      document.addEventListener("DOMContentLoaded", function() {
-      	const map = new jsVectorMap({
-      		selector: '#map-world',
-      		map: 'world',
-      		backgroundColor: 'transparent',
-      		regionStyle: {
-      			initial: {
-      				fill: tabler.getColor('body-bg'),
-      				stroke: tabler.getColor('border-color'),
-      				strokeWidth: 2,
-      			}
-      		},
-      		zoomOnScroll: false,
-      		zoomButtons: false,
-      		// -------- Series --------
-      		visualizeData: {
-      			scale: [tabler.getColor('bg-surface'), tabler.getColor('primary')],
-      			values: { "AF": 16, "AL": 11, "DZ": 158, "AO": 85, "AG": 1, "AR": 351, "AM": 8, "AU": 1219, "AT": 366, "AZ": 52, "BS": 7, "BH": 21, "BD": 105, "BB": 3, "BY": 52, "BE": 461, "BZ": 1, "BJ": 6, "BT": 1, "BO": 19, "BA": 16, "BW": 12, "BR": 2023, "BN": 11, "BG": 44, "BF": 8, "BI": 1, "KH": 11, "CM": 21, "CA": 1563, "CV": 1, "CF": 2, "TD": 7, "CL": 199, "CN": 5745, "CO": 283, "KM": 0, "CD": 12, "CG": 11, "CR": 35, "CI": 22, "HR": 59, "CY": 22, "CZ": 195, "DK": 304, "DJ": 1, "DM": 0, "DO": 50, "EC": 61, "EG": 216, "SV": 21, "GQ": 14, "ER": 2, "EE": 19, "ET": 30, "FJ": 3, "FI": 231, "FR": 2555, "GA": 12, "GM": 1, "GE": 11, "DE": 3305, "GH": 18, "GR": 305, "GD": 0, "GT": 40, "GN": 4, "GW": 0, "GY": 2, "HT": 6, "HN": 15, "HK": 226, "HU": 132, "IS": 12, "IN": 1430, "ID": 695, "IR": 337, "IQ": 84, "IE": 204, "IL": 201, "IT": 2036, "JM": 13, "JP": 5390, "JO": 27, "KZ": 129, "KE": 32, "KI": 0, "KR": 986, "KW": 117, "KG": 4, "LA": 6, "LV": 23, "LB": 39, "LS": 1, "LR": 0, "LY": 77, "LT": 35, "LU": 52, "MK": 9, "MG": 8, "MW": 5, "MY": 218, "MV": 1, "ML": 9, "MT": 7, "MR": 3, "MU": 9, "MX": 1004, "MD": 5, "MN": 5, "ME": 3, "MA": 91, "MZ": 10, "MM": 35, "NA": 11, "NP": 15, "NL": 770, "NZ": 138, "NI": 6, "NE": 5, "NG": 206, "NO": 413, "OM": 53, "PK": 174, "PA": 27, "PG": 8, "PY": 17, "PE": 153, "PH": 189, "PL": 438, "PT": 223, "QA": 126, "RO": 158, "RU": 1476, "RW": 5, "WS": 0, "ST": 0, "SA": 434, "SN": 12, "RS": 38, "SC": 0, "SL": 1, "SG": 217, "SK": 86, "SI": 46, "SB": 0, "ZA": 354, "ES": 1374, "LK": 48, "KN": 0, "LC": 1, "VC": 0, "SD": 65, "SR": 3, "SZ": 3, "SE": 444, "CH": 522, "SY": 59, "TW": 426, "TJ": 5, "TZ": 22, "TH": 312, "TL": 0, "TG": 3, "TO": 0, "TT": 21, "TN": 43, "TR": 729, "TM": 0, "UG": 17, "UA": 136, "AE": 239, "GB": 2258, "US": 4624, "UY": 40, "UZ": 37, "VU": 0, "VE": 285, "VN": 101, "YE": 30, "ZM": 15, "ZW": 5 },
-      		},
-      	});
-      	window.addEventListener("resize", () => {
-      		map.updateSize();
-      	});
-      });
-      // @formatter:off
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-activity'), {
-      		chart: {
-      			type: "radialBar",
-      			fontFamily: 'inherit',
-      			height: 40,
-      			width: 40,
-      			animations: {
-      				enabled: false
-      			},
-      			sparkline: {
-      				enabled: true
-      			},
-      		},
-      		tooltip: {
-      			enabled: false,
-      		},
-      		plotOptions: {
-      			radialBar: {
-      				hollow: {
-      					margin: 0,
-      					size: '75%'
-      				},
-      				track: {
-      					margin: 0
-      				},
-      				dataLabels: {
-      					show: false
-      				}
-      			}
-      		},
-      		colors: [tabler.getColor("blue")],
-      		series: [35],
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-development-activity'), {
-      		chart: {
-      			type: "area",
-      			fontFamily: 'inherit',
-      			height: 192,
-      			sparkline: {
-      				enabled: true
-      			},
-      			animations: {
-      				enabled: false
-      			},
-      		},
-      		dataLabels: {
-      			enabled: false,
-      		},
-      		fill: {
-      			opacity: .16,
-      			type: 'solid'
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      			curve: "smooth",
-      		},
-      		series: [{
-      			name: "Purchases",
-      			data: [3, 5, 4, 6, 7, 5, 6, 8, 24, 7, 12, 5, 6, 3, 8, 4, 14, 30, 17, 19, 15, 14, 25, 32, 40, 55, 60, 48, 52, 70]
-      		}],
-      		tooltip: {
-      			theme: 'dark'
-      		},
-      		grid: {
-      			strokeDashArray: 4,
-      		},
-      		xaxis: {
-      			labels: {
-      				padding: 0,
-      			},
-      			tooltip: {
-      				enabled: false
-      			},
-      			axisBorder: {
-      				show: false,
-      			},
-      			type: 'datetime',
-      		},
-      		yaxis: {
-      			labels: {
-      				padding: 4
-      			},
-      		},
-      		labels: [
-      			'2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-      		],
-      		colors: [tabler.getColor("primary")],
-      		legend: {
-      			show: false,
-      		},
-      		point: {
-      			show: false
-      		},
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-1'), {
-      		chart: {
-      			type: "line",
-      			fontFamily: 'inherit',
-      			height: 24,
-      			animations: {
-      				enabled: false
-      			},
-      			sparkline: {
-      				enabled: true
-      			},
-      		},
-      		tooltip: {
-      			enabled: false,
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      		},
-      		series: [{
-      			color: tabler.getColor("primary"),
-      			data: [17, 24, 20, 10, 5, 1, 4, 18, 13]
-      		}],
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-2'), {
-      		chart: {
-      			type: "line",
-      			fontFamily: 'inherit',
-      			height: 24,
-      			animations: {
-      				enabled: false
-      			},
-      			sparkline: {
-      				enabled: true
-      			},
-      		},
-      		tooltip: {
-      			enabled: false,
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      		},
-      		series: [{
-      			color: tabler.getColor("primary"),
-      			data: [13, 11, 19, 22, 12, 7, 14, 3, 21]
-      		}],
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-3'), {
-      		chart: {
-      			type: "line",
-      			fontFamily: 'inherit',
-      			height: 24,
-      			animations: {
-      				enabled: false
-      			},
-      			sparkline: {
-      				enabled: true
-      			},
-      		},
-      		tooltip: {
-      			enabled: false,
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      		},
-      		series: [{
-      			color: tabler.getColor("primary"),
-      			data: [10, 13, 10, 4, 17, 3, 23, 22, 19]
-      		}],
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-4'), {
-      		chart: {
-      			type: "line",
-      			fontFamily: 'inherit',
-      			height: 24,
-      			animations: {
-      				enabled: false
-      			},
-      			sparkline: {
-      				enabled: true
-      			},
-      		},
-      		tooltip: {
-      			enabled: false,
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      		},
-      		series: [{
-      			color: tabler.getColor("primary"),
-      			data: [6, 15, 13, 13, 5, 7, 17, 20, 19]
-      		}],
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-5'), {
-      		chart: {
-      			type: "line",
-      			fontFamily: 'inherit',
-      			height: 24,
-      			animations: {
-      				enabled: false
-      			},
-      			sparkline: {
-      				enabled: true
-      			},
-      		},
-      		tooltip: {
-      			enabled: false,
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      		},
-      		series: [{
-      			color: tabler.getColor("primary"),
-      			data: [2, 11, 15, 14, 21, 20, 8, 23, 18, 14]
-      		}],
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-    <script>
-        // @formatter:off
-      document.addEventListener("DOMContentLoaded", function () {
-      	window.ApexCharts && (new ApexCharts(document.getElementById('sparkline-bounce-rate-6'), {
-      		chart: {
-      			type: "line",
-      			fontFamily: 'inherit',
-      			height: 24,
-      			animations: {
-      				enabled: false
-      			},
-      			sparkline: {
-      				enabled: true
-      			},
-      		},
-      		tooltip: {
-      			enabled: false,
-      		},
-      		stroke: {
-      			width: 2,
-      			lineCap: "round",
-      		},
-      		series: [{
-      			color: tabler.getColor("primary"),
-      			data: [22, 12, 7, 14, 3, 21, 8, 23, 18, 14]
-      		}],
-      	})).render();
-      });
-      // @formatter:on
-    </script>
-</body>
+    @include('dash.footer')
+</div>
+</div>
+<!-- Libs JS -->
+<script src=" https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js">
+</script>
+<script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js">
+</script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-</html>
+@if ($message = Session::get('error'))
+<script>
+    Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "{{ $message }}"
+        });
+</script>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
+
+<script>
+    new DataTable('#table-userAktif', {
+    responsive: true,
+    rowReorder: {
+        selector: 'td:nth-child(2)'
+    }
+});
+</script>
