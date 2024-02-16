@@ -89,7 +89,7 @@
                             </div>
                             <div
                                 style="left: 17px; top: 60px; position: absolute; color: #1F2024; font-size: 25px; font-family: Poppins; font-weight: 500; word-wrap: break-word">
-                                53</div>
+                                {{ $totalProduk }}</div>
                             <div
                                 style="left: 17px; top: 34px; position: absolute; color: #667382; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">
                                 Total List Produk </div>

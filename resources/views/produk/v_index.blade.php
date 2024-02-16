@@ -34,7 +34,7 @@
                 <div class="row g-2 align-items-center">
                     <div class="col">
                         <!-- Page pre-title -->
-                        <h2 class="page-titl">
+                        <h2 class="page-title">
                             List Produk
                         </h2>
                     </div>
@@ -77,7 +77,7 @@
                                             <img src="public_imgTest/{{ $d->gmr_product }}" class="zoomable-img"
                                                 alt="Gambar Produk" width="80px">
                                         </td>
-                                        <td>{{ $d->nm_product }}</td>
+                                        <td>{{ $d->nm_Product }}</td>
                                         <td>{{ $d->dec_product }}</td>
                                         <td>{{ $d->created_at->format('d-m-Y H:i') }}</td>
                                         <td>{{ $d->updated_at->format('d-m-Y H:i') }}</td>

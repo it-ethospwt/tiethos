@@ -29,6 +29,8 @@
 <!-- Tabler Core -->
 <script src="{{asset('./dist/js/tabler.min.js?1684106062')}}" defer></script>
 <script src="{{asset('./dist/js/demo.min.js?1684106062')}}" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

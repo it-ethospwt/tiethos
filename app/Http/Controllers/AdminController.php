@@ -17,7 +17,7 @@ class AdminController extends Controller
     public function tambahUsers()
     {
         $jdl = 'Tambah Users';
-        return view('user.tambah');
+        return view('user.tambah', compact('jdl'));
     }
     public function users_store(Request $request)
     {

@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{!! asset('static') !!}/photo_profile/default.png" />
+    <link rel="icon" type="image/x-icon" href="/static/photo_profile/default.png">
     <title>Tiethos - {{$jdl}}</title>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css?1684106062') }} " rel="stylesheet" />
@@ -47,7 +48,8 @@
                     <div class="btn-list">
                     </div>
                 </div>
-                <div class="d-none d-md-flex">
+                {{-- Dark Mode Start --}}
+                {{-- <div class="d-none d-md-flex">
                     <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
                         data-bs-toggle="tooltip" data-bs-placement="bottom">
                         <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
@@ -70,7 +72,8 @@
                                 d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                         </svg>
                     </a>
-                </div>
+                </div> --}}
+                {{-- Dark Mode End --}}
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                         aria-label="Open user menu">

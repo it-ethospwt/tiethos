@@ -43,11 +43,10 @@
                             <h2 class="h2 text-center mt-7 mb-4">Login</h2>
                             <form action="{{ route('login-proses') }}" method="post">
                                 @csrf
-                                <!-- Sertakan token CSRF -->
                                 <div class="mb-2">
                                     <label class="form-label">Username</label>
                                     <input type="text" name="username" class="form-control" placeholder="Username"
-                                        autocomplete="off">
+                                        autocomplete="off" value="{{ old('username') }}">
                                 </div>
                                 @error('username')
                                 <small>{{ $message }}</small>
