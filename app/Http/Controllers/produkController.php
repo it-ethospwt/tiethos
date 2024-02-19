@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades;
 use  Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ public function index(){
     $jdl = "List Produk";
     //mengambil  data  dari database
     $data = product::all();
-
+    
     //Konfigurasi Kredensial AWS
     $config = [
         'region' => 'ap-southeast-1',
@@ -66,8 +67,8 @@ public function index(){
 public function tambah_product(){
     $jdl = "Tambah Produk";
 
-    return view('produk.v_tambah',['jdl' => $jdl]);
-    }
+    return view('produk.v_tambah', ['jdl' => $jdl]);
+}
 
 public  function store_product(Request $request){
     $this->validate($request,[
@@ -83,7 +84,7 @@ public  function store_product(Request $request){
     );
 
     $data =  [
-    'nm_product' =>  $request->nm_product,
+        'nm_product' =>  $request->nm_product,
     ]; 
 
     //cek gambar  yang di upload
@@ -94,43 +95,47 @@ public  function store_product(Request $request){
         //Menyimpan  file  kedalam bucket 'bankcont'  didalam folder /produk
         $gmr_pdk->storeAs('produk',$gmr_pdk_nama,'s3');
 
+        }
         //membuat nama  produk 
-        $data['file'] = $gmr_pdk_nama; 
+        $data['file'] = $gmr_pdk_nama;
+        
+        product::create($data);
+
+        return redirect('/produk')->with('success', 'Tambah Produk Berhasil!!');
     }
 
-    product::create($data);
-
-    return redirect('/produk')->with('success', 'Tambah Produk Berhasil!!');
-  }
-
-
+    
 // EDIT PRODUK &  PROSES  EDIT  PRODUK
 public function edit_product($id){
     $jdl = "Edit Produk";
     $data = product::find($id);
 
-    return  view('produk.v_edit',['jdl' => $jdl,'data' =>  $data]);
-}
+        return  view('produk.v_edit', ['jdl' => $jdl, 'data' =>  $data]);
+    }
 
-public  function store_edit_product($id,Request $request){
-    $this->validate($request,[
-        'nm_product' => 'required',
-    ],
-    [
-        'nm_product.required' => 'Nama Produk Harus Diisi!',
-    ]);
+
+public  function store_edit_product($id, Request $request)
+{
+    $this->validate(
+        $request,
+        [
+            'nm_product' => 'required',
+        ],
+        [
+            'nm_product.required' => 'Nama Produk Harus Diisi!',
+        ]
+    );
 
     $data_edit = product::find($id);
     $data_edit->nm_product  = $request->nm_product;
-
     $data_edit->save();
 
     return redirect('/produk')->with('success', 'Edit Produk Berhasil!!');
 }
-     
 
 //PROSES HAPUS PRODUK 
 public function destroy_product($id){
+
     $product = product::find($id);
 
     //Hapus  Produk  yang terkait dengan produk  dari AWS S3
@@ -165,7 +170,8 @@ public function destroy_product($id){
     $product->delete();
 
     return  redirect('/produk')->with('info',"Hapus Produk Berhasil!!");
-  }
+}
+
 
 
  //Download Image Produk
@@ -208,4 +214,6 @@ public function destroy_product($id){
     }
 
   }
+
 }
+

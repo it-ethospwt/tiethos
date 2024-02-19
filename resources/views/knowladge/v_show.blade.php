@@ -1,5 +1,17 @@
 <head>
         <title>{{ $jdl }}</title>
+
+        <style>
+            .card{
+                border: none !important;
+                border: 1px solid #DCE0E5 !important ;
+            }
+
+            .card-header{
+                border-bottom: 1px solid #DCE0E5 !important;
+            }
+
+        </style>
     </head>
 
     <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
@@ -34,6 +46,9 @@
                             </div>
                         </div>
                     </div>
+                        <div class="form-group mt-5">
+                                <a href="/knowladge" class="btn btn-dark btn-pill">Kembali</a>
+                        </div>
                 </div>
             </div>
         </div>

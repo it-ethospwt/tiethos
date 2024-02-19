@@ -9,6 +9,23 @@
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <style>
+            .card{
+                border: none !important;
+                border: 1px solid #DCE0E5 !important ;
+            }
+
+            .card-header{
+                border-bottom: 1px solid #DCE0E5 !important;
+            }
+
+            .note-icon-picture,
+            .note-icon-video,
+            .note-icon-code{
+                display: none !important;
+            }
+        </style>
 </head>
 
     <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
@@ -67,7 +84,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Simpan" class="btn btn-primary">
-                                    <a href="/produk" class="btn btn-dark">Kembali</a>
+                                    <a href="/produk" class="btn btn-dark btn-pill">Kembali</a>
                                 </div>
                             </form>
                         </div>

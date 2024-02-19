@@ -1,8 +1,13 @@
     <head>
         <title>{{ $jdl }}</title>
         <style>
-            .btn-primary{
-                background-color: #FF8B03 !important;
+             .card{
+                border: none !important;
+                border: 1px solid #DCE0E5 !important ;
+            }
+
+            .card-header{
+                border-bottom: 1px solid #DCE0E5 !important;
             }
 
             .btn-show{
@@ -50,15 +55,13 @@
                         <div class="card">
                         <div class="card-body">
                             <div class="row g-0" style="display:flex; gap:51px; ">
-                                    @foreach( $data as $d)
-                                        @if($d->product && $imageUrls[$d->product->file])
+                            @foreach( $data as $d)
+                                        @if($d->product)
                                             <div class="col-md-2" style="border: 1px solid #DCE0E5; border-radius:5px;display:flex;align-items:center;flex-direction:column">
-                                                <img src="{{ $imageUrls[$d->product->file] }}" alt="" class="card-img-top" height="210">
-                                                    <h3 class="text-center mb-2 mt-2 p-1">{{ $d->product->nm_product }}</h3>
-                                                    <!-- <p class="text-center">{{ $d->deskripsi }}</p> -->
+                                                <h2 class="text-center mb-5 mt-5 p-1">{{ $d->product->nm_product }}</h2>
                                                 <div class="col d-flex align-center flex-column" style="width: 80%;">
-                                                    <a href="/show/{{ $d->id }}" class="btn btn-show text-white mb-3"><i class="fa-regular fa-eye fa-sm" style="color:#fff;margin-right:5px;"></i>Lihat</a>
-                                                    <a href="#" class="btn btn-edit text-white w-100 mb-3"><i class="fa-solid fa-edit fa-sm" style="color:#fff;margin-right:5px;"></i>Edit</a>
+                                                    <a href="/show/{{ $d->id }}" class="btn btn-show btn-pill text-white fw-normal mb-3"><i class="fa-regular fa-eye fa-sm" style="color:#fff;margin-right:5px;"></i>Lihat Knowladge</a>
+                                                    <a href="/editKnowladge/{{ $d->id }}" class="btn btn-edit btn-pill text-white fw-normal mb-3"><i class="fa-solid fa-edit fa-sm" style="color:#fff;margin-right:5px;"></i>Edit Knowladge</a>
                                             </div>
                                             </div>
                                         @endif
@@ -66,7 +69,7 @@
                                 </div>
                                  <!-- link untuk membuat penomeran  Halaman -->
                                     <div class="d-flex justify-content-center mt-5" style="width: 100%;">
-                                            {{ $data ->links() }}
+                                           {{ $data->links(); }}
                                     </div>
                             </div>
                         </div>
