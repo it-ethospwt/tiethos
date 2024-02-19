@@ -11,7 +11,11 @@ class product extends Model
 
     protected $table = 'product';
 
-    protected $fillable = ['nm_product','gmr_product','dec_product'];
+    protected $fillable = ['nm_product','file'];
     
     protected $dates = ['created_at','updated_at'];
+
+    public  function knowladge(){
+        return  $this->hasOne(knowladge::class);
+    }
 }

@@ -6,8 +6,8 @@
     <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
     <div class="page">
         <!-- Navbar -->
-         <x-dash.header/>
-         <x-dash.menu/>
+        @include('dash.header')
+        @include('dash.menu')
          <div class="page-wrapper">
             <!-- Page header -->
             <div class="page-header d-print-none">
@@ -44,32 +44,6 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="dec_product" class="mb-3">Deskripsi <span style="color:red">*</span></label>
-                                    <textarea class="form-control" name="dec_product" id="dec_product"  cols="30" rows="2"> {{ $data->dec_product }}</textarea>
-                                    @if($errors->has('dec_product'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('dec_product') }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="form-group mb-5">
-                                    <label for="gmr_product" class="mb-3">Gambar Produk</label>
-                                    <input type="file" name="gmr_product" id="gmr_product" class="form-control">
-                                    <label style="font-size: 13px;margin-top:10px">File maksimal  2MB(PNG,JPG,JPEG,WPEG)</label>
-                                    @if($errors->has('gmr_product'))
-                                        <div class="text-danger">
-                                            {{ $errors->first('gmr_product') }}
-                                        </div>
-                                    @endif
-                                </div>
-
-                                @if($data->gmr_product)
-                                    <div class="mb-5">
-                                        <img src="{{ url('public_imgTest').'/'.$data->gmr_product }}" alt="" width="200px">
-                                    </div>
-                                @endif
-
                                 <div class="form-group">
                                     <input type="submit" value="Update" class="btn btn-Success">
                                     <a href="/produk" class="btn btn-dark">Kembali</a>
@@ -83,6 +57,6 @@
         </div>
     </div>
 
-    <x-dash.footer/>
+    @include('dash.footer')
 
     

@@ -1,7 +1,7 @@
     <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script> -->
     <div class="page">
         <!-- Navbar -->
-        <x-dash.header/>
+        @include('dash.header')
         @include('dash.menu')
         <div class="page-wrapper">
             <!-- Page header -->

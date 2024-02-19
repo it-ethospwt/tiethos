@@ -5,22 +5,6 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-        
-        <style>
-            .image-zoom-container{
-                position: relative;
-            }
- 
-            .zoomable-img{
-                z-index: 500;
-                cursor: pointer;
-                transition: transform 0.90s ease;
-            }
-
-            .zoomable-img:hover{
-                transform: scale(3.4);
-            }
-        </style>
     </head>
    
     <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
@@ -62,7 +46,6 @@
                                 <th>No</th>
                                 <th style="width:13%;text-align: center;">Gambar</th>
                                 <th>Nama Produk</th>
-                                <th style="width:25%">Deskripsi</th>
                                 <th>Created At</th>
                                 <th>Updated  At</th>
                                 <th>Aksi</th>
@@ -74,13 +57,15 @@
                             <tr style="font-size: 90%;">
                                 <td>{{$no++}}</td>
                                 <td align="center">
-                                    <img src="public_imgTest/{{ $d->gmr_product }}"  class="zoomable-img" alt="Gambar Produk" width="80px">
-                                </td>
+                                    @if(isset($imageUrls[$d->id ]))
+                                    <img src="{{ $imageUrls[$d->id] }}" alt="Gambar Produk" width="80px">
+                                    @endif
+                                </td> 
                                 <td>{{ $d->nm_product }}</td>
-                                <td>{{ $d->dec_product }}</td>
                                 <td>{{ $d->created_at->format('d-m-Y H:i') }}</td>
                                 <td>{{ $d->updated_at->format('d-m-Y H:i') }}</td>
                                 <td>
+                                    <a href="{{ url('download/'.$d->id) }}" class="btn btn-primary"><i class="fa  fa-download"></i></a>
                                     <a href="edit/{{ $d->id }}" class="btn btn-success"><i class="fa fa-edit"> </i></a>
                                     <a href="hapus/{{ $d->id }}" class="btn btn-danger"><i class="fa fa-trash"> </i></a>
                                 </td>
