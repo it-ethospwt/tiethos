@@ -76,3 +76,17 @@ Route::post('toko', [App\Http\Controllers\kontenController::class, "toko"]);
 Route::get('ubah/{content_id}', [App\Http\Controllers\kontenController::class, 'edit']);
 Route::put('storeUbah/{content_id}', [App\Http\Controllers\kontenController::class, 'edit_store']);
 Route::get('delete/{content_id}', [App\Http\Controllers\kontenController::class, "destroy_content"]);
+
+
+// punya hadnbook
+Route::get('handbook', [App\Http\Controllers\handbookController::class, "index"]);
+// handbookwa
+Route::get('/{id}/handbook/wa', [App\Http\Controllers\handbookController::class, 'wa'])->name('handbook.wa.index');
+Route::get('handbook/wa/tambah', [App\Http\Controllers\handbookController::class, 'tambah'])->name('handbook.wa.tambah');
+Route::post('saveWa', [App\Http\Controllers\handbookController::class, "saveWa"]);
+Route::get('wa/detail/{id}', [App\Http\Controllers\handbookController::class, 'detail'])->name('handbook.wa.detail');
+// handbookweb
+Route::get('/{id}/handbook/web', [App\Http\Controllers\handbookController::class, 'web'])->name('handbook.web.index');
+Route::get('handbook/web/tambah', [App\Http\Controllers\handbookController::class, 'plus'])->name('handbook.web.tambah');
+Route::post('saveWeb', [App\Http\Controllers\handbookController::class, "saveWeb"]);
+Route::get('web/detail/{id}', [App\Http\Controllers\handbookController::class, 'lengkap'])->name('handbook.web.detail');

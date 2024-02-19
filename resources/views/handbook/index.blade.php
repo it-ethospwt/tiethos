@@ -52,17 +52,17 @@
                                         <div class="col-sm-6 col-lg-3">
                                             <div style="width: 200px; height: 500px; position: relative">
                                                 <div style="width: 200px; height: 350px; left: 0px; top: 0px; position: absolute; background: white; border-radius: 5px; border: 1px #DCE0E5 solid"></div>
-                                                <img style="width: 200px; height: 200px; left: 0px; top: 0px; position: absolute; border-top-left-radius: 5px; border-top-right-radius: 5px" src="{{ asset('/dist/img/img/' . $p->gambar) }}" />
+                                                <img style="width: 200px; height: 200px; left: 0px; top: 0px; position: absolute; border-top-left-radius: 5px; border-top-right-radius: 5px" src="{{ asset('/public_imgTest/' . $p->gmr_product) }}" />
                                                 <div style="width: 200px; height: 300px; left: 0px; top: 172px; position: absolute">
                                                     <div style="width: 200px; height: 200px; left: 0px; top: 0px; position: absolute; background: white; border-top-left-radius: 5px; border-top-right-radius: 5px; border: 1px #DCE0E5 solid"></div>
                                                     <div style="left: 71px; top: 5px; position: absolute; color: black; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">{{$p->product_name}}</div>
                                                     <div style="width: 163px; height: 32px; left: 19px; top: 53px; position: absolute">
-                                                        <a href="{{ route('handbook.wa.index', $p->product_id) }}" class="custom-button" style="background: #4ECB71;">
+                                                        <a href="{{ route('handbook.wa.index', $p->id) }}" class="custom-button" style="background: #4ECB71;">
                                                             Interaksi Whatsapp
                                                         </a>
                                                     </div>
                                                     <div style="width: 163px; height: 32px; left: 19px; top: 98px; position: absolute">
-                                                        <a href="#" class="custom-button" style="background: #2989A8;">
+                                                        <a href="{{ route('handbook.web.index', $p->id) }}" class="custom-button" style="background: #2989A8;">
                                                             Konversi Web
                                                         </a>
                                                     </div>
