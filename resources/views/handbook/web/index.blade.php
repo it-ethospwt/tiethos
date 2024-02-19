@@ -46,7 +46,7 @@
                             {{$jdl}}
                         </h2>
                         <div class="col col-sm-2 col-md-2 col-xl py-3">
-                            <a href="/handbook/wa/tambah" class="btn btn-ghost-warning active w-100">
+                            <a href="/handbook/web/tambah" class="btn btn-ghost-warning active w-100">
                                 <span style="margin-right: 8px;"></span>Tambah Handbook
                             </a>
                         </div>
@@ -99,21 +99,21 @@
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
-                                        @foreach ($wa as $w)
+                                        @foreach ($web as $wb)
                                         <tr>
                                             <td><span class="text-muted"><?= $i++; ?></span></td>
-                                            <td><a href="invoice.html" class="text-reset" tabindex="-1">{{$w->sub}}</a></td>
+                                            <td><a href="invoice.html" class="text-reset" tabindex="-1">{{$wb->sub}}</a></td>
                                             <td>
-                                                {{$w->created_at}}
+                                                {{$wb->created_at}}
                                             </td>
                                             <td>
-                                                {{$w->updated_at}}
+                                                {{$wb->updated_at}}
                                             </td>
                                             <td>
                                                 <div class="row g-2">
                                                     <!-- Tombol Edit -->
                                                     <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                        <a href="{{ route('handbook.wa.detail', $w->wa_id)}}" class="btn btn-primary">
+                                                        <a href="{{ route('handbook.web.detail', $wb->web_id)}}" class="btn btn-primary">
                                                             <i class="fas fa-search"></i>
                                                         </a>
                                                     </div>
