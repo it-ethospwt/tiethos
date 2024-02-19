@@ -114,4 +114,15 @@
     });
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '@foreach ($errors->all() as $error){{ $error }}@endforeach',
+        });
+    </script>
+    @endif
+
 </div>
