@@ -166,7 +166,6 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-
                                 <!-- /Table -->
                             </div>
                         </div>
@@ -176,7 +175,6 @@
         </div>
     </div>
     @include('dash.footer')
-</div>
 </div>
 <!-- Libs JS -->
 <script src=" https://code.jquery.com/jquery-3.7.0.js"></script>

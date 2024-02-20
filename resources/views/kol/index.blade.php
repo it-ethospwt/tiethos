@@ -18,56 +18,77 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            List FAQ
+                            Content KOL
                         </h2>
-                    </div>
-                    <div class="btn-tambahUser mt-4 mb-2">
-                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-primary"> <span
-                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
-                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-primary btn-pill"> <span
-                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Page body -->
         <div class="page-body">
-            <div class="container-xl">
-                <div class="row row-cards">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-body">
-                                    <div class="row">
-                                        @foreach ($produk as $p)
-                                        @php
-                                        $keluhanProduk = $keluhan->where('id_produk', $p->id);
-                                        @endphp
-                                        @if (!$keluhanProduk->isEmpty())
-                                        <div class="col-sm-6 col-lg-3">
-                                            <div class="card">
-                                                <img src="public_imgTest/{{ $p->gmr_product }}" alt="Gambar Produk">
-                                                <div class="card-body text-center">
-                                                    <h3 class="card-title">{{ $p->nm_Product }}</h3>
-                                                    @foreach ($keluhanProduk as $k)
-                                                    <a href="{{ route('faqIndex', ['id' => $k->id]) }}"
-                                                        class="btn btn-secondary btn-pill mt-2">{{ $k->nama }}</a>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @endforeach
-                                    </div>
-                                </div>
+            <div class="container-lg">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Content KOL</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="btn-tambahUser mt-2 mb-5">
+                                <a href="{{route ('kol.tambah')}}" class="btn btn-primary"> <span
+                                        style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
                             </div>
+                            <!-- Table -->
+                            <table id="table-kol" class="display nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama KOL</th>
+                                        <th>Tanggal Tayang</th>
+                                        <th>Owning</th>
+                                        <th>Data User</th>
+                                        <th>Update</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($kol as $k)
+                                    <tr>
+                                        <td scope="row">{{ $loop->iteration }}.</td>
+                                        <td>{{ $k->nama }}</td>
+                                        <td>{{ $k->tanggal_tayang }}</td>
+                                        <td>{{ $k->owning }}</td>
+                                        <td>{{ $k->id_produk }}</td>
+                                        <td>{{ $k->user }}</td>
+                                        <td>{{ $k->updated_at }}</td>
+                                        <td>
+                                            <a href="" class="btn btn-primary btn-pill">
+                                                <span class="ti ti-search" style="color: white;"></span>
+                                            </a>
+                                            <a href="" class="btn btn-success btn-pill">
+                                                <span class="ti ti-edit" style="color: white;"></span>
+                                            </a>
+                                            <form action="" method="POST" id="deleteForm" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-pill deleteButton">
+                                                    <span class="ti ti-trash" style="color: white;"></span>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <!-- /Table -->
                         </div>
                     </div>
                 </div>
+
+                <!-- </div> -->
+                @include('dash.footer')
             </div>
         </div>
     </div>
-    @include('dash.footer')
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -133,3 +154,12 @@
         });
 </script>
 @endif
+
+<script>
+    new DataTable('#table-kol', {
+                    responsive: true,
+                    rowReorder: {
+                        selector: 'td:nth-child(2)'
+                    }
+                });
+</script>

@@ -10,7 +10,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Tambah User
+                            Tambah Content KOL
                         </h2>
                     </div>
                 </div>
@@ -24,63 +24,77 @@
                     <div class="container-xl">
                         <div class="row row-cards">
                             <div class="col-12">
-                                <form class="card" action="{{ route('admin.users.store') }}" method="POST">
+                                <form class="card" action="" method="POST">
                                     @csrf
                                     <div class="card-header">
-                                        <h3 class="card-title">Form Tambah User</h3>
+                                        <h3 class="card-title">Form Tambah Content KOL</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="mb-3">
-                                            <label class="form-label required">Email address</label>
-                                            <div>
-                                                <input type="email" name="email" class="form-control"
-                                                    aria-describedby="emailHelp" placeholder="Enter email">
-                                                <small class="form-hint">We'll never share your email with anyone
-                                                    else.</small>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Username</label>
+                                            <label class="form-label required">Nama KOL</label>
                                             <div>
                                                 <input type="text" name="username" class="form-control"
-                                                    placeholder="Enter Username">
+                                                    placeholder="Input Nama KOL">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label required">Nama</label>
+                                            <label class="form-label required">Tanggal Tayang</label>
+                                            <div>
+                                                <input type="date" name="tanggal_tayang" class="form-control"
+                                                    placeholder="YYYY-MM-DD">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label required">Owning Berapa Lama</label>
                                             <div>
                                                 <input type="text" name="name" class="form-control"
-                                                    placeholder="Enter Name">
+                                                    placeholder="Input Owning">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label required">Password</label>
+                                            <label class="form-label required">Rate Card</label>
                                             <div>
-                                                <input type="text" name="password" class="form-control"
-                                                    placeholder="Password">
-                                                <small class="form-hint">
-                                                    Your password must be 8-20 characters long, contain letters and
-                                                    numbers, and must not contain spaces, special characters.
-                                                </small>
+                                                <input type="text" name="name" class="form-control"
+                                                    placeholder="Input Rate Card">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Jenis Kelamin</label>
+                                            <label class="form-label required">Keterangan Transfer</label>
                                             <div>
-                                                <select name="jenis_kelamin" class="form-select">
-                                                    <option>Laki - Laki</option>
-                                                    <option>Perempuan</option>
+                                                <input type="text" name="name" class="form-control"
+                                                    placeholder="Input Keterangan Transfer">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label required">Resi</label>
+                                            <div>
+                                                <input type="text" name="name" class="form-control"
+                                                    placeholder="Input Resi">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label required">Ekspedisi</label>
+                                            <div>
+                                                <input type="text" name="name" class="form-control"
+                                                    placeholder="Input Ekspedisi">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Produk</label>
+                                            <div>
+                                                <select name="produk_id" class="form-select">
+                                                    @foreach($produk as $p)
+                                                    <option value="{{ $p->id }}">{{ $p->nm_Product }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Posisi</label>
+                                            <label class="form-label required">Nama User</label>
                                             <div>
-                                                <select name="role" class="form-select">
-                                                    <option>Admin</option>
-                                                    <option>ADV</option>
-                                                    <option>CS</option>
-                                                </select>
+                                                <input type="text" name="name" class="form-control"
+                                                    placeholder="Input Nama User">
                                             </div>
                                         </div>
                                     </div>

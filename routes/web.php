@@ -4,11 +4,12 @@ use App\Models\product;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\KolController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\produkController;
 use App\Http\Controllers\kontenController;
 
+use App\Http\Controllers\produkController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -29,9 +30,10 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('login-proses', [LoginController::class, 'proses'])->name('login-proses');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::prefix('dashboard')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
+
 
 Route::prefix('users')->middleware(['isadmin'])->group(function () {
     Route::get('/', [AdminController::class, 'users'])->name('admin.users')->middleware('auth');
@@ -90,3 +92,13 @@ Route::get('/{id}/handbook/web', [App\Http\Controllers\handbookController::class
 Route::get('handbook/web/tambah', [App\Http\Controllers\handbookController::class, 'plus'])->name('handbook.web.tambah');
 Route::post('saveWeb', [App\Http\Controllers\handbookController::class, "saveWeb"]);
 Route::get('web/detail/{id}', [App\Http\Controllers\handbookController::class, 'lengkap'])->name('handbook.web.detail');
+
+Route::prefix('kol')->group(function () {
+    Route::get('/', [KolController::class, 'index'])->name('kol')->middleware('auth');
+    Route::get('tambahKOL', [KolController::class, 'tambahKOL'])->name('kol.tambah')->middleware('auth');
+    Route::post('store', [KolController::class, 'users_store'])->name('admin.users.')->middleware('auth');
+    Route::get('detail/{id}', [KolController::class, 'users_detail'])->name('.users.detail')->middleware('auth');
+    Route::get('edit/{id}', [KolController::class, 'users_edit'])->name('admin..edit')->middleware('auth');
+    Route::post('update/{id}', [KolController::class, 'users_update'])->name('admin..update')->middleware('auth');
+    Route::delete('delete/{id}', [KolController::class, 'users_delete'])->name('.users.delete')->middleware('auth');
+});
