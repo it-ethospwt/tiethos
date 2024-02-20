@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->id();
-            $table->string('nm_Product',100)->nullable('false');
+            $table->string('nm_product',100)->nullable('false');
             $table->string('gmr_product',225)->nullable('false');
-            $table->text('dec_product')->nullable('false');
             $table->timestamps();
         });
     }
