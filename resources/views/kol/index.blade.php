@@ -34,7 +34,7 @@
                         </div>
                         <div class="card-body">
                             <div class="btn-tambahUser mt-2 mb-5">
-                                <a href="{{route ('kol.tambah')}}" class="btn btn-primary"> <span
+                                <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span
                                         style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
                             </div>
                             <!-- Table -->
@@ -52,7 +52,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($kol as $k)
-                                    <tr>
+                                    <tr style="font-size: 90%;">
                                         <td scope="row">{{ $loop->iteration }}.</td>
                                         <td>{{ $k->nama }}</td>
                                         <td>{{ $k->tanggal_tayang }}</td>

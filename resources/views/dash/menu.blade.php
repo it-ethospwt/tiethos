@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     @endif
-                    <li class="nav-item">
+                    <li class="nav-item dropdown {{ request()->is('produk*') ? 'active' : '' }}">
                         <a class="nav-link" href="/produk">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->

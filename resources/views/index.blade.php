@@ -4,27 +4,27 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 </head>
-    
-    <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script> -->
-    <div class="page">
-        <!-- Navbar -->
-        @include('dash.header')
-        @include('dash.menu')
-        <div class="page-wrapper">
-            <!-- Page header -->
-            <div class="page-header d-print-none">
-                <div class="container-xl">
-                    <div class="row g-2 align-items-center">
-                        <div class="col">
-                            <!-- Page pre-title -->
-                            <h2 class="page-title">
-                                Dashboard
-                            </h2>
-                        </div>
+
+<!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script> -->
+<div class="page">
+    <!-- Navbar -->
+    @include('dash.header')
+    @include('dash.menu')
+    <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+            <div class="container-xl">
+                <div class="row g-2 align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <h2 class="page-title">
+                            Dashboard
+                        </h2>
                     </div>
                 </div>
             </div>
-        
+        </div>
+
         <!-- Page body -->
         <div class="page-body">
             <div class="container-xl">
@@ -109,7 +109,7 @@
                                 Total Content </div>
                         </div>
                     </div>
-        
+
 
                     <div class="col-12">
                         <div class="card">
@@ -140,9 +140,7 @@
                                                 {{ Carbon\Carbon::parse($u->last_seen)->diffForHumans()}}
                                             </td>
                                             <td>
-                                                <span class="status-online">
-                                                    Online
-                                                </span>
+                                                <span class="badge bg-success me-1"></span> Online
                                             </td>
                                         </tr>
                                         @endif
@@ -156,9 +154,9 @@
                 </div>
             </div>
         </div>
-        </div>
     </div>
-    @include('dash.footer')
+</div>
+@include('dash.footer')
 </div>
 <!-- Libs JS -->
 <script src=" https://code.jquery.com/jquery-3.7.0.js"></script>

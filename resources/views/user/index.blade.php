@@ -34,8 +34,8 @@
                         </div>
                         <div class="card-body">
                             <div class="btn-tambahUser mt-2 mb-5">
-                                <a href="{{ route('admin.tambahUsers') }}" class="btn btn-primary"> <span
-                                        style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Data User</a>
+                                <a href="{{ route('admin.tambahUsers') }}" class="btn btn-warning btn-pill active">
+                                    <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Data User</a>
                             </div>
                             <!-- Table -->
                             <table id="table-user" class="display nowrap" style="width:100%">
@@ -53,7 +53,7 @@
                                 <tbody>
                                     @if ($user->count() > 0)
                                     @foreach ($user as $u)
-                                    <tr>
+                                    <tr style="font-size: 90%;">
                                         <td scope="row">{{ $loop->iteration }}.</td>
                                         <td>{{ $u->username }}</td>
                                         <td>{{ $u->email }}</td>

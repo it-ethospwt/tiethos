@@ -85,7 +85,7 @@
                                             <div>
                                                 <select name="produk_id" class="form-select">
                                                     @foreach($produk as $p)
-                                                    <option value="{{ $p->id }}">{{ $p->nm_Product }}</option>
+                                                    <option value="{{ $p->id }}">{{ $p->nm_product }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
