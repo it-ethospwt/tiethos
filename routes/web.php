@@ -97,3 +97,15 @@ Route::post('storeKnowladge',[knowladgeController::class,"store_knowladge"]);
 Route::get('show/{id}',[knowladgeController::class,'show_knowladge']);
 Route::get('editKnowladge/{id}',[knowladgeController::class,'edit_knowladge']);
 Route::put('storeEditKnowladge/{id}',[knowladgeController::class,'store_edit_knowladge']);
+// punya hadnbook
+Route::get('handbook', [App\Http\Controllers\handbookController::class, "index"]);
+// handbookwa
+Route::get('/{id}/handbook/wa', [App\Http\Controllers\handbookController::class, 'wa'])->name('handbook.wa.index');
+Route::get('handbook/wa/tambah', [App\Http\Controllers\handbookController::class, 'tambah'])->name('handbook.wa.tambah');
+Route::post('saveWa', [App\Http\Controllers\handbookController::class, "saveWa"]);
+Route::get('wa/detail/{id}', [App\Http\Controllers\handbookController::class, 'detail'])->name('handbook.wa.detail');
+// handbookweb
+Route::get('/{id}/handbook/web', [App\Http\Controllers\handbookController::class, 'web'])->name('handbook.web.index');
+Route::get('handbook/web/tambah', [App\Http\Controllers\handbookController::class, 'plus'])->name('handbook.web.tambah');
+Route::post('saveWeb', [App\Http\Controllers\handbookController::class, "saveWeb"]);
+Route::get('web/detail/{id}', [App\Http\Controllers\handbookController::class, 'lengkap'])->name('handbook.web.detail');

@@ -19,12 +19,24 @@ class AdminController extends Controller
         $jdl = 'Tambah Users';
         return view('user.tambah', compact('jdl'));
     }
+
     public function users_store(Request $request)
     {
-        // dd($request->all());
-        User::create($request->all());
+        $validatedData = $request->validate([
+            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'password' => 'required|string|min:8|confirmed'
+        ]);
 
-        return redirect()->route('admin.users')->with('success', 'User Berhasil Ditambahkan');
+        $validatedData['password'] = bcrypt($request->password);
+
+        try {
+            User::create($validatedData);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Data Belum Sesuai']);
+        }
     }
 
     public function users_edit($id)

@@ -67,3 +67,25 @@
     <!-- </div> -->
     @include('dash.footer')
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if ($errors->any())
+<script>
+    Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '@foreach ($errors->all() as $error){{ $error }}@endforeach',
+        });
+</script>
+@endif
+
+@if (session('error'))
+<script>
+    Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ session('error') }}',
+        });
+</script>
+@endif

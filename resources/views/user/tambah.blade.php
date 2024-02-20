@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-end">
-                                        <button type="button" class="btn btn-danger"
+                                        <button type="button" class="btn btn-danger btn-pill"
                                             onclick="window.history.back()">Back</button>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
@@ -102,3 +102,15 @@
     <!-- </div> -->
     @include('dash.footer')
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if ($errors->any())
+<script>
+    Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '@foreach ($errors->all() as $error){{ $error }}@endforeach',
+        });
+</script>
+@endif

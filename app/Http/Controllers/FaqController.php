@@ -26,12 +26,26 @@ class FaqController extends Controller
 
     public function keluhanStore(Request $request)
     {
-        $keluhan = new Keluhan();
-        $keluhan->nama = $request->nama;
-        $keluhan->id_produk = $request->id_produk;
-        $keluhan->save();
+        // Validasi input
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255'
+        ], [
+            'nama.required' => 'Nama Keluhan field is required.'
+        ]);
 
-        return redirect()->route('faq')->with('success', 'Keluhan Berhasil Ditambahkan');
+        try {
+            // Simpan data jika validasi berhasil
+            $keluhan = new Keluhan();
+            $keluhan->nama = $request->nama;
+            $keluhan->id_produk = $request->id_produk; // Pastikan id_produk tersedia di request
+            $keluhan->save();
+
+            // Redirect dengan pesan sukses
+            return redirect()->route('faq')->with('success', 'Keluhan Berhasil Ditambahkan');
+        } catch (\Exception $e) {
+            // Tangani jika terjadi kesalahan saat menyimpan
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan keluhan. Silakan coba lagi.');
+        }
     }
 
     public function faqIndex($id)
@@ -65,23 +79,32 @@ class FaqController extends Controller
 
     public function storeFaq(Request $request)
     {
-        // Validasi data
         $request->validate([
-            'produk' => 'required', // Sesuaikan dengan aturan validasi Anda
+            'produk' => 'required',
             'keluhan' => 'required',
             'pertanyaan' => 'required',
             'jawaban' => 'required',
+        ], [
+            'produk.required' => 'Produk field is required.',
+            'keluhan.required' => 'Keluhan field is required.',
+            'pertanyaan.required' => 'Pertanyaan field is required.',
+            'jawaban.required' => 'Jawaban field is required.',
         ]);
 
-        // Simpan data ke dalam tabel faqs
-        $faq = new Faq();
-        $faq->id_produk = $request->produk;
-        $faq->id_keluhan = $request->keluhan;
-        $faq->pertanyaan = $request->pertanyaan;
-        $faq->jawaban = $request->jawaban;
-        $faq->save();
+        try {
+            // Simpan data ke dalam tabel faqs jika validasi berhasil
+            $faq = new Faq();
+            $faq->id_produk = $request->produk;
+            $faq->id_keluhan = $request->keluhan;
+            $faq->pertanyaan = $request->pertanyaan;
+            $faq->jawaban = $request->jawaban;
+            $faq->save();
 
-        // Redirect pengguna kembali ke halaman yang diinginkan
-        return redirect()->route('faq')->with('success', 'FAQ telah berhasil ditambahkan.');
+            // Redirect pengguna kembali ke halaman yang diinginkan dengan pesan sukses
+            return redirect()->route('faq')->with('success', 'FAQ telah berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Tangani jika terjadi kesalahan saat menyimpan
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan FAQ. Silakan coba lagi.');
+        }
     }
 }

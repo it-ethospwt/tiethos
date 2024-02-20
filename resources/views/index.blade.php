@@ -44,19 +44,15 @@
                                 style="left: 17px; top: 34px; position: absolute; color: #667382; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">
                                 Total User </div>
                             <div style="width: 42px; height: 42px; left: 217px; top: 44px; position: absolute">
-                                <div style="width: 42px; height: 42px; left: 0px; top: 0px; position: absolute"></div>
-                                <div
-                                    style="width: 14px; height: 14px; left: 8.75px; top: 5.25px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
-                                <div
-                                    style="width: 21px; height: 10.50px; left: 5.25px; top: 26.25px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
-                                <div
-                                    style="width: 5.26px; height: 13.56px; left: 28px; top: 5.48px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
-                                <div
-                                    style="width: 5.25px; height: 10.24px; left: 31.50px; top: 26.51px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -75,19 +71,15 @@
                                 style="left: 17px; top: 34px; position: absolute; color: #667382; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">
                                 Total List Produk </div>
                             <div style="width: 42px; height: 42px; left: 219px; top: 44px; position: absolute">
-                                <div style="width: 42px; height: 42px; left: 0px; top: 0px; position: absolute"></div>
-                                <div
-                                    style="width: 28px; height: 31.50px; left: 7px; top: 5.25px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
-                                <div
-                                    style="width: 14px; height: 7.88px; left: 21px; top: 13.12px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
-                                <div
-                                    style="width: 0px; height: 15.75px; left: 21px; top: 21px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
-                                <div
-                                    style="width: 14px; height: 7.88px; left: 7px; top: 13.12px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+                                    <path d="M12 12l8 -4.5" />
+                                    <path d="M12 12l0 9" />
+                                    <path d="M12 12l-8 -4.5" />
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -100,17 +92,18 @@
                                 style="width: 272px; height: 118px; left: 0px; top: 7px; position: absolute; background: white; border-radius: 5px; border: 1px #DCE0E5 solid">
                             </div>
                             <div style="width: 42px; height: 42px; left: 217px; top: 46px; position: absolute">
-                                <div style="width: 42px; height: 42px; left: 0px; top: 0px; position: absolute"></div>
-                                <div
-                                    style="width: 24.50px; height: 24.50px; left: 12.25px; top: 5.25px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
-                                <div
-                                    style="width: 24.50px; height: 24.50px; left: 5.25px; top: 12.25px; position: absolute; border: 2px #ACB2B9 solid">
-                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M7 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+                                    <path d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />
+                                </svg>
                             </div>
                             <div
                                 style="left: 17px; top: 60px; position: absolute; color: #1F2024; font-size: 25px; font-family: Poppins; font-weight: 500; word-wrap: break-word">
-                                25</div>
+                                {{ $totalKonten }}</div>
                             <div
                                 style="left: 17px; top: 34px; position: absolute; color: #667382; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">
                                 Total Content </div>

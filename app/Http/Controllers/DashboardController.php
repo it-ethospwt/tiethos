@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\product;
+use App\Models\Konten;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,10 +14,13 @@ class DashboardController extends Controller
     {
         $jdl = 'Dashboard';
         $users = User::orderBy('last_seen', 'DESC')->get();
-        $totalUsers = $users->count();
         $product = Product::all();
-        $totalProduk = $product->count();
+        $konten = Konten::all();
 
-        return view('index', compact('users', 'totalUsers', 'totalProduk', 'jdl'));
+        $totalUsers = $users->count();
+        $totalProduk = $product->count();
+        $totalKonten = $konten->count();
+
+        return view('index', compact('users', 'totalUsers', 'totalProduk', 'totalKonten', 'jdl'));
     }
 }
