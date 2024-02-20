@@ -1,26 +1,39 @@
-<head>
-    <title>{{ $jdl }}</title>
-</head>
+    <head>
+        <title>{{ $jdl }}</title>
 
-<!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
-<div class="page">
-    <!-- Navbar -->
-    @include('dash.header')
-    @include('dash.menu')
-    <div class="page-wrapper">
-        <!-- Page header -->
-        <div class="page-header d-print-none">
-            <div class="container-xl">
-                <div class="row g-2 align-items-center">
-                    <div class="col">
-                        <!-- Page pre-title -->
-                        <h2 class="page-title">
-                            Tambah Produk
-                        </h2>
+        <style>
+            .card{
+                border: none !important;
+                border: 1px solid #DCE0E5 !important ;
+            }
+
+            .card-header{
+                border-bottom: 1px solid #DCE0E5 !important;
+            }
+        </style>
+    </head>
+    
+    <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
+    <div class="page">
+        <!-- Navbar -->
+        @include('dash.header')
+        @include('dash.menu')
+        <div class="page-wrapper">
+            <!-- Page header -->
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <!-- Page pre-title -->
+                            <h2 class="page-title">
+                                Tambah Produk
+                            </h2>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+       
+         
         <!-- Page body -->
         <div class="page-body">
             <div class="container-lg">
@@ -43,32 +56,19 @@
                                     </div>
                                     @endif
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="dec_product" class="mb-3">Deskripsi <span
-                                            style="color:red">*</span></label>
-                                    <textarea class="form-control" name="dec_product" id="dec_product" cols="30"
-                                        rows="2"></textarea>
-                                    @if($errors->has('dec_product'))
-                                    <div class="text-danger">
-                                        {{ $errors->first('dec_product') }}
-                                    </div>
-                                    @endif
-                                </div>
                                 <div class="form-group mb-5">
-                                    <label for="gmr_product" class="mb-3">Gambar Produk<span
-                                            style="color:red">*</span></label>
-                                    <input type="file" name="gmr_product" id="gmr_product" class="form-control">
-                                    <label style="font-size: 13px;margin-top:10px">File maksimal
-                                        2MB(PNG,JPG,JPEG,WPEG)</label>
-                                    @if($errors->has('gmr_product'))
+                                    <label for="file" class="mb-3">Gambar Produk<span style="color:red">*</span></label>
+                                    <input type="file" name="file" id="file" class="form-control">
+                                    <label style="font-size: 13px;margin-top:10px">File maksimal  2MB(PNG,JPG,JPEG,WPEG)</label>
+                                    @if($errors->has('file'))
                                     <div class="text-danger">
-                                        {{ $errors->first('gmr_product') }}
+                                        {{ $errors->first('file') }}
                                     </div>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Simpan" class="btn btn-primary">
-                                    <a href="/produk" class="btn btn-dark">Kembali</a>
+                                    <a href="/produk" class="btn btn-dark btn-pill">Kembali</a>
                                 </div>
                             </form>
                         </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
-</div>
-
-{{-- @include('dash.footer') --}}
+    
+    @include('dash.footer')

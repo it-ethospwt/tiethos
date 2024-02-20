@@ -1,8 +1,13 @@
 <?php
 
-use App\Models\product;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\knowladgeController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\produkController;
+use App\Models\product;
+
+use App\Http\Controllers\Controller;
+
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\KolController;
 use App\Http\Controllers\AdminController;
@@ -14,6 +19,7 @@ use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +30,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', function () {
+    return view('index');
+});
 
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -45,14 +55,6 @@ Route::prefix('users')->middleware(['isadmin'])->group(function () {
     Route::delete('delete/{id}', [AdminController::class, 'users_delete'])->name('admin.users.delete')->middleware('auth');
 });
 
-//ROUTE PRODUCT
-Route::get('produk', [produkController::class, "index"]);
-Route::get('tambah', [produkController::class, "tambah_product"]);
-Route::post('store', [produkController::class, "store_product"]);
-Route::get('edit/{id}', [produkController::class, 'edit_product']);
-Route::put('storeEdit/{id}', [produkController::class, 'store_edit_product']);
-Route::get('hapus/{id}', [produkController::class, "destroy_product"]);
-
 Route::prefix('faq')->group(function () {
     Route::get('/', [FaqController::class, 'index'])->name('faq')->middleware('auth');
     Route::get('tambahKeluhan', [FaqController::class, 'tambahKeluhan'])->name('faq.tambahKeluhan')->middleware('auth');
@@ -63,23 +65,41 @@ Route::prefix('faq')->group(function () {
     Route::post('storeFaq', [FaqController::class, 'storeFaq'])->name('storeFaq')->middleware('auth');
 });
 
-
 // punya konten
 Route::get('konten', [App\Http\Controllers\kontenController::class, "index"]);
 Route::get('/{id}/al/', [App\Http\Controllers\kontenController::class, 'al'])->name('konten.al');
 Route::get('/{id}/ccp/', [App\Http\Controllers\kontenController::class, 'ccp'])->name('konten.ccp');
 Route::get('/{id}/ac/', [App\Http\Controllers\kontenController::class, 'ac'])->name('konten.ac');
+
 // contoroller tambah vidio dan gambar
 Route::get('konten/tambah', [App\Http\Controllers\kontenController::class, 'tambah'])->name('konten.tambah');
 Route::get('konten/plus', [App\Http\Controllers\kontenController::class, 'plus'])->name('konten.plus');
 Route::post('save', [App\Http\Controllers\kontenController::class, "save"]);
 Route::post('toko', [App\Http\Controllers\kontenController::class, "toko"]);
+
+
 // controller edit konten
 Route::get('ubah/{content_id}', [App\Http\Controllers\kontenController::class, 'edit']);
 Route::put('storeUbah/{content_id}', [App\Http\Controllers\kontenController::class, 'edit_store']);
 Route::get('delete/{content_id}', [App\Http\Controllers\kontenController::class, "destroy_content"]);
 
 
+//ROUTE PRODUCT
+Route::get('produk',[produkController::class,"index"]);
+Route::get('tambah', [produkController::class,"tambah_product"]);
+Route::post('store',[produkController::class,"store_product"]);
+Route::get('edit/{id}',[produkController::class,'edit_product']);
+Route::put('storeEdit/{id}',[produkController::class,'store_edit_product']);
+Route::get('hapus/{id}',[produkController::class,"destroy_product"]);
+Route::get('download/{id}',[produkController::class,"download_product"]);
+
+// ROUTE  BANK KNOWLADGE
+Route::get('knowladge',[knowladgeController::class,"index"]);
+Route::get('tambahKnowladge',[knowladgeController::class,"tambah_knowladge"]);
+Route::post('storeKnowladge',[knowladgeController::class,"store_knowladge"]);
+Route::get('show/{id}',[knowladgeController::class,'show_knowladge']);
+Route::get('editKnowladge/{id}',[knowladgeController::class,'edit_knowladge']);
+Route::put('storeEditKnowladge/{id}',[knowladgeController::class,'store_edit_knowladge']);
 // punya hadnbook
 Route::get('handbook', [App\Http\Controllers\handbookController::class, "index"]);
 // handbookwa
