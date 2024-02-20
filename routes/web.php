@@ -13,8 +13,6 @@ use App\Http\Controllers\KolController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\kontenController;
-
-use App\Http\Controllers\produkController;
 use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -85,21 +83,21 @@ Route::get('delete/{content_id}', [App\Http\Controllers\kontenController::class,
 
 
 //ROUTE PRODUCT
-Route::get('produk',[produkController::class,"index"]);
-Route::get('tambah', [produkController::class,"tambah_product"]);
-Route::post('store',[produkController::class,"store_product"]);
-Route::get('edit/{id}',[produkController::class,'edit_product']);
-Route::put('storeEdit/{id}',[produkController::class,'store_edit_product']);
-Route::get('hapus/{id}',[produkController::class,"destroy_product"]);
-Route::get('download/{id}',[produkController::class,"download_product"]);
+Route::get('produk', [produkController::class, "index"]);
+Route::get('tambah', [produkController::class, "tambah_product"]);
+Route::post('store', [produkController::class, "store_product"]);
+Route::get('edit/{id}', [produkController::class, 'edit_product']);
+Route::put('storeEdit/{id}', [produkController::class, 'store_edit_product']);
+Route::get('hapus/{id}', [produkController::class, "destroy_product"]);
+Route::get('download/{id}', [produkController::class, "download_product"]);
 
 // ROUTE  BANK KNOWLADGE
-Route::get('knowladge',[knowladgeController::class,"index"]);
-Route::get('tambahKnowladge',[knowladgeController::class,"tambah_knowladge"]);
-Route::post('storeKnowladge',[knowladgeController::class,"store_knowladge"]);
-Route::get('show/{id}',[knowladgeController::class,'show_knowladge']);
-Route::get('editKnowladge/{id}',[knowladgeController::class,'edit_knowladge']);
-Route::put('storeEditKnowladge/{id}',[knowladgeController::class,'store_edit_knowladge']);
+Route::get('knowladge', [knowladgeController::class, "index"]);
+Route::get('tambahKnowladge', [knowladgeController::class, "tambah_knowladge"]);
+Route::post('storeKnowladge', [knowladgeController::class, "store_knowladge"]);
+Route::get('show/{id}', [knowladgeController::class, 'show_knowladge']);
+Route::get('editKnowladge/{id}', [knowladgeController::class, 'edit_knowladge']);
+Route::put('storeEditKnowladge/{id}', [knowladgeController::class, 'store_edit_knowladge']);
 // punya hadnbook
 Route::get('handbook', [App\Http\Controllers\handbookController::class, "index"]);
 // handbookwa
