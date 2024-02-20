@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('knowladge', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('product_id')->constrained()->onDelete('cascade');
             $table->text('deskripsi');
             $table->timestamps();
         });
