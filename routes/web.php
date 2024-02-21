@@ -75,6 +75,8 @@ Route::post('toko', [App\Http\Controllers\kontenController::class, "toko"]);
 // controller edit konten
 Route::get('ubah/{content_id}', [App\Http\Controllers\kontenController::class, 'edit']);
 Route::put('storeUbah/{content_id}', [App\Http\Controllers\kontenController::class, 'edit_store']);
+Route::get('ganti/{content_id}', [App\Http\Controllers\kontenController::class, 'ganti']);
+Route::put('storeGanti/{content_id}', [App\Http\Controllers\kontenController::class, 'edit_ganti']);
 Route::get('delete/{content_id}', [App\Http\Controllers\kontenController::class, "destroy_content"]);
 
 

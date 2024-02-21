@@ -14,8 +14,9 @@ class kontenController extends Controller
 {
     public function index()
     {
-        $jdl = 'Konten';
+        $jdl = 'Bank Konten';
         $p = product::all();
+        $p = Product::paginate(8);
         return  view('konten.index', ['product' => $p, 'jdl' => $jdl]);
     }
 
@@ -176,11 +177,67 @@ class kontenController extends Controller
         <script>
             window.history.go(-2);
         </script>
+    <?php
+        exit();
+
+        return redirect()->back()->with('success', 'Edit Konten Berhasil!!');
+    }
+
+    public function ganti($content_id)
+    {
+        $jdl = 'Tambah Konten Video';
+        $konten = Konten::findOrFail($content_id);
+        $p = product::all();
+        return view('konten.ganti', ['product' => $p, 'contents' => $konten, 'jdl' => $jdl]);
+    }
+
+    public  function edit_ganti($content_id, Request $request)
+    {
+        $this->validate(
+            $request,
+            [
+                'product_id' => 'required',
+                'title' => 'required',
+                'konten' => 'required',
+            ],
+            [
+                'product_id' => 'Nama product Harus Diisi!',
+                'title.required' => 'Judul product Harus Diisi!',
+                'konten.required' => 'konten product Harus Diisi!',
+            ]
+        );
+
+        $data_edit = Konten::find($content_id);
+        $data_edit->product_id  = $request->product_id;
+        $data_edit->title = $request->title;
+        $data_edit->konten = $request->konten;
+
+        //cek  gambar  yang diupload
+        if ($request->hasFile('video')) {
+            $video = $request->file('video');
+            $video_nama = $video->hashName();
+            $video->move(public_path('public_imgTest'), $video_nama);
+
+            //Hapus video  Lama, Setelah video baru berhasil diunggah
+            if ($data_edit->video) {
+                File::delete(public_path('public_imgTest') . '/' . $data_edit->video);
+            }
+
+            $data_edit->video = $video_nama;
+        }
+
+        $data_edit->save();
+
+    ?>
+        <script>
+            window.history.go(-2);
+        </script>
 <?php
         exit();
 
         return redirect()->back()->with('success', 'Edit Konten Berhasil!!');
     }
+
 
     public function destroy_content($content_id)
     {

@@ -29,7 +29,7 @@
             <div class="container-xl">
                 <!-- <div class="row row-deck row-cards"> -->
                 <div class="col-md-12">
-                    <form class="card" action="\storeUbah\{{ $contents->content_id }}" method="POST" enctype="multipart/form-data">
+                    <form class="card" action="\storeGanti\{{ $contents->content_id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -62,12 +62,12 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label required">Upload Konten Gambar</label>
+                                <label class="form-label required">Upload Konten Video</label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="gambar" name="gambar" accept="image/png, image/jpeg">
+                                    <input type="file" class="form-control" id="video" name="video" accept="video/mp4, video/mov" value="{{ $contents->title }}">
                                     <button class="btn btn-outline-secondary" type="button" id="upload-button">Upload</button>
                                 </div>
-                                <small class="form-hint">File max 2mb dengan format PNG, JPG, JPEG</small>
+                                <small class="form-hint">File max 20mb dengan format mp4,mov,avi</small>
                             </div>
                             <div class="row">
                                 <div class="col-6 col-sm-4 col-md-2 col-l py-3">

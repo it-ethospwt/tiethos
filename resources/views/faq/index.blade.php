@@ -22,10 +22,8 @@
                         </h2>
                     </div>
                     <div class="btn-tambahUser mt-4 mb-2">
-                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-primary"> <span
-                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
-                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-primary btn-pill"> <span
-                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
+                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-primary"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
+                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-primary btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
                     </div>
                 </div>
             </div>
@@ -50,8 +48,7 @@
                                                 <div class="card-body text-center">
                                                     <h3 class="card-title">{{ $p->nm_Product }}</h3>
                                                     @foreach ($keluhanProduk as $k)
-                                                    <a href="{{ route('faqIndex', ['id' => $k->id]) }}"
-                                                        class="btn btn-secondary btn-pill mt-2">{{ $k->nama }}</a>
+                                                    <a href="{{ route('faqIndex', ['id' => $k->id]) }}" class="btn btn-secondary btn-pill mt-2">{{ $k->nama }}</a>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -69,7 +66,7 @@
         </div>
     </div>
 </div>
-
+@include('dash.footer')
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
@@ -130,6 +127,6 @@
     Toast.fire({
         icon: "success",
         title: "{{$message}}"
-        });
+    });
 </script>
 @endif

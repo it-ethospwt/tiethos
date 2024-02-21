@@ -14,6 +14,7 @@ class handbookController extends Controller
     {
         $jdl = 'HANDBOOK';
         $p = product::all();
+        $p = Product::paginate(8);
         return  view('handbook.index', ['product' => $p, 'jdl' => $jdl]);
     }
 
@@ -22,7 +23,7 @@ class handbookController extends Controller
     {
         $jdl = 'HANDBOOK INTERAKSI WHATSAPP';
         $w = Wa::where('product_id', $product_id)->get();
-
+        // $w = Wa::paginate(8);
         return view('handbook.wa.index', ['wa' => $w, 'product_id' => $product_id, 'jdl' => $jdl]);
     }
 
@@ -64,7 +65,7 @@ class handbookController extends Controller
 
         Wa::create($data);
 
-        return redirect('/handbook')->with('success', 'Tambah Produk Berhasil!!');
+        return redirect('/handbook')->with('success', 'Tambah Handbook Interaksi Berhasil!!');
     }
 
     public function detail($wa_id)
@@ -122,7 +123,7 @@ class handbookController extends Controller
 
         Web::create($data);
 
-        return redirect('/handbook')->with('success', 'Tambah Produk Berhasil!!');
+        return redirect('/handbook')->with('success', 'Tambah Handbook Konversi Web Berhasil!!');
     }
 
     public function lengkap($web_id)

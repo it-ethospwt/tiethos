@@ -19,10 +19,8 @@
                         </h2>
                     </div>
                 </div>
-                <div class="col col-sm-2 col-md-2 col-xl py-3">
-                    <a href="javascript:history.back()" class="btn btn-ghost-warning active w-100">
-                        <span style="margin-right: 8px;"></span>Kembali
-                    </a>
+                <div class="btn-tambahUser mt-4 mb-2">
+                    <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                 </div>
             </div>
         </div>
@@ -58,18 +56,15 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required">Upload Konten Video</label>
-                                <div>
-                                    <input type="file" class="form-control-file" id="video" name="video">
-                                    <small class="form-hint">File max 20mb dengan format mp4,mov,avi</small>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="video" name="video" accept="video/mp4, video/mov">
+                                    <button class="btn btn-outline-secondary" type="button" id="upload-button">Upload</button>
                                 </div>
+                                <small class="form-hint">File max 20mb dengan format mp4,mov,avi</small>
                             </div>
-                            <div class="row">
-                                <div class="col-6 col-sm-4 col-md-2 col-l py-3">
-                                    <button type="submit" class="btn btn-success w-100">Simpan</button>
-                                </div>
-                                <div class="col-6 col-sm-4 col-md-2 col-l py-3">
-                                    <!-- <button type="submit" class="btn btn-secondary w-100">Reset</button> -->
-                                </div>
+                            <div class="footer">
+                                <button type=" submit" class="btn btn-success btn-pill">Submit</button>
+                                <button type="reset" class="btn btn-secondary btn-pill"">Reset</button>
                             </div>
                         </div>
                     </form>

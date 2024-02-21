@@ -17,22 +17,9 @@
                         <h2 class="page-title">
                             Detail {{$jdl}}
                         </h2>
-                        <div class="col col-sm-2 col-md-2 col-xl py-3">
-                            <a href="javascript:history.back()" class="btn btn-ghost-warning active w-100">
-                                <span style="margin-right: 8px;"></span>Kembali
-                            </a>
+                        <div class="btn-tambahUser mt-4 mb-2">
+                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                         </div>
-                        <!-- <div class="col col-sm-2 col-md-2 col-xl py-3">
-                            <a href="#navbar-help" class="btn btn-ghost-warning active w-100" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Konten</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/konten/tambah">
-                                    Gambar
-                                </a>
-                                <a class="dropdown-item" href="/konten/plus">
-                                    Vidio
-                                </a>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -46,10 +33,10 @@
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
                                     <li class="nav-item">
-                                        <a href="#tabs-home-1" class="nav-link active" data-bs-toggle="tab">Gambar</a>
+                                        <a href="#tabs-home-1" class="nav-link active" data-bs-toggle="tab"><span style="margin-right: 8px;"><i class="fa fa-image"></i></span>Gambar</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#tabs-profile-1" class="nav-link" data-bs-toggle="tab">Video</a>
+                                        <a href="#tabs-profile-1" class="nav-link" data-bs-toggle="tab"><span style="margin-right: 8px;"><i class="fa fa-video"></i></span>Video</a>
                                     </li>
                                 </ul>
                             </div>
@@ -116,12 +103,12 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/edit/{{ $k->content_id }}" class="btn btn-primary">
+                                                                    <a href="/ganti/{{ $k->content_id }}" class="btn btn-primary">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/hapus/{{ $k->content_id }}" class="btn btn-danger">
+                                                                    <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
@@ -131,7 +118,6 @@
                                                 </div>
                                                 @endif
                                                 @endforeach
-
                                             </div>
                                         </div>
                                     </div>
@@ -142,45 +128,11 @@
                 </div>
             </div>
         </div>
-        <footer class="footer footer-transparent d-print-none">
-            <div class="container-xl">
-                <div class="row text-center align-items-center flex-row-reverse">
-                    <div class="col-lg-auto ms-lg-auto">
-                        <ul class="list-inline list-inline-dots mb-0">
-                            <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
-                            <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
-                            <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                            <li class="list-inline-item">
-                                <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                                    </svg>
-                                    Sponsor
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                        <ul class="list-inline list-inline-dots mb-0">
-                            <li class="list-inline-item">
-                                Copyright &copy; 2023
-                                <a href="." class="link-secondary">Tabler</a>.
-                                All rights reserved.
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                    v1.0.0-beta19
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 </div>
+@include('dash.footer')
+<!-- Sweet Alert -->
+@include('sweetalert::alert')
 <!-- Libs JS -->
 <!-- Tabler Core -->
 <script src="/dist/js/tabler.min.js?1684106062" defer></script>

@@ -46,9 +46,12 @@
                             {{$jdl}}
                         </h2>
                         <div class="col col-sm-2 col-md-2 col-xl py-3">
-                            <a href="/handbook/web/tambah" class="btn btn-ghost-warning active w-100">
-                                <span style="margin-right: 8px;"></span>Tambah Handbook
+                            <a href="/handbook/web/tambah" class="btn btn-warning btn-pill">
+                                <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah Handbook
                             </a>
+                        </div>
+                        <div class="btn-tambahUser mt-4 mb-2">
+                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                         </div>
                     </div>
                 </div>
@@ -160,8 +163,9 @@
         </div>
     </div>
 </div>
-
+@include('dash.footer')
+<!-- Sweet Alert -->
+@include('sweetalert::alert')
 <script src="/dist/js/demo-theme.min.js?1684106062"></script>
 <script src="/dist/js/tabler.min.js?1684106062" defer></script>
 <script src="/dist/js/demo.min.js?1684106062" defer></script>
-@include('dash.footer')

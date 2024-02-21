@@ -46,15 +46,17 @@
                             {{$jdl}}
                         </h2>
                         <div class="col col-sm-2 col-md-2 col-xl py-3">
-                            <a href="/handbook/wa/tambah" class="btn btn-ghost-warning active w-100">
-                                <span style="margin-right: 8px;"></span>Tambah Handbook
+                            <a href="/handbook/wa/tambah" class="btn btn-warning btn-pill">
+                                <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah Handbook
                             </a>
+                        </div>
+                        <div class="btn-tambahUser mt-4 mb-2">
+                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="page-body">
             <div class="container-xl">
                 <div class="row row-cards">
@@ -84,7 +86,7 @@
                                 <table class="table card-table table-vcenter text-nowrap datatable">
                                     <thead>
                                         <tr>
-                                            <th class="w-1">No. <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
+                                            <th class="w-1">No.
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M6 15l6 -6l6 6" />
@@ -125,33 +127,9 @@
                                 </table>
                             </div>
                             <div class="card-footer d-flex align-items-center">
-                                <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
-                                <ul class="pagination m-0 ms-auto">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                            <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M15 6l-6 6l6 6" />
-                                            </svg>
-                                            prev
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">
-                                            next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M9 6l6 6l-6 6" />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class="col-md-12">
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,8 +138,9 @@
         </div>
     </div>
 </div>
-
+@include('sweetalert::alert')
 <script src="/dist/js/demo-theme.min.js?1684106062"></script>
 <script src="/dist/js/tabler.min.js?1684106062" defer></script>
 <script src="/dist/js/demo.min.js?1684106062" defer></script>
+
 @include('dash.footer')

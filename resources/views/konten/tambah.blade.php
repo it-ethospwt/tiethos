@@ -15,16 +15,13 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Bank Konten
+                            {{$jdl}}
                         </h2>
                     </div>
                 </div>
-                <div class="col col-sm-2 col-md-2 col-xl py-3">
-                    <a href="javascript:history.back()" class="btn btn-ghost-warning active w-100">
-                        <span style="margin-right: 8px;"></span>Kembali
-                    </a>
+                <div class="btn-tambahUser mt-4 mb-2">
+                    <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                 </div>
-
             </div>
         </div>
         <!-- Page body -->
@@ -59,19 +56,22 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required">Upload Konten Gambar</label>
-                                <div>
-                                    <input type="file" class="form-control-file" id="gambar" name="gambar">
-                                    <small class="form-hint">File max 2mb dengan format PNG,JPG,JPEG</small>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="gambar" name="gambar" accept="image/png, image/jpeg">
+                                    <button class="btn btn-outline-secondary" type="button" id="upload-button">Upload</button>
                                 </div>
+                                <small class="form-hint">File max 2mb dengan format PNG, JPG, JPEG</small>
                             </div>
-                            <div class="row">
-                                <div class="col-6 col-sm-4 col-md-2 col-l py-3">
-                                    <button type="submit" class="btn btn-success w-100">Simpan</button>
-                                </div>
-                                <div class="col-6 col-sm-4 col-md-2 col-l py-3">
-                                    <!-- <button type="submit" class="btn btn-secondary w-100">Reset</button> -->
-                                </div>
+                            <div class="footer">
+                                <button type=" submit" class="btn btn-success btn-pill">Submit</button>
+                                <button type="reset" class="btn btn-secondary btn-pill"">Reset</button>
                             </div>
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('dash.footer')
