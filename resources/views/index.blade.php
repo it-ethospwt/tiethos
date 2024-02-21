@@ -1,31 +1,11 @@
-<!-- CSS DataTables Responsive -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+<head>
+    <!-- CSS DataTables Responsive -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+</head>
 
-<style>
-    .status-online {
-        background-color: green;
-        color: white;
-        /* Untuk mengubah warna teks agar lebih terlihat pada latar belakang hijau */
-        padding: 2px 5px;
-        /* Menambahkan sedikit padding agar lebih terlihat */
-        border-radius: 5px;
-        /* Memberikan sedikit sudut membulat */
-    }
-
-    .status-offline {
-        background-color: red;
-        color: white;
-        /* Untuk mengubah warna teks agar lebih terlihat pada latar belakang merah */
-        padding: 2px 5px;
-        /* Menambahkan sedikit padding agar lebih terlihat */
-        border-radius: 5px;
-        /* Memberikan sedikit sudut membulat */
-    }
-</style>
-
-
+<!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script> -->
 <div class="page">
     <!-- Navbar -->
     @include('dash.header')
@@ -44,6 +24,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Page body -->
         <div class="page-body">
             <div class="container-xl">
@@ -128,6 +109,8 @@
                                 Total Content </div>
                         </div>
                     </div>
+
+
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
@@ -157,16 +140,13 @@
                                                 {{ Carbon\Carbon::parse($u->last_seen)->diffForHumans()}}
                                             </td>
                                             <td>
-                                                <span class="status-online">
-                                                    Online
-                                                </span>
+                                                <span class="badge bg-success me-1"></span> Online
                                             </td>
                                         </tr>
                                         @endif
                                         @endforeach
                                     </tbody>
                                 </table>
-
                                 <!-- /Table -->
                             </div>
                         </div>
@@ -175,8 +155,8 @@
             </div>
         </div>
     </div>
-    @include('dash.footer')
 </div>
+@include('dash.footer')
 </div>
 <!-- Libs JS -->
 <script src=" https://code.jquery.com/jquery-3.7.0.js"></script>

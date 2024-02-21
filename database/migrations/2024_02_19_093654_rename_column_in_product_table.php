@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
-            $table->id();
-            $table->string('nm_Product', 100)->nullable('false');
-            $table->string('file', 225)->nullable('false');
-            $table->timestamps();
+        Schema::table('product', function (Blueprint $table) {
+            $table->renameColumn('gmr_product', 'file');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product');
+        Schema::table('product', function (Blueprint $table) {
+            $table->renameColumn('gmr_product', 'file');
+        });
     }
 };

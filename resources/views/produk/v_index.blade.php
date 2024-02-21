@@ -6,18 +6,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 
     <style>
-        .image-zoom-container {
-            position: relative;
+        .card {
+            border: none !important;
+            border: 1px solid #DCE0E5 !important;
         }
 
-        .zoomable-img {
-            z-index: 500;
-            cursor: pointer;
-            transition: transform 0.90s ease;
-        }
-
-        .zoomable-img:hover {
-            transform: scale(3.4);
+        .card-header {
+            border-bottom: 1px solid #DCE0E5 !important;
         }
     </style>
 </head>
@@ -41,6 +36,9 @@
                 </div>
             </div>
         </div>
+
+        <br><br>
+
         <!-- Page body -->
         <div class="card-body">
             <div class="container-lg">
@@ -55,6 +53,7 @@
                                             class="fa fa-plus"></i></span>
                                     Data Produk</a>
                             </div>
+
                             <!-- Table -->
                             <table id="table-produkList" class="display wrap table-sm" style="width:100%">
                                 <thead>
@@ -62,10 +61,9 @@
                                         <th>No</th>
                                         <th style="width:13%;text-align: center;">Gambar</th>
                                         <th>Nama Produk</th>
-                                        <th style="width:25%">Deskripsi</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
-                                        <th>Aksi</th>
+                                        <th style="width:18%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,18 +72,20 @@
                                     <tr style="font-size: 90%;">
                                         <td>{{$no++}}</td>
                                         <td align="center">
-                                            <img src="public_imgTest/{{ $d->gmr_product }}" class="zoomable-img"
-                                                alt="Gambar Produk" width="80px">
+                                            @if(isset($imageUrls[$d->id ]))
+                                            <img src="{{ $imageUrls[$d->id] }}" alt="Gambar Produk" width="80px">
+                                            @endif
                                         </td>
-                                        <td>{{ $d->nm_Product }}</td>
-                                        <td>{{ $d->dec_product }}</td>
+                                        <td>{{ $d->nm_product }}</td>
                                         <td>{{ $d->created_at->format('d-m-Y H:i') }}</td>
                                         <td>{{ $d->updated_at->format('d-m-Y H:i') }}</td>
                                         <td>
-                                            <a href="edit/{{ $d->id }}" class="btn btn-success"><i class="fa fa-edit">
-                                                </i></a>
-                                            <a href="hapus/{{ $d->id }}" class="btn btn-danger"><i class="fa fa-trash">
-                                                </i></a>
+                                            <a href="{{ url('download/'.$d->id) }}" class="btn btn-primary"><i
+                                                    class="fa fa-download"></i></a>
+                                            <a href="edit/{{ $d->id }}" class="btn btn-success btn-pill "><i
+                                                    class="fa fa-edit"> </i></a>
+                                            <a href="hapus/{{ $d->id }}" class="btn btn-danger btn-pill"><i
+                                                    class="fa fa-trash"> </i></a>
                                         </td>
                                     </tr>
                                     @endforeach

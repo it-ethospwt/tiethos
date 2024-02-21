@@ -18,7 +18,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            List User
+                            Content KOL
                         </h2>
                     </div>
                 </div>
@@ -30,47 +30,44 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data User</h3>
+                            <h3 class="card-title">Data Content KOL</h3>
                         </div>
                         <div class="card-body">
                             <div class="btn-tambahUser mt-2 mb-5">
-                                <a href="{{ route('admin.tambahUsers') }}" class="btn btn-warning btn-pill active">
-                                    <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Data User</a>
+                                <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span
+                                        style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
                             </div>
                             <!-- Table -->
-                            <table id="table-user" class="display nowrap" style="width:100%">
+                            <table id="table-kol" class="display nowrap" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Username</th>
-                                        <th>Email</th>
-                                        <th>Nama</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>Posisi</th>
+                                        <th>Nama KOL</th>
+                                        <th>Tanggal Tayang</th>
+                                        <th>Owning</th>
+                                        <th>Data User</th>
+                                        <th>Update</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($user->count() > 0)
-                                    @foreach ($user as $u)
+                                    @foreach ($kol as $k)
                                     <tr style="font-size: 90%;">
                                         <td scope="row">{{ $loop->iteration }}.</td>
-                                        <td>{{ $u->username }}</td>
-                                        <td>{{ $u->email }}</td>
-                                        <td>{{ $u->name }}</td>
-                                        <td>{{ $u->jenis_kelamin }}</td>
-                                        <td>{{ $u->role }}</td>
+                                        <td>{{ $k->nama }}</td>
+                                        <td>{{ $k->tanggal_tayang }}</td>
+                                        <td>{{ $k->owning }}</td>
+                                        <td>{{ $k->id_produk }}</td>
+                                        <td>{{ $k->user }}</td>
+                                        <td>{{ $k->updated_at }}</td>
                                         <td>
-                                            <a href="{{ route('admin.users.detail', $u->id)}}"
-                                                class="btn btn-primary btn-pill">
+                                            <a href="" class="btn btn-primary btn-pill">
                                                 <span class="ti ti-search" style="color: white;"></span>
                                             </a>
-                                            <a href="{{ route('admin.users.edit', ['id' => $u->id]) }}"
-                                                class="btn btn-success btn-pill">
+                                            <a href="" class="btn btn-success btn-pill">
                                                 <span class="ti ti-edit" style="color: white;"></span>
                                             </a>
-                                            <form action="{{ route('admin.users.delete', $u->id)}}" method="POST"
-                                                id="deleteForm" class="d-inline">
+                                            <form action="" method="POST" id="deleteForm" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-pill deleteButton">
@@ -78,19 +75,11 @@
                                                 </button>
                                             </form>
                                         </td>
-
                                     </tr>
                                     @endforeach
-                                    @else
-                                    <tr>
-                                        <td class="text-center">Data Belum Tersedia</td>
-                                    </tr>
-                                    @endif
-
                                 </tbody>
                             </table>
                             <!-- /Table -->
-
                         </div>
                     </div>
                 </div>
@@ -167,7 +156,7 @@
 @endif
 
 <script>
-    new DataTable('#table-user', {
+    new DataTable('#table-kol', {
                     responsive: true,
                     rowReorder: {
                         selector: 'td:nth-child(2)'

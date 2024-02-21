@@ -17,6 +17,18 @@
     <link href="{{ asset('dist/css/demo.min.css?1684106062') }} " rel="stylesheet" />
     <!-- Font Awesome -->
     <link href="{{ asset('dist/fontawesome-free-6.5.1-web/css/all.css') }} " rel="stylesheet">
+
+    <style>
+        .card {
+            border: none !important;
+            border: 1px solid #DCE0E5 !important;
+        }
+
+        .card-header {
+            border-bottom: 1px solid #DCE0E5 !important;
+        }
+    </style>
+
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
