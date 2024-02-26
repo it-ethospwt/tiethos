@@ -26,18 +26,21 @@ class AdminController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'username' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'password' => 'required|string|min:8|confirmed'
+            'password' => 'required|string|min:8',
+            'jenis_kelamin' => 'required|string|max:255',
+            'role' => 'required|string|max:255'
         ]);
 
         $validatedData['password'] = bcrypt($request->password);
 
         try {
             User::create($validatedData);
-            return response()->json(['success' => true]);
+            return redirect()->route('admin.users')->with('success', 'Data User Berhasil Ditambah');
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Data Belum Sesuai']);
         }
     }
+
 
     public function users_edit($id)
     {

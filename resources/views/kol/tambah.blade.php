@@ -24,7 +24,7 @@
                     <div class="container-xl">
                         <div class="row row-cards">
                             <div class="col-12">
-                                <form class="card" action="" method="POST">
+                                <form class="card" action="{{ route('kol.store') }}" method="POST">
                                     @csrf
                                     <div class="card-header">
                                         <h3 class="card-title">Form Tambah Content KOL</h3>
@@ -33,7 +33,7 @@
                                         <div class="mb-3">
                                             <label class="form-label required">Nama KOL</label>
                                             <div>
-                                                <input type="text" name="username" class="form-control"
+                                                <input type="text" name="nama" class="form-control"
                                                     placeholder="Input Nama KOL">
                                             </div>
                                         </div>
@@ -48,42 +48,45 @@
                                         <div class="mb-3">
                                             <label class="form-label required">Owning Berapa Lama</label>
                                             <div>
-                                                <input type="text" name="name" class="form-control"
+                                                <input type="text" name="owning" class="form-control"
                                                     placeholder="Input Owning">
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label required">Rate Card</label>
-                                            <div>
-                                                <input type="text" name="name" class="form-control"
-                                                    placeholder="Input Rate Card">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">
+                                                    Rp
+                                                </span>
+                                                <input type="text" name="rate_card" class="form-control"
+                                                    placeholder="Input Rate Card" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label required">Keterangan Transfer</label>
                                             <div>
-                                                <input type="text" name="name" class="form-control"
+                                                <input type="text" name="transfer" class="form-control"
                                                     placeholder="Input Keterangan Transfer">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label required">Resi</label>
+                                            <label class="form-label">Resi</label>
                                             <div>
-                                                <input type="text" name="name" class="form-control"
+                                                <input type="text" name="resi" class="form-control"
                                                     placeholder="Input Resi">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label required">Ekspedisi</label>
+                                            <label class="form-label">Ekspedisi</label>
                                             <div>
-                                                <input type="text" name="name" class="form-control"
+                                                <input type="text" name="ekspedisi" class="form-control"
                                                     placeholder="Input Ekspedisi">
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label">Produk</label>
+                                            <label class="form-label required">Produk</label>
                                             <div>
-                                                <select name="produk_id" class="form-select">
+                                                <select name="id_produk" class="form-select">
                                                     @foreach($produk as $p)
                                                     <option value="{{ $p->id }}">{{ $p->nm_product }}</option>
                                                     @endforeach
@@ -93,9 +96,17 @@
                                         <div class="mb-3">
                                             <label class="form-label required">Nama User</label>
                                             <div>
-                                                <input type="text" name="name" class="form-control"
+                                                <input type="text" name="user" class="form-control"
                                                     placeholder="Input Nama User">
                                             </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-label">Upload Gambar</div>
+                                            <input type="file" name="gambar" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-label">Upload Video</div>
+                                            <input type="file" name="video" class="form-control">
                                         </div>
                                     </div>
                                     <div class="card-footer text-end">

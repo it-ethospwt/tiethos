@@ -118,8 +118,10 @@ Route::get('web/detail/{id}', [App\Http\Controllers\handbookController::class, '
 Route::prefix('kol')->group(function () {
     Route::get('/', [KolController::class, 'index'])->name('kol')->middleware('auth');
     Route::get('tambahKOL', [KolController::class, 'tambahKOL'])->name('kol.tambah')->middleware('auth');
-    Route::post('store', [KolController::class, 'users_store'])->name('admin.users.')->middleware('auth');
-    Route::get('detail/{id}', [KolController::class, 'users_detail'])->name('.users.detail')->middleware('auth');
+    Route::post('store', [KolController::class, 'store'])->name('kol.store')->middleware('auth');
+    Route::get('detail/{id}', [KolController::class, 'detail'])->name('kol.detail')->middleware('auth');
+    Route::post('/upload-gambar/{id}', [KolController::class, 'uploadGambar'])->name('upload.gambar');
+    Route::post('/upload-video/{id}', [KolController::class, 'uploadVideo'])->name('upload.video');
     Route::get('edit/{id}', [KolController::class, 'users_edit'])->name('admin..edit')->middleware('auth');
     Route::post('update/{id}', [KolController::class, 'users_update'])->name('admin..update')->middleware('auth');
     Route::delete('delete/{id}', [KolController::class, 'users_delete'])->name('.users.delete')->middleware('auth');

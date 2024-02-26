@@ -39,6 +39,7 @@
                         </a>
                     </li>
                     @endif
+                    @if (Auth::check() && (Auth::user()->role == 'Admin' || Auth::user()->role == 'ADV'))
                     <li class="nav-item dropdown {{ request()->is('produk*') ? 'active' : '' }}">
                         <a class="nav-link" href="/produk">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -100,6 +101,9 @@
                             </div>
                         </div>
                     </li>
+                    @endif
+                    @if (Auth::check() && (Auth::user()->role == 'Admin' || Auth::user()->role == 'ADV' ||
+                    Auth::user()->role == 'CS'))
                     <li class="nav-item">
                         <a class="nav-link" href="/knowladge">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -153,6 +157,7 @@
                             </span>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </div>
         </div>
