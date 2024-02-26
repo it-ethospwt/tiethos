@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Models\Wa;
 use App\Models\Web;
+use Aws\s3\S3Client;
 use Illuminate\Http\Request;
 
 class handbookController extends Controller
@@ -15,7 +16,40 @@ class handbookController extends Controller
         $jdl = 'HANDBOOK';
         $p = product::all();
         $p = Product::paginate(8);
-        return  view('handbook.index', ['product' => $p, 'jdl' => $jdl]);
+        $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
+                'secret' =>  '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',
+            ],
+        ];
+
+        //membuat instansiasi  s3
+        $s3 = new S3Client($config);
+
+        //Nama Bucket dan Folder
+        $bucketName = 'bankcont';
+        $folderName = 'produk/';
+
+        //Arary untuk  menyimpan gambar
+        $imageUrls =  [];
+
+        //Loop melalui setiap data  produk
+        foreach ($p as $product) {
+            //Mendapatkan nama file dari field 'file' dalam  record product 
+            $fileName =  $product->file;
+
+            //mendapatkan URL gambar dari AWS S3 jika file tersebut ada
+            $imageUrl = $s3->getObjectUrl($bucketName, $folderName . $fileName);
+
+            //Menambahkan  URL  gambar  kedalam  array jika URL tersedia
+            if ($imageUrl) {
+                $imageUrls[$product->id] = $imageUrl;
+            }
+        }
+
+        return  view('handbook.index', ['product' => $p, 'jdl' => $jdl, 'imageUrls' => $imageUrls]);
     }
 
     // punya wa

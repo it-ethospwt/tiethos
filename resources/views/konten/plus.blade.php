@@ -36,7 +36,7 @@
                                 <label class="form-label required">Produk</label>
                                 <select class="form-control" name="product_id" id="product_id">
                                     @foreach ($product as $p)
-                                    <option value="<?= $p['id']; ?>"><?= $p['nm_Product']; ?></option>
+                                    <option value="<?= $p['id']; ?>"><?= $p['nm_product']; ?></option>
                                     @endforeach
                                 </select>
                             </div>

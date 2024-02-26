@@ -12,5 +12,9 @@ class Konten extends Model
         'product_id', 'title', 'konten', 'gambar', 'video' // Add other fields as needed
     ];
 
+    public function product()
+    {
+        return $this->belongsTo(product::class);
+    }
     // You can define relationships, scopes, or other model methods here
 }

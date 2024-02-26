@@ -50,25 +50,20 @@
                                                 <div class="col-md-6 col-lg-3 mb-3">
                                                     <div class="card">
                                                         <!-- Photo -->
-                                                        <div class="img-responsive img-responsive-21x9 card-img-top" style="background-image: url('{{ asset('public_imgTest/'.$k->gambar) }}'); height: 150px;"></div>
+                                                        @if(isset($imageUrls[$k->content_id ]))
+                                                        <div class="img-responsive img-responsive-21x9 card-img-top" style="background-image: url('{{ $imageUrls[$k->content_id] }}'); height: 150px;"></div>
+                                                        @endif
                                                         <div class="card-body">
                                                             <h3 class="card-title">{{$k->title}}</h3>
                                                             <div class="row g-2 justify-content-center">
-                                                                <!-- Tombol Edit -->
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/edit/{{ $k->content_id }}" class="btn btn-primary">
+                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                </div>
+                                                                <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
+                                                                    <a href="/ubah/{{ $k->content_id }}" class="btn btn-primary">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
-
-                                                                <!-- Tombol Download -->
-                                                                <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ asset('public_imgTest/'.$k->gambar) }}" download="konten.jpg" class="btn btn-success">
-                                                                        <i class="fas fa-download"></i>
-                                                                    </a>
-                                                                </div>
-
-                                                                <!-- Tombol Hapus -->
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
                                                                     <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
                                                                         <i class="fas fa-trash"></i>
@@ -94,30 +89,25 @@
                                                     <div class="card">
                                                         <!-- Video -->
                                                         <div class="card-img-top">
+                                                            @if(isset($videoUrls[$k->content_id ]))
                                                             <video controls style="width:100%; height:150px;">
-                                                                <source src="{{ asset('public_videoTest/'.$k->video) }}" type="video/mp4">
+                                                                <source src="{{ $videoUrls[$k->content_id] }}" type="video/mp4">
                                                                 Your browser does not support the video tag.
                                                             </video>
+                                                            @endif
                                                         </div>
                                                         <div class="card-body">
                                                             <h3 class="card-title">{{$k->title}}</h3>
 
                                                             <div class="row g-2 justify-content-center">
-                                                                <!-- Tombol Edit -->
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/edit/{{ $k->content_id }}" class="btn btn-primary">
+                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                </div>
+                                                                <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
+                                                                    <a href="/ganti/{{ $k->content_id }}" class="btn btn-primary">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
-
-                                                                <!-- Tombol Download -->
-                                                                <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ asset('public_videoTest/'.$k->video) }}" download="konten.mp4" class="btn btn-success">
-                                                                        <i class="fas fa-download"></i>
-                                                                    </a>
-                                                                </div>
-
-                                                                <!-- Tombol delete -->
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
                                                                     <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
                                                                         <i class="fas fa-trash"></i>
@@ -142,11 +132,10 @@
         </div>
     </div>
 </div>
-@include('dash.footer')
-<!-- Sweet Alert -->
 @include('sweetalert::alert')
-<!-- Libs JS -->
-<!-- Tabler Core -->
-<script src="/dist/js/tabler.min.js?1684106062" defer></script>
-<script src="/dist/js/demo.min.js?1684106062" defer></script>
-</body>
+
+<!-- <script src="/dist/js/tabler.min.js?1684106062" defer></script>
+<script src="/dist/js/demo.min.js?1684106062" defer></script> -->
+
+
+@include('dash.footer')

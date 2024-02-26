@@ -82,27 +82,38 @@
                                 <div class="card-body">
                                     <div class="row">
                                         @foreach ($product as $p)
-                                        <div class="col-sm-6 col-lg-3 mb-3">
-                                            <div class="card">
-                                                <!-- Apply a container div to maintain aspect ratio -->
-                                                <div class="image-container">
-                                                    <img src="{{ asset('/public_imgTest/' . $p->gmr_product) }}" alt="Gambar Produk">
-                                                </div>
-                                                <div class="card-body text-center">
-                                                    <h3 class="card-title">{{$p->nm_Product}}</h3>
-                                                    <!-- Wrap each button in a separate div for vertical layout -->
-                                                    <div class="button-container">
-                                                        <a href="{{ route('konten.al', $p->id) }}" class="btn btn-primary btn-pill mt-2">Agency Luar</a>
+                                        <?php $hasKONTEN = false; ?>
+                                        <?php foreach ($contents as $k) : ?>
+                                            <?php if ($k['product_id'] == $p['id']) {
+                                                $hasKONTEN = true;
+                                                break;
+                                            } ?>
+                                        <?php endforeach; ?>
+
+                                        <?php if ($hasKONTEN) : ?>
+                                            <div class="col-sm-6 col-lg-3 mb-3">
+                                                <div class="card">
+                                                    <div class="image-container">
+                                                        @if(isset($imageUrls[$p->id ]))
+                                                        <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
+                                                        @endif
                                                     </div>
-                                                    <div class="button-container">
-                                                        <a href="{{ route('konten.ccp', $p->id) }}" class="btn btn-info btn-pill mt-2">CCP</a>
-                                                    </div>
-                                                    <div class="button-container">
-                                                        <a href="{{ route('konten.ac', $p->id) }}" class="btn btn-success btn-pill mt-2">ADV/CWM</a>
+                                                    <div class="card-body text-center">
+                                                        <h3 class="card-title">{{$p->nm_product}}</h3>
+                                                        <!-- Wrap each button in a separate div for vertical layout -->
+                                                        <div class="button-container">
+                                                            <a href="{{ route('konten.al', $p->id) }}" class="btn btn-primary btn-pill mt-2">Agency Luar</a>
+                                                        </div>
+                                                        <div class="button-container">
+                                                            <a href="{{ route('konten.ccp', $p->id) }}" class="btn btn-info btn-pill mt-2">CCP</a>
+                                                        </div>
+                                                        <div class="button-container">
+                                                            <a href="{{ route('konten.ac', $p->id) }}" class="btn btn-success btn-pill mt-2">ADV/CWM</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
                                         @endforeach
                                     </div>
                                     <div class="row">

@@ -22,15 +22,8 @@
                         </h2>
                     </div>
                     <div class="btn-tambahUser mt-4 mb-2">
-<<<<<<< HEAD
-                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-primary"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
-                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-primary btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
-=======
-                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-warning btn-pill"> <span
-                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
-                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-warning btn-pill"> <span
-                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
->>>>>>> dd4ebb253581aaea6090a30610d27d06b6d4bc7f
+                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-warning btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
+                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-warning btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
                     </div>
                 </div>
             </div>

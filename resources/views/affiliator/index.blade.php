@@ -4,21 +4,13 @@
 
 
 <style>
-    /* styles.css */
-    /* .custom-button {
-            display: block;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            line-height: 32px;
-            text-decoration: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 12px;
-            font-family: Poppins;
-            font-weight: 400;
-            cursor: pointer;
-        } */
+    .btn-black {
+        background-color: black;
+        color: white;
+        /* Tambahkan properti CSS lainnya sesuai kebutuhan */
+        /* Misalnya: padding, border, dll. */
+    }
+
     .button-container {
         width: 100%;
         margin-top: 5px;
@@ -58,6 +50,9 @@
                         <h2 class="page-title">
                             {{$jdl}}
                         </h2>
+                        <div class="col col-sm-2 col-md-1 col-xl py-3">
+                            <a href="affiliator/tambah" class="btn btn-warning btn-pill mt-2"><span style="margin-right: 8px;"><i class="fas fa-plus"></i></span>{{$jdl}}</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,25 +66,40 @@
                                 <div class="card-body">
                                     <div class="row">
                                         @foreach ($product as $p)
-                                        <div class="col-sm-6 col-lg-3 mb-3">
-                                            <div class="card">
-                                                <!-- Apply a container div to maintain aspect ratio -->
-                                                <div class="image-container">
-                                                    @if(isset($imageUrls[$p->id ]))
-                                                    <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
-                                                    @endif
-                                                </div>
-                                                <div class="card-body text-center">
-                                                    <h3 class="card-title">{{$p->nm_product}}</h3>
-                                                    <div class="button-container">
-                                                        <a href="{{ route('handbook.wa.index', $p->id) }}" class="btn btn-success btn-pill mt-2">Interaksi Whatsapp</a>
+                                        <?php $hasKONTEN = false; ?>
+                                        <?php foreach ($affiliator as $a) : ?>
+                                            <?php if ($a['produk_id'] == $p['id']) {
+                                                $hasKONTEN = true;
+                                                break;
+                                            } ?>
+                                        <?php endforeach; ?>
+
+                                        <?php if ($hasKONTEN) : ?>
+                                            <div class="col-sm-6 col-lg-3 mb-3">
+                                                <div class="card">
+                                                    <!-- Apply a container div to maintain aspect ratio -->
+                                                    <div class="image-container">
+                                                        @if(isset($imageUrls[$p->id ]))
+                                                        <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
+                                                        @endif
                                                     </div>
-                                                    <div class="button-container">
-                                                        <a href="{{ route('handbook.web.index', $p->id) }}" class="btn btn-info btn-pill mt-2">Konversi Web</a>
+                                                    <div class="card-body text-center">
+                                                        <h3 class="card-title">{{$p->nm_product}}</h3>
+                                                        <div class="button-container">
+                                                            <a href="#navbar-help" class="btn btn-dark btn-pill mt-2" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false"><span style="margin-right: 8px;"><i class="fab fa-tiktok"></i></span>TIKTOK</a>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="{{ route('affiliator.purwokerto.index', $p->id) }}">
+                                                                    TikTok Purwokerto
+                                                                </a>
+                                                                <a class="dropdown-item" href="{{ route('affiliator.cilacap.index', $p->id) }}">
+                                                                    TikTok Cilacap
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
                                         @endforeach
                                     </div>
                                     <div class="row">

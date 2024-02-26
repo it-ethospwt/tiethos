@@ -41,9 +41,9 @@
                             </div> -->
                             <div class="mb-3">
                                 <label class="form-label required">Produk</label>
-                                <select class="form-control" name="product_id" id="product_id" value="{{ $contents->product_id }}">
+                                <select class="form-control" name="product_id" id="product_id">
                                     @foreach ($product as $p)
-                                    <option value="<?= $p['id']; ?>"><?= $p['nm_Product']; ?></option>
+                                    <option value="{{ $p->id }}" {{ $p->id == $contents->product_id ? 'selected' : '' }}>{{ $p->nm_product }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -78,3 +78,14 @@
                     </form>
 
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+@include('sweetalert::alert')
+
+<!-- <script src="/dist/js/tabler.min.js?1684106062" defer></script>
+<script src="/dist/js/demo.min.js?1684106062" defer></script> -->
+
+
+@include('dash.footer')

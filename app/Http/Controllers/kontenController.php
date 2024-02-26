@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Models\Konten;
 
+use Aws\s3\S3Client;
 use  Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 use Illuminate\Http\Request;
@@ -15,9 +17,43 @@ class kontenController extends Controller
     public function index()
     {
         $jdl = 'Bank Konten';
-        $p = product::all();
-        $p = Product::paginate(8);
-        return  view('konten.index', ['product' => $p, 'jdl' => $jdl]);
+        $p = product::paginate(8);
+        $k = Konten::all();
+
+        $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
+                'secret' =>  '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',
+            ],
+        ];
+
+        //membuat instansiasi  s3
+        $s3 = new S3Client($config);
+
+        //Nama Bucket dan Folder
+        $bucketName = 'bankcont';
+        $folderName = 'produk/';
+
+        //Arary untuk  menyimpan gambar
+        $imageUrls =  [];
+
+        //Loop melalui setiap data  produk
+        foreach ($p as $product) {
+            //Mendapatkan nama file dari field 'file' dalam  record product 
+            $fileName =  $product->file;
+
+            //mendapatkan URL gambar dari AWS S3 jika file tersebut ada
+            $imageUrl = $s3->getObjectUrl($bucketName, $folderName . $fileName);
+
+            //Menambahkan  URL  gambar  kedalam  array jika URL tersedia
+            if ($imageUrl) {
+                $imageUrls[$product->id] = $imageUrl;
+            }
+        }
+
+        return  view('konten.index', ['product' => $p, 'contents' => $k, 'jdl' => $jdl, 'imageUrls' => $imageUrls]);
     }
 
     public function al($product_id)
@@ -26,16 +62,112 @@ class kontenController extends Controller
         $jdl = 'Konten Agency Luar';
         $k = Konten::where('product_id', $product_id)->get();
 
-        return view('konten.al', ['contents' => $k, 'product_id' => $product_id, 'jdl' => $jdl]);
+
+
+        // Konfigurasi AWS S3
+        $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
+                'secret' =>  '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',
+            ],
+        ];
+
+        // Membuat instansiasi  s3
+        $s3 = new S3Client($config);
+
+        // Nama Bucket dan Folder
+        $bucketName = 'bankcont';
+
+        // Array untuk menyimpan gambar dan video
+        $imageUrls = [];
+        $videoUrls = [];
+
+        foreach ($k as $konten) {
+            $gambarFileName =  $konten->gambar;
+            $videoFileName =  $konten->video;
+
+            $gambarExtension = pathinfo($gambarFileName, PATHINFO_EXTENSION);
+
+            if (in_array($gambarExtension, ['jpg', 'jpeg', 'png'])) {
+                $gambarFolderName = 'konten/gambar/';
+                $imageUrl = $s3->getObjectUrl($bucketName, $gambarFolderName . $gambarFileName);
+                if ($imageUrl) {
+                    $imageUrls[$konten->content_id] = $imageUrl;
+                }
+            }
+
+            $videoExtension = pathinfo($videoFileName, PATHINFO_EXTENSION);
+
+            if (in_array($videoExtension, ['mp4', 'avi'])) {
+                $videoFolderName = 'konten/video/';
+                $videoUrl = $s3->getObjectUrl($bucketName, $videoFolderName . $videoFileName);
+                if ($videoUrl) {
+                    $videoUrls[$konten->content_id] = $videoUrl;
+                }
+            }
+        }
+
+
+        return view('konten.al', [
+            'contents' => $k, 'product_id' => $product_id, 'jdl' => $jdl, 'imageUrls' => $imageUrls, 'videoUrls' => $videoUrls
+        ]);
     }
 
     public function ccp($product_id)
     {
-        // Ambil konten berdasarkan product_id
         $jdl = 'Konten CCP';
         $k = Konten::where('product_id', $product_id)->get();
 
-        return view('konten.ccp', ['contents' => $k, 'product_id' => $product_id, 'jdl' => $jdl]);
+        $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
+                'secret' =>  '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',
+            ],
+        ];
+
+        //membuat instansiasi  s3
+        $s3 = new S3Client($config);
+
+        // Nama Bucket dan Folder
+        $bucketName = 'bankcont';
+
+        // Array untuk menyimpan gambar dan video
+        $imageUrls = [];
+        $videoUrls = [];
+
+        foreach ($k as $konten) {
+            $gambarFileName =  $konten->gambar;
+            $videoFileName =  $konten->video;
+
+            $gambarExtension = pathinfo($gambarFileName, PATHINFO_EXTENSION);
+
+            if (in_array($gambarExtension, ['jpg', 'jpeg', 'png'])) {
+                $gambarFolderName = 'konten/gambar/';
+                $imageUrl = $s3->getObjectUrl($bucketName, $gambarFolderName . $gambarFileName);
+                if ($imageUrl) {
+                    $imageUrls[$konten->content_id] = $imageUrl;
+                }
+            }
+
+            $videoExtension = pathinfo($videoFileName, PATHINFO_EXTENSION);
+
+            if (in_array($videoExtension, ['mp4', 'avi'])) {
+                $videoFolderName = 'konten/video/';
+                $videoUrl = $s3->getObjectUrl($bucketName, $videoFolderName . $videoFileName);
+                if ($videoUrl) {
+                    $videoUrls[$konten->content_id] = $videoUrl;
+                }
+            }
+        }
+
+
+        return view('konten.ccp', [
+            'contents' => $k, 'product_id' => $product_id, 'jdl' => $jdl, 'imageUrls' => $imageUrls, 'videoUrls' => $videoUrls
+        ]);
     }
 
     public function ac($product_id)
@@ -44,7 +176,53 @@ class kontenController extends Controller
         $jdl = 'Konten ADV / CWM';
         $k = Konten::where('product_id', $product_id)->get();
 
-        return view('konten.ac', ['contents' => $k, 'product_id' => $product_id, 'jdl' => $jdl]);
+        $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
+                'secret' =>  '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',
+            ],
+        ];
+
+        $s3 = new S3Client($config);
+
+        // Nama Bucket dan Folder
+        $bucketName = 'bankcont';
+
+        // Array untuk menyimpan gambar dan video
+        $imageUrls = [];
+        $videoUrls = [];
+
+        foreach ($k as $konten) {
+            $gambarFileName =  $konten->gambar;
+            $videoFileName =  $konten->video;
+
+            $gambarExtension = pathinfo($gambarFileName, PATHINFO_EXTENSION);
+
+            if (in_array($gambarExtension, ['jpg', 'jpeg', 'png'])) {
+                $gambarFolderName = 'konten/gambar/';
+                $imageUrl = $s3->getObjectUrl($bucketName, $gambarFolderName . $gambarFileName);
+                if ($imageUrl) {
+                    $imageUrls[$konten->content_id] = $imageUrl;
+                }
+            }
+
+            $videoExtension = pathinfo($videoFileName, PATHINFO_EXTENSION);
+
+            if (in_array($videoExtension, ['mp4', 'avi'])) {
+                $videoFolderName = 'konten/video/';
+                $videoUrl = $s3->getObjectUrl($bucketName, $videoFolderName . $videoFileName);
+                if ($videoUrl) {
+                    $videoUrls[$konten->content_id] = $videoUrl;
+                }
+            }
+        }
+
+
+        return view('konten.ac', [
+            'contents' => $k, 'product_id' => $product_id, 'jdl' => $jdl, 'imageUrls' => $imageUrls, 'videoUrls' => $videoUrls
+        ]);
     }
 
     public function tambah()
@@ -80,9 +258,9 @@ class kontenController extends Controller
         // cek gambar yang diupload
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
-            $gambar_nama = $gambar->hashName();
+            $gambar_nama = $gambar->getClientOriginalName();
             // hashName() menghasilkan string unik/random jika menggunakan nama Asli menggunakan getClientOriginalName() 
-            $gambar->move(public_path('public_imgTest'), $gambar_nama);
+            $gambar->storeAs('konten/gambar', $gambar_nama, 's3');
 
             // membuat nama product 
             $data['gambar'] = $gambar_nama;
@@ -111,14 +289,14 @@ class kontenController extends Controller
             'konten' => $request->konten,
         ];
 
-        // cek video yang diupload
+        // cek gambar yang diupload
         if ($request->hasFile('video')) {
             $video = $request->file('video');
-            $video_nama = $video->hashName();
+            $video_nama = $video->getClientOriginalName();
             // hashName() menghasilkan string unik/random jika menggunakan nama Asli menggunakan getClientOriginalName() 
-            $video->move(public_path('public_videoTest'), $video_nama);
+            $video->storeAs('konten/video', $video_nama, 's3');
 
-            // membuat nama video 
+            // membuat nama product 
             $data['video'] = $video_nama;
         }
 
@@ -157,21 +335,28 @@ class kontenController extends Controller
         $data_edit->title = $request->title;
         $data_edit->konten = $request->konten;
 
-        //cek  gambar  yang diupload
-        if ($request->hasFile('gambar')) {
-            $gambar = $request->file('gambar');
-            $gambar_nama = $gambar->hashName();
-            $gambar->move(public_path('public_imgTest'), $gambar_nama);
 
-            //Hapus Gambar  Lama, Setelah gambar baru berhasil diunggah
+        if ($request->hasFile('gambar')) {
+            $gmr_kon = $request->file('gambar');
+            $gmr_kon_nama = $gmr_kon->getClientOriginalName();
+
+            // Check if there is an existing image
             if ($data_edit->gambar) {
-                File::delete(public_path('public_imgTest') . '/' . $data_edit->gambar);
+                // Delete the existing image from S3
+                Storage::disk('s3')->delete('konten/gambar/' . $data_edit->gambar);
             }
 
-            $data_edit->gambar = $gambar_nama;
+            // Store the new image in the S3 bucket
+            $gmr_kon->storeAs('konten/gambar', $gmr_kon_nama, 's3');
+
+            // Update the image name in the data
+            $data_edit->gambar = $gmr_kon_nama;
         }
 
+        // Save the changes to the database
         $data_edit->save();
+
+
 
 ?>
         <script>
@@ -212,21 +397,41 @@ class kontenController extends Controller
         $data_edit->title = $request->title;
         $data_edit->konten = $request->konten;
 
-        //cek  gambar  yang diupload
-        if ($request->hasFile('video')) {
-            $video = $request->file('video');
-            $video_nama = $video->hashName();
-            $video->move(public_path('public_imgTest'), $video_nama);
+        // if ($request->hasFile('video')) {
+        //     $vid_kon = $request->file('video');
+        //     $vid_kon_nama = $vid_kon->getClientOriginalName();
 
-            //Hapus video  Lama, Setelah video baru berhasil diunggah
+        //     // menyimpan file ke dalam bucket 'bankcont' di dalam folder /produk
+        //     $vid_kon->storeAs('konten/video', $vid_kon_nama, 's3');
+
+        //     // memperbarui nama video pada data
+        //     $data_edit->video = $vid_kon_nama;
+        // }
+
+        // // menyimpan perubahan pada data affiliator
+        // $data_edit->save();
+
+        if ($request->hasFile('video')) {
+            $vid_kon = $request->file('video');
+            $vid_kon_nama = $vid_kon->getClientOriginalName();
+
+            // Check if there is an existing image
             if ($data_edit->video) {
-                File::delete(public_path('public_imgTest') . '/' . $data_edit->video);
+                // Delete the existing image from S3
+                Storage::disk('s3')->delete('konten/video/' . $data_edit->video);
             }
 
-            $data_edit->video = $video_nama;
+            // Store the new image in the S3 bucket
+            $vid_kon->storeAs('konten/video', $vid_kon_nama, 's3');
+
+            // Update the image name in the data
+            $data_edit->video = $vid_kon_nama;
         }
 
+        // Save the changes to the database
         $data_edit->save();
+
+
 
     ?>
         <script>
@@ -243,19 +448,70 @@ class kontenController extends Controller
     {
         $data = Konten::find($content_id);
 
-        // Hapus File Yang Terkait Dengan Konten
-        $filePath = public_path('public_imgTest') . '/' . $data->gambar;
-        if (File::exists($filePath)) {
-            File::delete($filePath);
+        if ($data) {
+            // Jika konten memiliki gambar, hapus gambar dari penyimpanan AWS S3
+            if ($data->gambar) {
+                Storage::disk('s3')->delete('konten/gambar/' . $data->gambar);
+            }
+
+            // Jika konten memiliki video, hapus video dari penyimpanan AWS S3
+            if ($data->video) {
+                Storage::disk('s3')->delete('konten/video/' . $data->video);
+            }
+
+            // Hapus konten dari database
+            $data->delete();
+
+            return redirect()->back()->with('success', 'Konten berhasil dihapus.');
         }
 
-        $filePath = public_path('public_videoTest') . '/' . $data->video;
-        if (File::exists($filePath)) {
-            File::delete($filePath);
+        return redirect()->back()->with('error', 'Konten tidak ditemukan.');
+    }
+
+    public function download_konten($content_id)
+    {
+        // Mendapatkan informasi produk berdasarkan id
+        $k = Konten::find($content_id);
+
+        // Konfigurasi kredensial AWS
+        $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' => 'AKIAZI2LDMSP6E5M4TFK',
+                'secret' => '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'
+            ]
+        ];
+
+        // Membuat instanisasi S3
+        $s3 = new S3Client($config);
+
+        // Nama bucket S3
+        $bucketName = 'bankcont';
+
+        // Menentukan object key berdasarkan jenis konten
+        if ($k->gambar) {
+            $objectKey = 'konten/gambar/' . $k->gambar;
+        } elseif ($k->video) {
+            $objectKey = 'konten/video/' . $k->video;
+        } else {
+            return back()->with('error', 'Konten tidak ditemukan');
         }
 
-        $data->delete();
+        // Mencoba untuk mendapatkan konten dari S3
+        try {
+            $fileContent = $s3->getObject([
+                'Bucket' => $bucketName,
+                'Key'   =>  $objectKey
+            ]);
 
-        return redirect()->back()->with('info', "Hapus Konten Berhasil!!");
+            // Mengembalikan file langsung sebagai unduhan
+            return response()->streamDownload(function () use ($fileContent) {
+                echo $fileContent['Body'];
+            }, $k->gambar ?: $k->video); // Menggunakan nama file gambar atau video sebagai nama unduhan
+        } catch (\Exception $e) {
+            // Tangani jika terjadi kesalahan saat mengambil konten dari S3
+            return back()->with('error', 'Gagal mengunduh file');
+        }
     }
 }

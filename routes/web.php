@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\KolController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AffiliatorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\kontenController;
 use App\Http\Controllers\DashboardController;
@@ -82,6 +83,7 @@ Route::put('storeUbah/{content_id}', [App\Http\Controllers\kontenController::cla
 Route::get('ganti/{content_id}', [App\Http\Controllers\kontenController::class, 'ganti']);
 Route::put('storeGanti/{content_id}', [App\Http\Controllers\kontenController::class, 'edit_ganti']);
 Route::get('delete/{content_id}', [App\Http\Controllers\kontenController::class, "destroy_content"]);
+Route::get('unduh/{id}', [App\Http\Controllers\kontenController::class, "download_konten"]);
 
 
 //ROUTE PRODUCT
@@ -122,3 +124,16 @@ Route::prefix('kol')->group(function () {
     Route::post('update/{id}', [KolController::class, 'users_update'])->name('admin..update')->middleware('auth');
     Route::delete('delete/{id}', [KolController::class, 'users_delete'])->name('.users.delete')->middleware('auth');
 });
+
+// punya affiliatpr
+Route::get('affiliator', [AffiliatorController::class, "index"]);
+Route::get('affiliator/tambah', [AffiliatorController::class, "tambah"]);
+Route::post('asave', [AffiliatorController::class, "asave"]);
+Route::get('detail/{id}', [AffiliatorController::class, 'adetail'])->name('affiliator.detail')->middleware('auth');
+Route::get('change/{id}', [AffiliatorController::class, 'edit']);
+Route::put('storeChange/{id}', [AffiliatorController::class, 'edit_store']);
+Route::get('ahapus/{id}', [AffiliatorController::class, "destroy_affiliator"]);
+// affiliator cilacap
+Route::get('/{id}/affiliator/cilacap', [AffiliatorController::class, 'cilacap'])->name('affiliator.cilacap.index');
+// affiliator purwokerto
+Route::get('/{id}/affiliator/purwokerto', [AffiliatorController::class, 'purwokerto'])->name('affiliator.purwokerto.index');
