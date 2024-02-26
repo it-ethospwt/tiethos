@@ -48,12 +48,13 @@
                             <h3 class="card-title">Data Produk</h3>
                         </div>
                         <div class="card-body">
+                            @can('admin-only')
                             <div class="btn-tambahProduk mt-2 mb-5">
                                 <a href="\tambah" class="btn btn-primary"> <span style="margin-right: 8px;"><i
                                             class="fa fa-plus"></i></span>
                                     Data Produk</a>
                             </div>
-
+                            @endcan
                             <!-- Table -->
                             <table id="table-produkList" class="display wrap table-sm" style="width:100%">
                                 <thead>
@@ -82,10 +83,12 @@
                                         <td>
                                             <a href="{{ url('download/'.$d->id) }}" class="btn btn-primary"><i
                                                     class="fa fa-download"></i></a>
+                                            @can('admin-only')
                                             <a href="edit/{{ $d->id }}" class="btn btn-success btn-pill "><i
                                                     class="fa fa-edit"> </i></a>
                                             <a href="hapus/{{ $d->id }}" class="btn btn-danger btn-pill"><i
                                                     class="fa fa-trash"> </i></a>
+                                            @endcan
                                         </td>
                                     </tr>
                                     @endforeach

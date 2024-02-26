@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Models\keluhan;
 use App\Models\faq;
+use Aws\s3\S3Client;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
@@ -14,7 +15,41 @@ class FaqController extends Controller
         $jdl = 'FAQ';
         $produk = product::all();
         $keluhan = keluhan::all();
-        return view('faq.index', compact('produk', 'jdl', 'keluhan'));
+        //Konfigurasi Kredensial AWS
+        $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
+                'secret' =>  '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',
+            ],
+        ];
+
+        //membuat instansiasi  s3
+        $s3 = new S3Client($config);
+
+        //Nama Bucket dan Folder
+        $bucketName = 'bankcont';
+        $folderName = 'produk/';
+
+        //Arary untuk  menyimpan gambar
+        $imageUrls =  [];
+
+        //Loop melalui setiap data  produk
+        foreach ($produk as $product) {
+            //Mendapatkan nama file dari field 'file' dalam  record product 
+            $fileName =  $product->file;
+
+            //mendapatkan URL gambar dari AWS S3 jika file tersebut ada
+            $imageUrl = $s3->getObjectUrl($bucketName, $folderName . $fileName);
+
+            //Menambahkan  URL  gambar  kedalam  array jika URL tersedia
+            if ($imageUrl) {
+                $imageUrls[$product->id] = $imageUrl;
+            }
+        }
+
+        return view('faq.index', compact('produk', 'jdl', 'keluhan', 'imageUrls'));
     }
 
     public function tambahKeluhan()

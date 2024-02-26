@@ -35,7 +35,8 @@
                         <div class="card-body">
                             <div class="btn-tambahUser mt-2 mb-5">
                                 <a href="{{ route('admin.tambahUsers') }}" class="btn btn-warning btn-pill active">
-                                    <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Data User</a>
+                                    <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Data User
+                                </a>
                             </div>
                             <!-- Table -->
                             <table id="table-user" class="display nowrap" style="width:100%">
@@ -65,6 +66,7 @@
                                                 class="btn btn-primary btn-pill">
                                                 <span class="ti ti-search" style="color: white;"></span>
                                             </a>
+                                            @if (Auth::check() && Auth::user()->role == 'Admin')
                                             <a href="{{ route('admin.users.edit', ['id' => $u->id]) }}"
                                                 class="btn btn-success btn-pill">
                                                 <span class="ti ti-edit" style="color: white;"></span>
@@ -77,6 +79,7 @@
                                                     <span class="ti ti-trash" style="color: white;"></span>
                                                 </button>
                                             </form>
+                                            @endif
                                         </td>
 
                                     </tr>
