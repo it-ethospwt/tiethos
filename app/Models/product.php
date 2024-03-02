@@ -15,7 +15,11 @@ class product extends Model
     
     protected $dates = ['created_at','updated_at'];
 
-    public  function knowladge(){
+    public function knowladge(){
         return  $this->hasOne(knowladge::class);
     }
+
+    public function endors(){
+        return $this-> hasOne(endors::class);
+    }  
 }

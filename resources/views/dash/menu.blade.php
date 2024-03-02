@@ -108,7 +108,7 @@
                                     <a class="dropdown-item" href="{{ route('kol') }}">
                                         Contect KOL
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="/endorse">
                                         List Endorse
                                     </a>
                                     <a class="dropdown-item" href="">
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item dropdown {{ request()->is('knowladge*') ? 'active' : '' }}">
                         <a class="nav-link" href="/knowladge">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
