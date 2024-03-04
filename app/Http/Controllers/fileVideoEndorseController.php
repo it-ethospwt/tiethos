@@ -55,46 +55,6 @@ class fileVideoEndorseController extends Controller
         return Response::json(['redirect_url' => '/endorse', 'success' => 'Upload File Berhasil']);
     }
 
-    public function download_fileVideo($id){
-
-        set_time_limit(120);
-
-        $file_video = file_video_endors::find($id);
-
-         //konfigurasi kredensial aws
-         $config = [
-            'region' => 'ap-southeast-1',
-            'version' => 'latest',
-            'credentials' => [
-                'key' => 'AKIAZI2LDMSP6E5M4TFK',
-                'secret' => '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'
-            ]
-            ];
-
-            //membuat instanisasi S3
-            $s3 = new S3Client($config);
-
-            //Nama  bucket  S3 dan  Nama  file di dalamnya
-            $bucketName = 'bankcont';
-            $objectKey =  'endorse/instagram/video/'.$file_video->file;
-
-            //Mencoba untuk mendapatkan URL tanda tangan yang ditandatangani (signed) untuk objek S3
-            try{
-                $file = $s3->getObject([
-                    'Bucket' => $bucketName,
-                    'Key' => $objectKey
-                ]);
-
-                // mengembalikan  file langsung  sebagai unduhan
-                return  response()->streamDownload(function() use ($file){
-                    echo $file['Body'];
-                }, $file_video->file);
-            }catch(\Exception $e){
-                 // Tangani jika terjadi kesalahan saat mengambil URL tanda tangan yang ditandatangani (signed)
-                 return back()->with('error','Gagal Mengunduh File Video');
-            }
-    }
-
     public function hapus_fileVideo($id){
 
         $file_video = file_video_endors::find($id);
@@ -124,7 +84,7 @@ class fileVideoEndorseController extends Controller
 
         $file_video->delete();
 
-        return back()->with('info','Hapus File Gambar Berhasil!!');
+        return back()->with('info','Hapus File Video Berhasil!!');
     }
 
 }

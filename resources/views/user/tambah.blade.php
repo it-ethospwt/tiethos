@@ -59,8 +59,7 @@
                                                 <input type="text" name="password" class="form-control"
                                                     placeholder="Password">
                                                 <small class="form-hint">
-                                                    Your password must be 8-20 characters long, contain letters and
-                                                    numbers, and must not contain spaces, special characters.
+                                                    Your password must be 8-20 characters long
                                                 </small>
                                             </div>
                                         </div>

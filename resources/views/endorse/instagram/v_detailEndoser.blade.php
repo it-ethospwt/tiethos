@@ -250,7 +250,6 @@
                                                 @endif
 
                                                     <div class="d-flex align-center flex-row">
-                                                        <a href="/download_fileVideo/{{ $fv->id }}" class="btn btn-darke text-white m-3 p-2"><i class="fa-solid fa-download" style="color:#fff;"></i></a>
                                                         <a href="/hapus_fileVideo/{{ $fv->id }}" class="btn btn-danger text-white m-3 p-2"><i class="fa-solid fa-trash " style="color:#fff;"></i></a>
                                                     </div>
                                                 </div>

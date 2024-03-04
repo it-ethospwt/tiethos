@@ -208,8 +208,6 @@ class produkController extends Controller
             $e->delete();
         }
 
-        
-
         //Hapus  produk itu Sendiri
         $product->delete();
 

@@ -45,6 +45,7 @@
                                         <th>Nama KOL</th>
                                         <th>Tanggal Tayang</th>
                                         <th>Owning</th>
+                                        <th>Produk</th>
                                         <th>Data User</th>
                                         <th>Update</th>
                                         <th>Aksi</th>
@@ -57,11 +58,20 @@
                                         <td>{{ $k->nama }}</td>
                                         <td>{{ $k->tanggal_tayang }}</td>
                                         <td>{{ $k->owning }}</td>
-                                        <td>{{ $k->id_produk }}</td>
+                                        <td>
+                                            @php
+                                            $product = App\Models\Product::find($k->id_produk);
+                                            if ($product) {
+                                            echo $product->nm_product;
+                                            } else {
+                                            echo "Product not found";
+                                            }
+                                            @endphp
+                                        </td>
                                         <td>{{ $k->user }}</td>
                                         <td>{{ $k->updated_at }}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary btn-pill">
+                                            <a href="{{ route('kol.detail', $k->id)}}" class="btn btn-primary btn-pill">
                                                 <span class="ti ti-search" style="color: white;"></span>
                                             </a>
                                             <a href="" class="btn btn-success btn-pill">
@@ -83,12 +93,10 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- </div> -->
-                @include('dash.footer')
             </div>
         </div>
     </div>
+    @include('dash.footer')
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>

@@ -46,7 +46,9 @@
                                         @if (!$keluhanProduk->isEmpty())
                                         <div class="col-sm-6 col-lg-3">
                                             <div class="card">
-                                                <img src="public_imgTest/{{ $p->gmr_product }}" alt="Gambar Produk">
+                                                @if(isset($imageUrls[$p->id ]))
+                                                <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
+                                                @endif
                                                 <div class="card-body text-center">
                                                     <h3 class="card-title">{{ $p->nm_Product }}</h3>
                                                     @foreach ($keluhanProduk as $k)

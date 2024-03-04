@@ -52,12 +52,13 @@
                             <h3 class="card-title">Data Produk</h3>
                         </div>
                         <div class="card-body">
+                            @can('admin-only')
                             <div class="btn-tambahProduk mt-2 mb-5">
                                 <a href="\tambah" class="btn btn-primary"> <span style="margin-right: 8px;"><i
                                             class="fa fa-plus"></i></span>
                                     Data Produk</a>
                             </div>
-
+                            @endcan
                             <!-- Table -->
                             <table id="table-produkList" class="display wrap table-sm" style="width:100%">
                                 <thead>
@@ -84,10 +85,12 @@
                                         <td>{{ $d->created_at->format('d-m-Y H:i') }}</td>
                                         <td>{{ $d->updated_at->format('d-m-Y H:i') }}</td>
                                         <td>
+                                            @can('admin-only')
                                             <a href="edit/{{ $d->id }}" class="btn btn-success btn-pill "><i
                                                     class="fa fa-edit"> </i></a>
                                             <a href="hapus/{{ $d->id }}" class="btn btn-danger btn-pill"><i
                                                     class="fa fa-trash"> </i></a>
+                                            @endcan
                                         </td>
                                     </tr>
                                     @endforeach

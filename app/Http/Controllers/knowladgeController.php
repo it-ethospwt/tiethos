@@ -17,99 +17,111 @@ class knowladgeController extends Controller
 
         $produk = product::all();
 
-        //Ambil data  produk  dari tabel  knowladge yang memili  dengan produk 
-        $data =  knowladge::paginate(10);
-        
-        $config = [
+         //Ambil data  produk  dari tabel  knowladge yang memili  dengan produk 
+         $data =  knowladge::with('product')->paginate(10);
+
+         $config = [
             'region' => 'ap-southeast-1',
             'version' => 'latest',
             'credentials' => [
-                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
-                'secret' =>  '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',
+                'key' => 'AKIAZI2LDMSP6E5M4TFK',
+                'secret' => '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',
             ],
-        ];
+         ];
 
-        //membuat instansiasi  s3
-        $s3 = new S3Client($config);
+         //Membuat instanisasi S3
+         $s3 = new S3Client($config);
 
-        //Nama Bucket dan Folder
-        $bucketName = 'bankcont';
-        $folderName = 'produk/';
+         //Nama Bucket dan Folder 
+         $bucketName = 'bankcont';
+         $folderName = 'produk/';
 
-        //Arary untuk  menyimpan gambar
-        $imageUrls =  [];
+         //Array untuk menyimpan gambar
+         $imageUrls = [];
 
-        //Loop melalui setiap data  produk
-        foreach ($produk as $produk) {
-            //Mendapatkan nama file dari field 'file' dalam  record product 
-            $fileName =  $produk->file;
+         //Loop setiap data produk
+         foreach($produk as $pdk){
+            //Mendapatkan nama  file  'file' dalam  record product
+            $fileName = $pdk->file;
 
-            //mendapatkan URL gambar dari AWS S3 jika file tersebut ada
-            $imageUrl = $s3->getObjectUrl($bucketName, $folderName . $fileName);
+            //Mendapatkan URL Gambar dari AWS S3 jika  file  tersebut  ada
+            $imageUrl =  $s3->getObjectUrl($bucketName,$folderName.$fileName);
 
-            //Menambahkan  URL  gambar  kedalam  array jika URL tersedia
-            if ($imageUrl) {
-                $imageUrls[$produk->id] = $imageUrl;
+            //Menambahkan URL gambar kedalam array  jika URL tersedia
+            if($imageUrl){
+                $imageUrls[$pdk->id] = $imageUrl;
             }
         }
 
-        return view('knowladge.v_index',['jdl' => $jdl,'produk' => $produk,'imageUrls' => $imageUrls,'data' => $data]);
-        }
+        return view('knowladge.v_index', ['jdl' => $jdl, 'data' => $data,'imageUrls'=> $imageUrls]);
 
-    //TAMBAH KNOWLADGE & PROSES TAMBAH KNOWLADGE
-    public function tambah_knowladge(){
-        $jdl = "Tambah  Knowladge";
-        $product = product::all(); 
-    
-        return view('knowladge.v_tambah',['jdl'=> $jdl,'product'=> $product]);
     }
 
-    public function store_knowladge(Request $request){
-        $this->validate($request,[
-            'product_id' => 'required|exists:product,id',
-            'deskripsi' => 'required|string'
-            ],[
+    //TAMBAH KNOWLADGE & PROSES TAMBAH KNOWLADGE
+    public function tambah_knowladge()
+    {
+        $jdl = "Tambah  Knowladge";
+        $product = product::all();
+
+        return view('knowladge.v_tambah', ['jdl' => $jdl, 'product' => $product]);
+    }
+
+    public function store_knowladge(Request $request)
+    {
+        $this->validate(
+            $request,
+            [
+                'product_id' => 'required|exists:product,id',
+                'deskripsi' => 'required|string'
+            ],
+            [
                 'deskripsi.required' => 'Deskripi Wajib Diisi'
             ]
         );
-        
+
         $deskripsi = $request->deskripsi;
         $dom = new DOMDocument();
-        $dom->loadHTML($deskripsi,9);
+        $dom->loadHTML($deskripsi, 9);
 
         $deskripsi = $dom->saveHTML();
-        
+
         Knowladge::create([
             'product_id' => $request->product_id,
             'nm_product' => $request->product_id,
             'deskripsi' => $deskripsi
         ]);
 
-        return  redirect('/knowladge')->with('success','Tambah Knowladge Berhasil!!');
+        return  redirect('/knowladge')->with('success', 'Tambah Knowladge Berhasil!!');
     }
 
     //DETAIL KNOWLADGE
-    public function show_knowladge($id){
+    public function show_knowladge($id)
+    {
         $jdl  = "Detail Knowladge";
         $data = Knowladge::find($id);
 
-        return view('knowladge.v_show',['jdl' => $jdl,'data' => $data]);
+        return view('knowladge.v_show', ['jdl' => $jdl, 'data' => $data]);
     }
 
 
     //EDIT KNOWLADGE & PROSES EDIT KNOWLADGE
-    public  function edit_knowladge($id){
+    public  function edit_knowladge($id)
+    {
         $jdl = "Edit Knowladge";
 
         $data = Knowladge::find($id);
 
-        return view('knowladge.v_edit',['jdl' => $jdl,'data' => $data]);
+        return view('knowladge.v_edit', ['jdl' => $jdl, 'data' => $data]);
     }
 
-    public function store_edit_knowladge($id,Request $request){
-        $this->validate($request,[
-            'deskripsi' => 'required|string'
-            ],[
+    public function store_edit_knowladge($id, Request $request)
+    {
+        $this->validate(
+            $request,
+            [
+                'deskripsi' => 'required|string'
+            ],
+            [
                 'deskripsi.required' => 'Deskripi Wajib Diisi'
             ]
         );
@@ -127,7 +139,6 @@ class knowladgeController extends Controller
         //Simpan kembali ke database
         $data_edit->save();
 
-        return  redirect('/knowladge')->with('success',"Update Knowladge Berhasil!!");
+        return  redirect('/knowladge')->with('success', "Update Knowladge Berhasil!!");
     }
-
 }
