@@ -1,35 +1,21 @@
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+<head>
 
+    <!-- CSS DataTables Responsive -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 
-<style>
-    /* styles.css */
-    .custom-button {
-        display: block;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        line-height: 32px;
-        text-decoration: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 12px;
-        font-family: Poppins;
-        font-weight: 400;
-        cursor: pointer;
-    }
+    <style>
+        .card {
+            border: none !important;
+            border: 1px solid #DCE0E5 !important;
+        }
 
-    @import url('https://rsms.me/inter/inter.css');
-
-    :root {
-        --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-    }
-
-    body {
-        font-feature-settings: "cv03", "cv04", "cv11";
-    }
-</style>
+        .card-header {
+            border-bottom: 1px solid #DCE0E5 !important;
+        }
+    </style>
+</head>
 
 <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
 <div class="page">
@@ -42,94 +28,63 @@
             <div class="container-xl">
                 <div class="row g-2 align-items-center">
                     <div class="col">
+                        <!-- Page pre-title -->
                         <h2 class="page-title">
-                            {{$jdl}}
+                            LIST {{$jdl}}
                         </h2>
                         <div class="col col-sm-2 col-md-2 col-xl py-3">
-                            <a href="/handbook/wa/tambah" class="btn btn-warning btn-pill">
+                            <a href="#" id="tambahHandbook" class="btn btn-warning btn-pill">
                                 <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah Handbook
                             </a>
-                        </div>
-                        <div class="btn-tambahUser mt-4 mb-2">
-                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="page-body">
-            <div class="container-xl">
-                <div class="row row-cards">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Invoices</h3>
-                            </div>
-                            <div class="card-body border-bottom py-3">
-                                <div class="d-flex">
-                                    <div class="text-muted">
-                                        Show
-                                        <div class="mx-2 d-inline-block">
-                                            <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
-                                        </div>
-                                        entries
-                                    </div>
-                                    <div class="ms-auto text-muted">
-                                        Search:
-                                        <div class="ms-2 d-inline-block">
-                                            <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table card-table table-vcenter text-nowrap datatable">
-                                    <thead>
-                                        <tr>
-                                            <th class="w-1">No.
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                    <path d="M6 15l6 -6l6 6" />
-                                                </svg>
-                                            </th>
-                                            <th>Judul</th>
-                                            <th>Create</th>
-                                            <th>Update</th>
-                                            <th>Aksi</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $i = 1; ?>
-                                        @foreach ($wa as $w)
-                                        <tr>
-                                            <td><span class="text-muted"><?= $i++; ?></span></td>
-                                            <td><a href="invoice.html" class="text-reset" tabindex="-1">{{$w->sub}}</a></td>
-                                            <td>
-                                                {{$w->created_at}}
-                                            </td>
-                                            <td>
-                                                {{$w->updated_at}}
-                                            </td>
-                                            <td>
-                                                <div class="row g-2">
-                                                    <!-- Tombol Edit -->
-                                                    <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                        <a href="{{ route('handbook.wa.detail', $w->wa_id)}}" class="btn btn-primary">
-                                                            <i class="fas fa-search"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-footer d-flex align-items-center">
-                                <div class="col-md-12">
 
-                                </div>
+        <br><br>
+
+        <!-- Page body -->
+        <div class="card-body">
+            <div class="container-lg">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DATA {{$jdl}} </h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Table -->
+                            <table id="table-produkList" class="display wrap table-sm" style="width:100%">
+                                <thead>
+                                    <tr style="font-size: 90%;">
+                                        <th>No</th>
+                                        <th>Judul</th>
+                                        <th>Create</th>
+                                        <th>Update</th>
+                                        <th style="width:18%;">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 1; ?>
+                                    @foreach ($wa as $w)
+                                    <tr style="font-size: 90%;">
+                                        <td>{{$no++}}</td>
+                                        <td>{{$w->sub}}</td>
+                                        <td>{{$w->created_at->format('d-m-Y H:i')}}</td>
+                                        <td>{{$w->updated_at->format('d-m-Y H:i')}}</td>
+                                        <td>
+                                            <a href="{{ route('handbook.wa.detail', $w->wa_id)}}" class="btn btn-primary">
+                                                <i class="fas fa-search"></i>
+                                            </a>
+                                            <a href="/wchange/{{ $w->wa_id }}" class="btn btn-success btn-pill "><i class="fa fa-edit"> </i></a>
+                                            <a href="/whapus/{{ $w->wa_id }}" class="btn btn-danger btn-pill"><i class="fa fa-trash"> </i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="btn-tambahUser mt-4">
+                                <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                             </div>
                         </div>
                     </div>
@@ -138,9 +93,33 @@
         </div>
     </div>
 </div>
-@include('sweetalert::alert')
-<script src="/dist/js/demo-theme.min.js?1684106062"></script>
-<script src="/dist/js/tabler.min.js?1684106062" defer></script>
-<script src="/dist/js/demo.min.js?1684106062" defer></script>
 
 @include('dash.footer')
+<!-- Sweet Alert -->
+@include('sweetalert::alert')
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+<script>
+    new DataTable('#table-produkList', {
+        responsive: true,
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        }
+    });
+</script>
+<script>
+    var currentURL = window.location.href;
+
+    // Extract the produk_id from the URL
+    var matches = currentURL.match(/\/(\d+)\/handbook\/wa/);
+    var produk_id = matches ? matches[1] : null;
+
+    // Build the new URL for the "Tambah Handbook" link
+    var tambahHandbookURL = "/handbook/wa/tambah?product_id=" + produk_id;
+
+    // Update the href attribute of the link
+    document.getElementById("tambahHandbook").setAttribute("href", tambahHandbookURL);
+</script>

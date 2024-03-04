@@ -15,7 +15,7 @@
                 <div class="row g-2 align-items-center">
                     <div class="col">
                         <h2 class="page-title">
-                            Detail {{$jdl}}
+                            {{$jdl}}
                         </h2>
                         <div class="btn-tambahUser mt-4 mb-2">
                             <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
@@ -76,7 +76,6 @@
                                                 </div>
                                                 @endif
                                                 @endforeach
-
                                             </div>
                                         </div>
                                     </div>
@@ -131,9 +130,4 @@
     </div>
 </div>
 @include('sweetalert::alert')
-
-<!-- <script src="/dist/js/tabler.min.js?1684106062" defer></script>
-<script src="/dist/js/demo.min.js?1684106062" defer></script> -->
-
-
 @include('dash.footer')

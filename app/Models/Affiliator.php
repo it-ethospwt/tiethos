@@ -11,6 +11,4 @@ class Affiliator extends Model
     protected $fillable = [
         'produk_id', 'nama', 'tim', 'jekel', 'gambar', 'akun', 'usia', 'alamat', 'cp', 'kategori', 'gmv', 'komisi', 'agency', 'deskripsi', 'like', 'followers', 'viewers'
     ];
-
-    // You can define relationships, scopes, or other model methods here
 }

@@ -13,8 +13,9 @@
             <div class="container-xl">
                 <div class="row g-2 align-items-center">
                     <div class="col">
+                        <!-- Page pre-title -->
                         <h2 class="page-title">
-                            {{$jdl}}
+                            Edit
                         </h2>
                     </div>
                 </div>
@@ -28,40 +29,39 @@
             <div class="container-xl">
                 <!-- <div class="row row-deck row-cards"> -->
                 <div class="col-md-12">
-                    <form class="card" action="\storeUbah\{{ $contents->content_id }}" method="POST" enctype="multipart/form-data">
+                    <form class="card" action="\wstoreChange\{{ $wa->wa_id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
-                            <!-- <div class="mb-3">
-                                <label class="form-label required">Produk</label>
-                                <div>
-                                    <input type="text" class="form-control" id="product_id" name="product_id" placeholder="Input Produk" value="{{ $contents->product_id }}">
-                                </div>
-                            </div> -->
                             <div class="mb-3">
                                 <label class="form-label required">Produk</label>
                                 <select class="form-control" name="product_id" id="product_id">
                                     @foreach ($product as $p)
-                                    <option value="{{ $p->id }}" {{ $p->id == $contents->product_id ? 'selected' : '' }}>{{ $p->nm_product }}</option>
+                                    <option value="{{ $p->id }}" {{ $p->id == $wa->product_id ? 'selected' : '' }}>{{ $p->nm_product }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required">Judul</label>
                                 <div>
-                                    <input type="text" name="title" class="form-control" aria-describedby="emailHelp" placeholder="Input Posisi" value="{{ $contents->title }}">
+                                    <input type="text" name="sub" class="form-control" aria-describedby="emailHelp" placeholder="Input Posisi" value="{{ $wa->sub }}">
                                 </div>
                             </div>
+                            <!-- <div class="form-group mb-3">
+                                <label for="deskripsi" class="mb-3">Deskripsi <span style="color:red">*</span></label>
+                                <textarea class="form-control" name="deskripsi" id="summernote">{{ $wa->deskripsi }}</textarea>
+                                @if($errors->has('deskripsi'))
+                                <div class="text-danger">
+                                    {{ $errors->first('deskripsi') }}
+                                </div>
+                                @endif
+                            </div> -->
                             <div class="mb-3">
-                                <label class="form-label required">Sumber Konten</label>
-                                <select class="form-control" id="konten" name="konten">
-                                    <option value="Agency Luar" {{ $contents->konten == "Agency Luar" ? 'selected' : '' }}>Agency Luar</option>
-                                    <option value="ccp" {{ $contents->konten == "ccp" ? 'selected' : '' }}>ccp</option>
-                                    <option value="cwm" {{ $contents->konten == "cwm" ? 'selected' : '' }}>cwm</option>
-                                </select>
+                                <label class="form-label">Description</label>
+                                <textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="{{ $wa->deskripsi }}" value="{{ $wa->deskripsi }}"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label required">Upload Konten Gambar</label>
+                                <label class="form-label required">Upload Foto Profil</label>
                                 <div class="input-group">
                                     <input type="file" class="form-control" id="gambar" name="gambar" accept="image/png, image/jpeg">
                                     <button class="btn btn-outline-secondary" type="button" id="upload-button">Upload</button>
@@ -75,16 +75,20 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src=" https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#deskripsi'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 @include('sweetalert::alert')
-
-<!-- <script src="/dist/js/tabler.min.js?1684106062" defer></script>
-<script src="/dist/js/demo.min.js?1684106062" defer></script> -->
-
 
 @include('dash.footer')

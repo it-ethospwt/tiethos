@@ -30,10 +30,9 @@
         object-fit: cover;
     }
 </style>
+@include('dash.header')
+@include('dash.menu')
 <div class="page">
-    <!-- Navbar -->
-    @include('dash.header')
-    @include('dash.menu')
     <div class="page-wrapper">
         <!-- Page header -->
         <div class="page-header d-print-none">
@@ -43,6 +42,9 @@
                         <h2 class="page-title">
                             {{$jdl}}
                         </h2>
+                        <div class="btn-tambahUser mt-4 mb-2">
+                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,12 +143,6 @@
                                     <option value="Non Agency">Non Agency</option>
                                 </select>
                             </div>
-                            <!-- <div class="mb-3">
-                                <label class="form-label required">Kontak Person</label>
-                                <div>
-                                    <input type="text" name="cp" class="form-control" aria-describedby="emailHelp" placeholder="Input Kontak Person">
-                                </div>
-                            </div> -->
                             <div class="mb-3">
                                 <label class="form-label required">Jumlah Viewer</label>
                                 <div>
@@ -195,11 +191,9 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+</div>
     @include('dash.footer')
-    <!-- Sweet Alert -->
     @include('sweetalert::alert')
     <script src=" https://code.jquery.com/jquery-3.7.0.js"></script>
                                     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>

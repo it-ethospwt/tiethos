@@ -10,114 +10,106 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Tambah Content KOL
+                            {{$jdl}}
                         </h2>
                     </div>
+                </div>
+                <div class="btn-tambahUser mt-4 mb-2">
+                    <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                 </div>
             </div>
         </div>
         <!-- Page body -->
         <div class="page-body">
-            <div class="container-lg">
+            <div class="container-xl">
                 <!-- <div class="row row-deck row-cards"> -->
-                <div class="page-body">
-                    <div class="container-xl">
-                        <div class="row row-cards">
-                            <div class="col-12">
-                                <form class="card" action="{{ route('kol.store') }}" method="POST">
-                                    @csrf
-                                    <div class="card-header">
-                                        <h3 class="card-title">Form Tambah Content KOL</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <label class="form-label required">Nama KOL</label>
-                                            <div>
-                                                <input type="text" name="nama" class="form-control"
-                                                    placeholder="Input Nama KOL">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Tanggal Tayang</label>
-                                            <div>
-                                                <input type="date" name="tanggal_tayang" class="form-control"
-                                                    placeholder="YYYY-MM-DD">
-                                            </div>
-                                        </div>
+                <div class="col-md-12">
+                    <form class="card" action="{{ route('kol.store') }}" method="POST">
+                        @csrf
+                        <div class="card-header">
+                            <h3 class="card-title">Form Tambah Content KOL</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label required">Nama KOL</label>
+                                <div>
+                                    <input type="text" name="nama" class="form-control" placeholder="Input Nama KOL">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Tanggal Tayang</label>
+                                <div>
+                                    <input type="date" name="tanggal_tayang" class="form-control" placeholder="YYYY-MM-DD">
+                                </div>
+                            </div>
 
-                                        <div class="mb-3">
-                                            <label class="form-label required">Owning Berapa Lama</label>
-                                            <div>
-                                                <input type="text" name="owning" class="form-control"
-                                                    placeholder="Input Owning">
+                            <div class="mb-3">
+                                <label class="form-label required">Owning Berapa Lama</label>
+                                <div>
+                                    <input type="text" name="owning" class="form-control" placeholder="Input Owning">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Rate Card</label>
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text">
+                                        Rp
+                                    </span>
+                                    <input type="text" name="rate_card" class="form-control" placeholder="Input Rate Card" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Keterangan Transfer</label>
+                                <div>
+                                    <input type="text" name="transfer" class="form-control" placeholder="Input Keterangan Transfer">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Resi</label>
+                                <div>
+                                    <input type="text" name="resi" class="form-control" placeholder="Input Resi">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ekspedisi</label>
+                                <div>
+                                    <input type="text" name="ekspedisi" class="form-control" placeholder="Input Ekspedisi">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Produk</label>
+                                <div>
+                                    <select name="id_produk" class="form-select">
+                                        @foreach($produk as $p)
+                                        <option value="{{ $p->id }}">{{ $p->nm_product }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Nama User</label>
+                                <div>
+                                    <input type="text" name="user" class="form-control" placeholder="Input Nama User">
+                                </div>
+                            </div>
+                            <!-- <div class="mb-3">
+                                            <label class="form-label required">Upload Konten Gambar</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" id="gambar" name="gambar" accept="image/png, image/jpeg">
+                                                <button class="btn btn-outline-secondary" type="button" id="upload-button">Upload</button>
                                             </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Rate Card</label>
-                                            <div class="input-group mb-2">
-                                                <span class="input-group-text">
-                                                    Rp
-                                                </span>
-                                                <input type="text" name="rate_card" class="form-control"
-                                                    placeholder="Input Rate Card" autocomplete="off">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Keterangan Transfer</label>
-                                            <div>
-                                                <input type="text" name="transfer" class="form-control"
-                                                    placeholder="Input Keterangan Transfer">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Resi</label>
-                                            <div>
-                                                <input type="text" name="resi" class="form-control"
-                                                    placeholder="Input Resi">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Ekspedisi</label>
-                                            <div>
-                                                <input type="text" name="ekspedisi" class="form-control"
-                                                    placeholder="Input Ekspedisi">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Produk</label>
-                                            <div>
-                                                <select name="id_produk" class="form-select">
-                                                    @foreach($produk as $p)
-                                                    <option value="{{ $p->id }}">{{ $p->nm_product }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Nama User</label>
-                                            <div>
-                                                <input type="text" name="user" class="form-control"
-                                                    placeholder="Input Nama User">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <div class="form-label">Upload Gambar</div>
-                                            <input type="file" name="gambar" class="form-control">
-                                        </div>
-                                        <div class="mb-3">
+                                            <small class="form-hint">File max 2mb dengan format PNG, JPG, JPEG</small>
+                                        </div> -->
+                            <!-- <div class="mb-3">
                                             <div class="form-label">Upload Video</div>
                                             <input type="file" name="video" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="card-footer text-end">
-                                        <button type="button" class="btn btn-danger btn-pill"
-                                            onclick="window.history.back()">Back</button>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
+                                        </div> -->
                         </div>
-                    </div>
+                        <div class="card-footer text-end">
+                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -130,9 +122,9 @@
 @if ($errors->any())
 <script>
     Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '@foreach ($errors->all() as $error){{ $error }}@endforeach',
-        });
+        icon: 'error',
+        title: 'Oops...',
+        text: '@foreach ($errors->all() as $error){{ $error }}@endforeach',
+    });
 </script>
 @endif

@@ -62,9 +62,16 @@
                                 </div>
                                 <small class="form-hint">File max 2mb dengan format PNG, JPG, JPEG</small>
                             </div>
+                            <div id="progress" style="display: none;">
+                                <div class="progress">
+                                    <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        0%
+                                    </div>
+                                </div>
+                            </div>
                             <div class="footer">
-                                <button type=" submit" class="btn btn-success btn-pill">Submit</button>
-                                <button type="reset" class="btn btn-secondary btn-pill"">Reset</button>
+                                <button type="submit" class="btn btn-success btn-pill" id="submit-button">Submit</button>
+                                <button type="reset" class="btn btn-secondary btn-pill">Reset</button>
                             </div>
                         </div>
                     </form>
@@ -73,5 +80,43 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('submit-button').addEventListener('click', function() {
+        var fileInput = document.getElementById('gambar');
+        var file = fileInput.files[0];
+        if (file) {
+            var formData = new FormData();
+            formData.append('file', file);
 
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'url/to/upload/endpoint', true);
+
+            xhr.upload.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    var percentComplete = (e.loaded / e.total) * 100;
+                    document.getElementById('progress').style.display = 'block';
+                    document.getElementById('progress-bar').style.width = percentComplete + '%';
+                    document.getElementById('progress-bar').innerHTML = percentComplete.toFixed(2) + '%';
+                }
+            };
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // File uploaded successfully
+                    console.log('File uploaded successfully');
+                    // Add code here to submit the form
+                    document.getElementById('submit-button').closest('form').submit();
+                } else {
+                    // Error uploading file
+                    console.error('Error uploading file');
+                }
+            };
+
+            xhr.send(formData);
+        } else {
+            // No file selected
+            console.error('No file selected');
+        }
+    });
+</script>
 @include('dash.footer')

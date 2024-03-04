@@ -55,7 +55,7 @@ class affiliatorController extends Controller
 
     public function tambah()
     {
-        $jdl = 'Tambah Affiliator';
+        $jdl = 'TAMBAH AFFILIATOR';
         $p = product::all();
         return view('affiliator.tambah', ['product' => $p, 'jdl' => $jdl]);
     }
@@ -185,7 +185,7 @@ class affiliatorController extends Controller
 
     public function adetail($id)
     {
-        $jdl = 'Detail Affiliator';
+        $jdl = 'DETAIL AFFILIATOR';
         $a = Affiliator::findOrFail($id);
 
         if (!$a) {
@@ -221,7 +221,7 @@ class affiliatorController extends Controller
 
     public function edit($id)
     {
-        $jdl = 'Edit Affiliator';
+        $jdl = 'EDIT AFFILIATOR';
         $affiliator = Affiliator::findOrFail($id);
         $p = product::all();
         return view('affiliator.edit', ['product' => $p, 'affiliator' => $affiliator, 'jdl' => $jdl]);
@@ -286,19 +286,6 @@ class affiliatorController extends Controller
         $data_edit->followers = $request->followers;
         $data_edit->viewers = $request->viewers;
 
-        // if ($request->hasFile('gambar')) {
-        //     $gmr_aff = $request->file('gambar');
-        //     $gmr_aff_nama = $gmr_aff->getClientOriginalName();
-
-        //     // menyimpan file ke dalam bucket 'bankcont' di dalam folder /produk
-        //     $gmr_aff->storeAs('affiliator', $gmr_aff_nama, 's3');
-
-        //     // memperbarui nama gambar pada data
-        //     $data_edit->gambar = $gmr_aff_nama;
-        // }
-
-        // // menyimpan perubahan pada data affiliator
-        // $data_edit->save();
 
         if ($request->hasFile('gambar')) {
             $gmr_aff = $request->file('gambar');

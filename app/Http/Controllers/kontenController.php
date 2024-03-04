@@ -16,7 +16,7 @@ class kontenController extends Controller
 {
     public function index()
     {
-        $jdl = 'Bank Konten';
+        $jdl = 'BANK KONTEN';
         $p = product::paginate(8);
         $k = Konten::all();
 
@@ -59,7 +59,7 @@ class kontenController extends Controller
     public function al($product_id)
     {
         // Ambil konten berdasarkan product_id
-        $jdl = 'Konten Agency Luar';
+        $jdl = 'KONTEN AGENCY LUAR';
         $k = Konten::where('product_id', $product_id)->get();
 
 
@@ -117,7 +117,7 @@ class kontenController extends Controller
 
     public function ccp($product_id)
     {
-        $jdl = 'Konten CCP';
+        $jdl = 'KONTEN CCP';
         $k = Konten::where('product_id', $product_id)->get();
 
         $config = [
@@ -173,7 +173,7 @@ class kontenController extends Controller
     public function ac($product_id)
     {
         // Ambil konten berdasarkan product_id
-        $jdl = 'Konten ADV / CWM';
+        $jdl = 'KONTEN ADV / CWM';
         $k = Konten::where('product_id', $product_id)->get();
 
         $config = [
@@ -227,13 +227,13 @@ class kontenController extends Controller
 
     public function tambah()
     {
-        $jdl = 'Tambah Konten Gambar';
+        $jdl = 'TAMBAH KONTEN GAMBAR';
         $p = product::all();
         return view('konten.tambah', ['product' => $p, 'jdl' => $jdl]);
     }
     public function plus()
     {
-        $jdl = 'Tambah Konten Video';
+        $jdl = 'TAMBAH KONTEN VIDEO';
         $p = product::all();
         return view('konten.plus', ['product' => $p, 'jdl' => $jdl]);
     }
@@ -308,7 +308,7 @@ class kontenController extends Controller
 
     public function edit($content_id)
     {
-        $jdl = 'Tambah Konten Video';
+        $jdl = 'EDIT KONTEN GAMBAR';
         $konten = Konten::findOrFail($content_id);
         $p = product::all();
         return view('konten.edit', ['product' => $p, 'contents' => $konten, 'jdl' => $jdl]);
@@ -370,7 +370,7 @@ class kontenController extends Controller
 
     public function ganti($content_id)
     {
-        $jdl = 'Tambah Konten Video';
+        $jdl = 'EDIT KONTEN VIDEO';
         $konten = Konten::findOrFail($content_id);
         $p = product::all();
         return view('konten.ganti', ['product' => $p, 'contents' => $konten, 'jdl' => $jdl]);

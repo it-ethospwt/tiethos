@@ -45,11 +45,13 @@
                     <form class="card" action="/saveWeb" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
-                            <div class="mb-3">
+                            <div class="mb-3" style="display: none;">
                                 <label class="form-label required">Produk</label>
                                 <select class="form-control" name="product_id" id="product_id">
                                     @foreach ($product as $p)
-                                    <option value="<?= $p['id']; ?>"><?= $p['nm_Product']; ?></option>
+                                    <option value="<?= $p['id']; ?>" {{ isset($_GET['product_id']) && $_GET['product_id'] == $p['id'] ? 'selected' : '' }}>
+                                        <?= $p['nm_product']; ?>
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -90,6 +92,16 @@
                                             .catch(error => {
                                                 console.error(error);
                                             });
+                                    </script>
+                                    <script>
+                                        // Get the product_id from the URL parameters
+                                        var urlParams = new URLSearchParams(window.location.search);
+                                        var product_id = urlParams.get('product_id');
+
+                                        // Set the selected attribute for the corresponding option
+                                        if (product_id) {
+                                            document.getElementById('product_id').value = product_id;
+                                        }
                                     </script>
 
                                     @include('dash.footer')

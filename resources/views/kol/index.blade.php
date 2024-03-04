@@ -34,8 +34,7 @@
                         </div>
                         <div class="card-body">
                             <div class="btn-tambahUser mt-2 mb-5">
-                                <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span
-                                        style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
+                                <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
                             </div>
                             <!-- Table -->
                             <table id="table-kol" class="display nowrap" style="width:100%">
@@ -74,16 +73,12 @@
                                             <a href="{{ route('kol.detail', $k->id)}}" class="btn btn-primary btn-pill">
                                                 <span class="ti ti-search" style="color: white;"></span>
                                             </a>
-                                            <a href="" class="btn btn-success btn-pill">
+                                            <a href="/kedit/{{ $k->id }}" class="btn btn-success btn-pill">
                                                 <span class="ti ti-edit" style="color: white;"></span>
                                             </a>
-                                            <form action="" method="POST" id="deleteForm" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-pill deleteButton">
-                                                    <span class="ti ti-trash" style="color: white;"></span>
-                                                </button>
-                                            </form>
+                                            <a href="/khapus/{{ $k->id }}" class="btn btn-danger btn-pill">
+                                                <span class="ti ti-trash" style="color: white;"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -159,15 +154,15 @@
     Toast.fire({
         icon: "success",
         title: "{{$message}}"
-        });
+    });
 </script>
 @endif
 
 <script>
     new DataTable('#table-kol', {
-                    responsive: true,
-                    rowReorder: {
-                        selector: 'td:nth-child(2)'
-                    }
-                });
+        responsive: true,
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        }
+    });
 </script>

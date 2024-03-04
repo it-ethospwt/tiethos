@@ -35,9 +35,6 @@
                         <h2 class="page-title">
                             {{$jdl}}
                         </h2>
-                        <div class="btn-tambahUser mt-4 mb-2">
-                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -49,8 +46,13 @@
                             <div class="card card-lg">
                                 <div class="card-body markdown">
                                     <h1 id="whos-that-then"> {{ $wa->sub }}</h1>
-                                    <p><img src="{{ asset('/public_imgTest/' . $wa->gambar) }}" alt="Image Alt" /></p>
+                                    @if(isset($imageUrls[$wa->wa_id ]))
+                                    <p><img src="{{ $imageUrls[$wa->wa_id] }}" alt="Image Alt" /></p>
+                                    @endif
                                     <p>{!! $wa->deskripsi !!}</p>
+                                    <div class="btn-tambahUser mt-4">
+                                        <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -58,3 +60,6 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+@include('dash.footer')

@@ -3,6 +3,12 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.4.1/css/rowReorder.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 
+<style>
+    .small-text {
+        font-size: 12px;
+        /* Atur ukuran font sesuai kebutuhan */
+    }
+</style>
 
 <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
 <div class="page">
@@ -26,18 +32,17 @@
         <div class="page-body">
             <div class="container-xl">
                 <div class="row row-cards">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="card">
-                            <div class="empty">
+                            <div class="image-container">
                                 @if(isset($imageUrls[$affiliator->id ]))
-                                <div class="empty-img"><img src="{{ $imageUrls[$affiliator->id] }}" height="128" alt="">
-                                </div>
+                                <img src="{{ $imageUrls[$affiliator->id] }}" alt="Gambar Produk">
                                 @endif
-                                <p class="empty-title">{{ $affiliator->nama }}</p>
-                                <p class="empty-subtitle text-muted">
-                                    {{ $affiliator->kategori }}
-                                </p>
-                                <table class="table table-vcenter card-table">
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title">{{ $affiliator->nama }}</h3>
+                                <h3 class="card-title"> {{ $affiliator->kategori }}</h3>
+                                <table class="table table-vcenter card-table small-text">
                                     <tbody>
                                         <tr>
                                             <td>Viewer</td>
@@ -71,10 +76,11 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <div class="card">
                             <div class="table-responsive">
                                 <table class="table table-vcenter card-table">
