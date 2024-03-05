@@ -43,7 +43,7 @@
                             <h3 class="card-title">Form Edit Endoser</h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="\storeEditEndorse(instagram)\{{ $endor->id }}" enctype="multipart/form-data" class="row  g-3">
+                            <form method="POST" action="\storeEditEndorse\{{ $endor->id }}" enctype="multipart/form-data" class="row  g-3">
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="product_id" class="form-label mb-3">Nama Product<span style="color:red">*</span></label>

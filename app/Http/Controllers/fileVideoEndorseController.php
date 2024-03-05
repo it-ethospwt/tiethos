@@ -16,7 +16,7 @@ class fileVideoEndorseController extends Controller
         
         $endor = endors::find($id);
     
-        return view('endorse.instagram.v_tambahFileVideo',['jdl' => $jdl, 'endor'=> $endor]);
+        return view('endorse.v_tambahFileVideo',['jdl' => $jdl, 'endor'=> $endor]);
     }
     
     public function store_fileVideo(Request $request){

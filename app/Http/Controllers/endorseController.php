@@ -25,7 +25,12 @@ class endorseController extends Controller
          // Menampilkan total  kemunculan  data  endors  berdasarkan product_id
         $countEndorsByProduk = [];
         foreach( $produk as $pdk ){
-            $countEndorsByProduk[ $pdk->id] = endors::where('product_id',$pdk->id)->get();
+            $countEndorsByProduk[$pdk->id]['instagram'] = endors::where('product_id',$pdk->id)
+                                                    ->where('sosial_media','instagram')
+                                                    ->count();
+            $countEndorsByProduk[$pdk->id]['tiktok'] = endors::where('product_id',$pdk->id)
+                                                    ->where('sosial_media','tiktok')
+                                                    ->count();
         }
 
          $config = [
@@ -76,19 +81,37 @@ class endorseController extends Controller
         //mengambil data endors dengan  product id  yang sesuai
         $endor = endors::where('sosial_media','instagram')->where('product_id',$product_id)->get();
 
-        return view('endorse.instagram.v_indexInstagram',['jdl' =>  $jdl,'endor'=>$endor,'produk' => $produk]);
+        return view('endorse.v_indexInstagram',['jdl' =>  $jdl,'endor'=>$endor,'produk' => $produk]);
     }
 
-    public function tambah_EndorseInstagram(){
-        $jdl  = "Tambah Endoser Instagram";
+
+    //List Endorse(Tiktok)
+    public function tiktok_index(Request $request){
+        $jdl =  "List Endorse(Tiktok)";
+
+        //menangkap product_id dari permintaan
+        $product_id = $request->input('product_id');
+
+        $produk = product::all();
+
+        //mengambil data endors dengan  product id  yang sesuai
+        $endor = endors::where('sosial_media','tiktok')->where('product_id',$product_id)->get();
+
+        return view('endorse.v_indexTiktok',['jdl' =>  $jdl,'endor'=>$endor,'produk' => $produk]);
+    }
+
+
+
+    public function tambah_Endorse(){
+        $jdl  = "Tambah Endoser";
         
         $produk = product::all();
 
-        return view('endorse.instagram.v_tambahEndorseInstagram',['jdl' => $jdl,'produk' => $produk]);
+        return view('endorse.v_tambahEndorse',['jdl' => $jdl,'produk' => $produk]);
     }
 
 
-    public function store_EndorseInstagram(Request $request){
+    public function store_Endorse(Request $request){
         $this->validate($request,[
             'product_id' => 'required|exists:product,id',
             'nm_endorse' =>  'required ',
@@ -234,21 +257,20 @@ class endorseController extends Controller
             }
         } 
 
-        return view('endorse.instagram.v_detailEndoser',['jdl' => $jdl,'endor' => $endor,'file_gambar' => $file_gambar, 'file_video' => $file_video , 'imageUrls' =>  $imageUrls,'file_imageUrls' =>  $file_imageUrls,'file_videoUrls' =>  $file_videoUrls]);
+        return view('endorse.v_detailEndoser',['jdl' => $jdl,'endor' => $endor,'file_gambar' => $file_gambar, 'file_video' => $file_video , 'imageUrls' =>  $imageUrls,'file_imageUrls' =>  $file_imageUrls,'file_videoUrls' =>  $file_videoUrls]);
     }
 
-    public  function edit_EndorseInstagram($id){
+    public  function edit_Endorse($id){
         $jdl = "Edit Endoser Instagram";
 
         $produk = product::all();
         
         $endor = endors::find($id);
 
-        return view('endorse.instagram.v_editEndoser',['jdl' => $jdl,'produk' => $produk,'endor' => $endor ]);
-
+        return view('endorse.v_editEndoser',['jdl' => $jdl,'produk' => $produk,'endor' => $endor ]);
     }
 
-    public function store_editEndorseInstagram($id,Request $request){
+    public function store_editEndorse($id,Request $request){
         $this->validate($request,[
             'product_id' => 'required|exists:product,id',
             'nm_endorse' =>  'required ',
@@ -329,7 +351,7 @@ class endorseController extends Controller
         return redirect('endorse')->with('success',"Update Knowladge Berhasil!!");
     }
 
-    public function hapus_EndorseInstagram($id){
+    public function hapus_Endorse($id){
         $hapus_data = endors::find($id);
 
          //Hapus  Produk  yang terkait dengan produk  dari AWS S3
