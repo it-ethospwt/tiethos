@@ -131,22 +131,26 @@ Route::prefix('kol')->group(function () {
 Route::get('endorse',[endorseController::class,"index"]);
 //Route List Endorse(Instagram)
 Route::get('endorse(instagram)',[endorseController::class,'instagram_index']);
-Route::get('tambahEndorse(instagram)',[endorseController::class,'tambah_EndorseInstagram']);
-Route::post('storeEndorse(instagram)',[endorseController::class,'store_EndorseInstagram']);
+//Route List Endorse(Tiktok)
+Route::get('endorse(tiktok)',[endorseController::class,'tiktok_index']);
+// ----------------------------------------------------------------------
+Route::get('tambahEndorse',[endorseController::class,'tambah_Endorse']);
+Route::post('storeEndorse',[endorseController::class,'store_Endorse']);
 Route::get('detailEndoser/{id}',[endorseController::class,'detail_Endoser']);
-Route::get('editEndorse(instagram)/{id}',[endorseController::class,'edit_EndorseInstagram']);
-Route::post('storeEditEndorse(instagram)/{id}',[endorseController::class,'store_editEndorseInstagram']);
-Route::get('hpsEndorse(instagram)/{id}',[endorseController::class,'hapus_EndorseInstagram']);
-//Route File Gambar Endorse(Instagram)  
-Route::get('tambahFile(instagram)/{id}',[fileEndorseController::class,'tambah_fileInstagram']);
-Route::post('storeFile/{id}',[fileEndorseController::class,'store_fileInstagram']);
+Route::get('editEndorse/{id}',[endorseController::class,'edit_Endorse']);
+Route::post('storeEditEndorse/{id}',[endorseController::class,'store_editEndorse']);
+Route::get('hpsEndorse/{id}',[endorseController::class,'hapus_Endorse']);
+//Route File Gambar Endorse 
+Route::get('tambahFile/{id}',[fileEndorseController::class,'tambah_file']);
+Route::post('storeFile/{id}',[fileEndorseController::class,'store_file']);
 Route::get('download_file/{id}',[fileEndorseController::class,'download_file']);
 Route::get('hapus_file/{id}',[fileEndorseController::class,'hapus_file']);
-//Route File Video Endorse(Instagram)
+//Route File Video Endorse
 Route::get('tambahVideo/{id}',[fileVideoEndorseController::class,'tambah_fileVideo']);
 Route::post('storeFileVideo/{id}',[fileVideoEndorseController::class,'store_fileVideo']);
 Route::get('download_fileVideo/{id}',[fileVideoEndorseController::class,'download_fileVideo']);
-Route::get('hapus_fileVideo/{id}',[fileVideoEndorseController::class,'hapus_fileVideo']);                                                                                        
+Route::get('hapus_fileVideo/{id}',[fileVideoEndorseController::class,'hapus_fileVideo']);
+
 
 
 

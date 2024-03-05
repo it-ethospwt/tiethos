@@ -42,7 +42,7 @@
                         <!-- Page pre-title -->
                         <h2 class="page-title">
                             @if($endor->isNotEmpty()) <!-- Memastikan Koleksi  Tidak Kosong -->
-                                Instagram({{ $endor[0]->product->nm_product }}) <!-- Mengakses Properti Item Dari Koleksi pertama -->
+                                Tiktok({{ $endor[0]->product->nm_product }}) <!-- Mengakses Properti Item Dari Koleksi pertama -->
                             @endif 
                         </h2>
                     </div>
@@ -58,7 +58,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Endoser Instagram  @if($endor->isNotEmpty()) Produk {{$endor[0]->product->nm_product }} @endif</h3>
+                            <h3 class="card-title">Data Endoser Tiktok @if($endor->isNotEmpty()) Produk {{$endor[0]->product->nm_product }} @endif</h3>
                         </div>
                         <div class="card-body">
                             <!-- Table -->
@@ -84,8 +84,8 @@
                                         <td>{{ $e->owning }}</td>
                                         <td>
                                             <a href="/detailEndoser/{{ $e->id }}" class="btn btn-search btn-pill"><i class="fa fa-search" style="color: #fff;"></i></a>
-                                            <a href="/editEndorse(instagram)/{{ $e->id }}" class="btn btn-success btn-pill "><i class="fa fa-edit"></i></a>
-                                            <a href="/hpsEndorse(instagram)/{{ $e->id }}" class="btn btn-danger btn-pill"><i class="fa fa-trash"></i></a>
+                                            <a href="/editEndorse/{{ $e->id }}" class="btn btn-success btn-pill "><i class="fa fa-edit"></i></a>
+                                            <a href="/hpsEndorse/{{ $e->id }}" class="btn btn-danger btn-pill"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

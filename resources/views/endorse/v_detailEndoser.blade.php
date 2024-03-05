@@ -202,7 +202,7 @@
                                            
                                         <div class="row">
                                             <div class="col-sm-12">
-                                            <a class="btn btn-primary btn-pill" href="/tambahFile(instagram)/{{ $endor->id }}"><i class="fa fa-plus fa-sm" style="margin-right: 5px;"></i>File Foto</a>
+                                            <a class="btn btn-primary btn-pill" href="/tambahFile/{{ $endor->id }}"><i class="fa fa-plus fa-sm" style="margin-right: 5px;"></i>File Foto</a>
                                             <a class="btn btn-darke btn-pill" href="/tambahVideo/{{ $endor->id }} "><i class="fa fa-plus fa-sm" style="margin-right: 5px;"></i>File Video</a>
                                             </div>
                                         </div>

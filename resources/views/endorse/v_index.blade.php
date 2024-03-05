@@ -51,7 +51,7 @@
 
             <div class="container-lg">
                 <div class="btn-tambahProduk mt-4 mb-3">
-                    <a href="/tambahEndorse(instagram)" class="btn btn-primary"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Endoser</a>
+                    <a href="/tambahEndorse" class="btn btn-primary"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Endoser</a>
                 </div>
             </div>
         
@@ -72,9 +72,13 @@
                                             <a href="/endorse(instagram)?product_id={{ $p->id }}" class="btn btn-ig btn-pill text-white fw-normal mb-3">
                                                 <i class="fa-brands fa-instagram fa-sm" style="color: #ffffff;margin-right:5px;">
                                             </i>Instagram 
-                                                [{{ count($countEndorsByProduk[$p->id])  }}]
+                                                [{{ $countEndorsByProduk[$p->id]['instagram'] ?? 0 }}]
                                             </a>
-                                            <a href="#" class="btn btn-tiktok btn-pill text-white fw-normal mb-3"><i class="fa-brands fa-tiktok fa-sm" style="color: #ffffff;margin-right:5px;"></i>Tiktok[0]</a>
+                                            <a href="/endorse(tiktok)?product_id={{$p->id}}" class="btn btn-tiktok btn-pill text-white fw-normal mb-3">
+                                                <i class="fa-brands fa-tiktok fa-sm" style="color: #ffffff;margin-right:5px;">
+                                            </i>Tiktok
+                                                [{{ $countEndorsByProduk[$p->id]['tiktok'] ?? 0 }}]    
+                                            </a>
                                         </div>
                                 </div>
                                 @endforeach

@@ -13,14 +13,14 @@ use Aws\S3\S3Client;
 class fileEndorseController extends Controller
 {
     
-    public  function tambah_fileInstagram($id){
+    public  function tambah_file($id){
         $jdl = "Tambah File Endoser(Instagram)";
         $endor = endors::find($id);
 
-        return view('endorse.instagram.v_tambahFile',['jdl'=> $jdl,'endor' => $endor]);
+        return view('endorse.v_tambahFile',['jdl'=> $jdl,'endor' => $endor]);
     }
 
-    public function store_fileInstagram(Request $request){
+    public function store_file(Request $request){
         $this->validate($request,[
             'file' => 'mimes:jpg,jpeg,png,gif,webp,heic|max:5048|required'
         ],
