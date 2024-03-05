@@ -50,7 +50,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                <a href=".">
+                <a href="">
                     <img src="{{ asset('static/logo.png') }}" class="navbar-brand-image" style="width: 110;height:50">
                 </a>
             </h1>

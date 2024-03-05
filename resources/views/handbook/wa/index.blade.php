@@ -32,11 +32,13 @@
                         <h2 class="page-title">
                             LIST {{$jdl}}
                         </h2>
+                        @can('admin-only')
                         <div class="col col-sm-2 col-md-2 col-xl py-3">
                             <a href="#" id="tambahHandbook" class="btn btn-warning btn-pill">
                                 <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah Handbook
                             </a>
                         </div>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -73,18 +75,24 @@
                                         <td>{{$w->created_at->format('d-m-Y H:i')}}</td>
                                         <td>{{$w->updated_at->format('d-m-Y H:i')}}</td>
                                         <td>
-                                            <a href="{{ route('handbook.wa.detail', $w->wa_id)}}" class="btn btn-primary">
+                                            <a href="{{ route('handbook.wa.detail', $w->wa_id)}}"
+                                                class="btn btn-primary">
                                                 <i class="fas fa-search"></i>
                                             </a>
-                                            <a href="/wchange/{{ $w->wa_id }}" class="btn btn-success btn-pill "><i class="fa fa-edit"> </i></a>
-                                            <a href="/whapus/{{ $w->wa_id }}" class="btn btn-danger btn-pill"><i class="fa fa-trash"> </i></a>
+                                            @can('admin-only')
+                                            <a href="/wchange/{{ $w->wa_id }}" class="btn btn-success btn-pill "><i
+                                                    class="fa fa-edit"> </i></a>
+                                            <a href="/whapus/{{ $w->wa_id }}" class="btn btn-danger btn-pill"><i
+                                                    class="fa fa-trash"> </i></a>
+                                            @endcan
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                             <div class="btn-tambahUser mt-4">
-                                <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
+                                <button type="button" class="btn btn-danger btn-pill"
+                                    onclick="window.history.back()">Back</button>
                             </div>
                         </div>
                     </div>

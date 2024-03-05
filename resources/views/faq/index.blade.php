@@ -21,10 +21,14 @@
                             List FAQ
                         </h2>
                     </div>
+                    @can('admin-only')
                     <div class="btn-tambahUser mt-4 mb-2">
-                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-warning btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
-                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-warning btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
+                        <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-warning btn-pill"> <span
+                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
+                        <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-warning btn-pill"> <span
+                                style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
                     </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -50,7 +54,8 @@
                                                 <div class="card-body text-center">
                                                     <h3 class="card-title">{{ $p->nm_Product }}</h3>
                                                     @foreach ($keluhanProduk as $k)
-                                                    <a href="{{ route('faqIndex', ['id' => $k->id]) }}" class="btn btn-secondary btn-pill mt-2">{{ $k->nama }}</a>
+                                                    <a href="{{ route('faqIndex', ['id' => $k->id]) }}"
+                                                        class="btn btn-secondary btn-pill mt-2">{{ $k->nama }}</a>
                                                     @endforeach
                                                 </div>
                                             </div>

@@ -15,9 +15,9 @@
             border-bottom: 1px solid #DCE0E5 !important;
         }
 
-        .btn-primary{
-                background-color: #FF8B03 !important;
-            }
+        .btn-primary {
+            background-color: #FF8B03 !important;
+        }
     </style>
 </head>
 
@@ -68,7 +68,9 @@
                                         <th>Nama Produk</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        @can('admin-only')
                                         <th style="width:18%;">Aksi</th>
+                                        @endcan
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,14 +86,14 @@
                                         <td>{{ $d->nm_product }}</td>
                                         <td>{{ $d->created_at->format('d-m-Y H:i') }}</td>
                                         <td>{{ $d->updated_at->format('d-m-Y H:i') }}</td>
+                                        @can('admin-only')
                                         <td>
-                                            @can('admin-only')
                                             <a href="edit/{{ $d->id }}" class="btn btn-success btn-pill "><i
                                                     class="fa fa-edit"> </i></a>
                                             <a href="hapus/{{ $d->id }}" class="btn btn-danger btn-pill"><i
                                                     class="fa fa-trash"> </i></a>
-                                            @endcan
                                         </td>
+                                        @endcan
                                     </tr>
                                     @endforeach
                                 </tbody>

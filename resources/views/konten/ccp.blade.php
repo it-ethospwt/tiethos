@@ -18,7 +18,8 @@
                             {{$jdl}}
                         </h2>
                         <div class="btn-tambahUser mt-4 mb-2">
-                            <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
+                            <button type="button" class="btn btn-danger btn-pill"
+                                onclick="window.history.back()">Back</button>
                         </div>
                     </div>
                 </div>
@@ -33,10 +34,12 @@
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
                                     <li class="nav-item">
-                                        <a href="#tabs-home-1" class="nav-link active" data-bs-toggle="tab"><span style="margin-right: 8px;"><i class="fa fa-image"></i></span>Gambar</a>
+                                        <a href="#tabs-home-1" class="nav-link active" data-bs-toggle="tab"><span
+                                                style="margin-right: 8px;"><i class="fa fa-image"></i></span>Gambar</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#tabs-profile-1" class="nav-link" data-bs-toggle="tab"><span style="margin-right: 8px;"><i class="fa fa-video"></i></span>Video</a>
+                                        <a href="#tabs-profile-1" class="nav-link" data-bs-toggle="tab"><span
+                                                style="margin-right: 8px;"><i class="fa fa-video"></i></span>Video</a>
                                     </li>
                                 </ul>
                             </div>
@@ -51,24 +54,32 @@
                                                     <div class="card">
                                                         <!-- Photo -->
                                                         @if(isset($imageUrls[$k->content_id ]))
-                                                        <div class="img-responsive img-responsive-21x9 card-img-top" style="background-image: url('{{ $imageUrls[$k->content_id] }}'); height: 150px;"></div>
+                                                        <div class="img-responsive img-responsive-21x9 card-img-top"
+                                                            style="background-image: url('{{ $imageUrls[$k->content_id] }}'); height: 150px;">
+                                                        </div>
                                                         @endif
                                                         <div class="card-body">
                                                             <h3 class="card-title">{{$k->title}}</h3>
                                                             <div class="row g-2 justify-content-center">
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                    <a href="{{ url('unduh/'.$k->content_id) }}"
+                                                                        class="btn btn-success"><i
+                                                                            class="fa fa-download"></i></a>
                                                                 </div>
+                                                                @can('admin-only')
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/ubah/{{ $k->content_id }}" class="btn btn-primary">
+                                                                    <a href="/ganti/{{ $k->content_id }}"
+                                                                        class="btn btn-primary">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
+                                                                    <a href="/delete/{{ $k->content_id }}"
+                                                                        class="btn btn-danger">
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
+                                                                @endcan
                                                             </div>
                                                         </div>
 
@@ -91,7 +102,8 @@
                                                         <div class="card-img-top">
                                                             @if(isset($videoUrls[$k->content_id ]))
                                                             <video controls style="width:100%; height:150px;">
-                                                                <source src="{{ $videoUrls[$k->content_id] }}" type="video/mp4">
+                                                                <source src="{{ $videoUrls[$k->content_id] }}"
+                                                                    type="video/mp4">
                                                                 Your browser does not support the video tag.
                                                             </video>
                                                             @endif
@@ -101,18 +113,24 @@
 
                                                             <div class="row g-2 justify-content-center">
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                    <a href="{{ url('unduh/'.$k->content_id) }}"
+                                                                        class="btn btn-success"><i
+                                                                            class="fa fa-download"></i></a>
                                                                 </div>
+                                                                @can('admin-only')
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/ganti/{{ $k->content_id }}" class="btn btn-primary">
+                                                                    <a href="/ganti/{{ $k->content_id }}"
+                                                                        class="btn btn-primary">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
+                                                                    <a href="/delete/{{ $k->content_id }}"
+                                                                        class="btn btn-danger">
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
+                                                                @endcan
                                                             </div>
                                                         </div>
                                                     </div>
