@@ -13,10 +13,17 @@
 
         .card-header {
             border-bottom: 1px solid #DCE0E5 !important;
+
+        }
+
+        .btn-search{
+            background-color: #2989A8 !important;
+            border :1px  solid #fff !important;
         }
 
         .btn-primary{
                 background-color: #FF8B03 !important;
+                color: #fff !important;
             }
     </style>
 </head>
@@ -34,7 +41,9 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            List Produk
+                            @if($endor->isNotEmpty()) <!-- Memastikan Koleksi  Tidak Kosong -->
+                                Instagram({{ $endor[0]->product->nm_product }}) <!-- Mengakses Properti Item Dari Koleksi pertama -->
+                            @endif 
                         </h2>
                     </div>
                 </div>
@@ -49,48 +58,34 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Produk</h3>
+                            <h3 class="card-title">Data Endoser Instagram  @if($endor->isNotEmpty()) Produk {{$endor[0]->product->nm_product }} @endif</h3>
                         </div>
                         <div class="card-body">
-                            @can('admin-only')
-                            <div class="btn-tambahProduk mt-2 mb-5">
-                                <a href="\tambah" class="btn btn-primary"> <span style="margin-right: 8px;"><i
-                                            class="fa fa-plus"></i></span>
-                                    Data Produk</a>
-                            </div>
-                            @endcan
                             <!-- Table -->
                             <table id="table-produkList" class="display wrap table-sm" style="width:100%">
                                 <thead>
                                     <tr style="font-size: 90%;">
                                         <th>No</th>
-                                        <th style="width:13%;text-align: center;">Gambar</th>
-                                        <th>Nama Produk</th>
-                                        <th>Created At</th>
-                                        <th>Updated At</th>
+                                        <th>Nama Endoser</th>
+                                        <th>Kontak Person</th>
+                                        <th>Link Akun Sosmed</th>
+                                        <th>Owning</th>
                                         <th style="width:18%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1; ?>
-                                    @foreach( $data as $d)
+                                    @php $no = 1;  @endphp
+                                    @foreach($endor as  $e)
                                     <tr style="font-size: 90%;">
-                                        <td>{{$no++}}</td>
-                                        <td align="center">
-                                            @if(isset($imageUrls[$d->id ]))
-                                            <img src="{{ $imageUrls[$d->id] }}" alt="Gambar Produk" width="80px">
-                                            @endif
-                                        </td>
-                                        <td>{{ $d->nm_product }}</td>
-                                        <td>{{ $d->created_at->format('d-m-Y H:i') }}</td>
-                                        <td>{{ $d->updated_at->format('d-m-Y H:i') }}</td>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $e->nm_endorse }}</td>
+                                        <td>{{ $e->kontak_person }}</td>
+                                        <td><em><a href="{{ $e->link_akun }}" target="_blank" >{{ $e->link_akun }}</a></em></td>
+                                        <td>{{ $e->owning }}</td>
                                         <td>
-                                            @can('admin-only')
-                                            <a href="edit/{{ $d->id }}" class="btn btn-success btn-pill "><i
-                                                    class="fa fa-edit"> </i></a>
-                                            <a href="hapus/{{ $d->id }}" class="btn btn-danger btn-pill"><i
-                                                    class="fa fa-trash"> </i></a>
-                                            @endcan
+                                            <a href="/detailEndoser/{{ $e->id }}" class="btn btn-search btn-pill"><i class="fa fa-search" style="color: #fff;"></i></a>
+                                            <a href="/editEndorse(instagram)/{{ $e->id }}" class="btn btn-success btn-pill "><i class="fa fa-edit"></i></a>
+                                            <a href="/hpsEndorse(instagram)/{{ $e->id }}" class="btn btn-danger btn-pill"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -106,8 +101,7 @@
 </div>
 
 @include('dash.footer')
-<!-- Sweet Alert -->
-@include('sweetalert::alert')
+
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>

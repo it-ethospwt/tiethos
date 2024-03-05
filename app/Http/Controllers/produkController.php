@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Storage;
 
 //memanggil  model product
 use App\Models\product;
-
 //memanggil  model knowladge
 use App\Models\knowladge;
+//memanggil model endors
+use App\Models\endors;
+
+use App\Models\Konten;
 use Nette\Utils\Strings;
 
 class produkController extends Controller
@@ -126,14 +129,34 @@ class produkController extends Controller
             $request,
             [
                 'nm_product' => 'required',
+                'foto' => 'mimes:jpg,jpeg,png,gif|max:5048'
             ],
             [
                 'nm_product.required' => 'Nama Produk Harus Diisi!',
+                'foto.mimes' => 'File  Yang  Diupload Bukan  Gambar!!',
+                'foto.max' =>  'Ukuran Gambar  Produk Tidak Boleh Melebihi 5MB'
             ]
         );
 
         $data_edit = product::find($id);
         $data_edit->nm_product  = $request->nm_product;
+
+        if ($request->hasFile('file')) {
+            $gmr_pdk = $request->file('file');
+            $gmr_pdk_nama = $gmr_pdk->getClientOriginalName();
+
+            //Check  Jika  Gambar ada
+            if ($data_edit->file) {
+                //Hapus  Gambar  Produk dari Bucket  S3
+                Storage::disk('s3')->delete('produk/' . $data_edit->file);
+            }
+            // Simpan  Gambar pada baru pada  bucket S3
+            $gmr_pdk->storeAs('produk/', $gmr_pdk_nama, 's3');
+
+            //Upadate nama  gambar  pada  database
+            $data_edit->file = $gmr_pdk_nama;
+        }
+
         $data_edit->save();
 
         return redirect('/produk')->with('success', 'Edit Produk Berhasil!!');
@@ -173,51 +196,37 @@ class produkController extends Controller
             $k->delete();
         }
 
-        //Hapus  produk itu Sendiri
-        $product->delete();
+        //Hapus data yang terkait dari table 'endors'
+        $endor  = endors::where('product_id', $id)->get();
+        foreach ($endor as $e) {
+            $bucketName = 'bankcont';
+            $objectKey  = 'endorse/instagram/foto_profile/' . $e->foto;
 
-        return  redirect('/produk')->with('info', "Hapus Produk Berhasil!!");
-    }
-
-
-
-    //Download Image Produk
-    public  function download_product($id)
-    {
-        //Mendapatkan  informasi  produk berdasarkan id
-        $product = Product::find($id);
-
-        //konfigurasi kredinsial aws
-        $config = [
-            'region' => 'ap-southeast-1',
-            'version' => 'latest',
-            'credintial' => [
-                'key' => 'AKIAZI2LDMSP6E5M4TFK',
-                'secret' => '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'
-            ]
-        ];
-
-        //Membuat instanisasi S3
-        $s3 = new  S3Client($config);
-
-        //Nama  bucket  S3 dan  Nama  file di dalamnya
-        $bucketName = 'bankcont';
-        $objectKey  = 'produk/' . $product->file;
-
-        //Mencoba untuk mendapatkan URL tanda tangan yang ditandatangani (signed) untuk objek S3
-        try {
-            $fileContent = $s3->getObject([
+            $s3->deleteObject([
                 'Bucket' => $bucketName,
                 'Key'   =>  $objectKey
             ]);
 
-            // mengembalikan  file langsung  sebagai unduhan
-            return response()->streamDownload(function () use ($fileContent) {
-                echo $fileContent['Body'];
-            }, $product->file);
-        } catch (\Exception $e) {
-            // Tangani jika terjadi kesalahan saat mengambil URL tanda tangan yang ditandatangani (signed)
-            return back()->with('error', 'Gagal Mengunduh File');
+            $e->delete();
         }
+
+        //Hapus data yang terkait dari table 'endors'
+        $konten  = Konten::where('content_id', $id)->get();
+        foreach ($konten as $kt) {
+            $bucketName = 'bankcont';
+            $objectKey  = 'konten/gambar/' . $kt->gambar;
+
+            $s3->deleteObject([
+                'Bucket' => $bucketName,
+                'Key'   =>  $objectKey
+            ]);
+
+            $kt->delete();
+        }
+
+        //Hapus  produk itu Sendiri
+        $product->delete();
+
+        return  redirect('/produk')->with('info', "Hapus Produk Berhasil!!");
     }
 }

@@ -15,10 +15,46 @@ class knowladgeController extends Controller
     {
         $jdl = "Bank Knowladge";
 
-        //Ambil data  produk  dari tabel  knowladge yang memili  dengan produk 
-        $data =  knowladge::with('product')->paginate(2);
+        $produk = product::all();
 
-        return view('knowladge.v_index', ['jdl' => $jdl, 'data' => $data]);
+         //Ambil data  produk  dari tabel  knowladge yang memili  dengan produk 
+         $data =  knowladge::with('product')->paginate(10);
+
+         $config = [
+            'region' => 'ap-southeast-1',
+            'version' => 'latest',
+            'credentials' => [
+                'key' => 'AKIAZI2LDMSP6E5M4TFK',
+                'secret' => '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',
+            ],
+         ];
+
+         //Membuat instanisasi S3
+         $s3 = new S3Client($config);
+
+         //Nama Bucket dan Folder 
+         $bucketName = 'bankcont';
+         $folderName = 'produk/';
+
+         //Array untuk menyimpan gambar
+         $imageUrls = [];
+
+         //Loop setiap data produk
+         foreach($produk as $pdk){
+            //Mendapatkan nama  file  'file' dalam  record product
+            $fileName = $pdk->file;
+
+            //Mendapatkan URL Gambar dari AWS S3 jika  file  tersebut  ada
+            $imageUrl =  $s3->getObjectUrl($bucketName,$folderName.$fileName);
+
+            //Menambahkan URL gambar kedalam array  jika URL tersedia
+            if($imageUrl){
+                $imageUrls[$pdk->id] = $imageUrl;
+            }
+        }
+
+        return view('knowladge.v_index', ['jdl' => $jdl, 'data' => $data,'imageUrls'=> $imageUrls]);
+
     }
 
     //TAMBAH KNOWLADGE & PROSES TAMBAH KNOWLADGE

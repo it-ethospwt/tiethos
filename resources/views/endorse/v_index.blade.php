@@ -1,4 +1,4 @@
-    <head>
+<head>
         <title>{{ $jdl }}</title>
         <style>
              .card{
@@ -14,12 +14,15 @@
                 background-color: #FF8B03 !important;
             }
 
-            .btn-show{
-                background-color: #2989A8 !important;
+            .btn-ig{
+               background-image: url("{{ asset('background-instagram.png') }}");
+               background-position: center;
+               background-repeat: no-repeat;
+               background-size: cover;
             }
 
-            .btn-edit{
-                background-color: #4ECB71 !important;
+            .btn-tiktok{
+                background-color: #010101 !important;
                 display: flex;
                 justify-content: space-between;
             }
@@ -39,42 +42,46 @@
                         <div class="col">
                             <!-- Page pre-title -->
                             <h2 class="page-title">
-                                List Knowladge
+                                List Endorse
                             </h2>
                         </div>
                     </div>
                 </div>  
             </div>
-            
+
             <div class="container-lg">
-                <div class="btn-tambahKnowladge mt-5 mb-4">
-                    <a href="/tambahKnowladge" class="btn btn-primary"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Data Knowladge</a>
+                <div class="btn-tambahProduk mt-4 mb-3">
+                    <a href="/tambahEndorse(instagram)" class="btn btn-primary"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Endoser</a>
                 </div>
             </div>
-            
+        
             <!-- Page body -->
             <div class="page-body">
                 <div class="container-lg">
                     <div class="col-12">
                         <div class="card">
                         <div class="card-body">
-                            <div class="row g-0" style="display:flex; gap:51px; ">
-                            @foreach( $data as $d)
+                            <div class="row g-0" style="display:flex; gap:51px;">
+                            @foreach($produk as $p) 
                                 <div class="col-md-2" style="border: 1px solid #DCE0E5; border-radius:5px;display:flex;align-items:center;flex-direction:column">
-                                    @if(isset($imageUrls[$d->product->id ]))
-                                        <img src="{{ $imageUrls[$d->product->id] }}" alt="Gambar Produk"  class="card-img-top" height="210">
+                                        @if(isset($imageUrls[$p->id]))
+                                        <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk"  class="card-img-top" height="210">
                                         @endif
-                                        <h2 class="text-center mb-3 mt-3 p-1">{{ $d->product->nm_product }}</h2>
+                                        <h2 class="text-center mb-3 mt-3 p-1">{{ $p->nm_product }}</h2>
                                         <div class="col d-flex align-center flex-column" style="width: 80%;">
-                                            <a href="/show/{{ $d->id }}" class="btn btn-show btn-pill text-white fw-normal mb-3"><i class="fa-regular fa-eye fa-sm" style="color:#fff;margin-right:5px;"></i>Lihat Knowladge</a>
-                                            <a href="/editKnowladge/{{ $d->id }}" class="btn btn-edit btn-pill text-white fw-normal mb-3"><i class="fa-solid fa-edit fa-sm" style="color:#fff;margin-right:5px;"></i>Edit Knowladge</a>
+                                            <a href="/endorse(instagram)?product_id={{ $p->id }}" class="btn btn-ig btn-pill text-white fw-normal mb-3">
+                                                <i class="fa-brands fa-instagram fa-sm" style="color: #ffffff;margin-right:5px;">
+                                            </i>Instagram 
+                                                [{{ count($countEndorsByProduk[$p->id])  }}]
+                                            </a>
+                                            <a href="#" class="btn btn-tiktok btn-pill text-white fw-normal mb-3"><i class="fa-brands fa-tiktok fa-sm" style="color: #ffffff;margin-right:5px;"></i>Tiktok[0]</a>
                                         </div>
                                 </div>
                                 @endforeach
                                 </div>
                                  <!-- link untuk membuat penomeran  Halaman -->
                                     <div class="d-flex justify-content-center mt-5" style="width: 100%;">
-                                           {{ $data->links(); }}
+                                    {{ $produk->links(); }} 
                                     </div>
                             </div>
                         </div>
@@ -83,9 +90,8 @@
             </div>
         </div>
         
-        @include('dash.footer')
+@include('dash.footer')
+<!-- Sweet Alert -->
+@include('sweetalert::alert')
 
-         <!-- Sweet Alert -->
-         @include('sweetalert::alert')
-    
 

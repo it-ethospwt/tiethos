@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\knowladgeController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\produkController;
+use App\Http\Controllers\fileEndorseController;
+use App\Http\Controllers\fileVideoEndorseController;
 use App\Models\product;
-
+use App\Http\Controllers\endorseController;
 use App\Http\Controllers\Controller;
-
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\KolController;
 use App\Http\Controllers\AdminController;
@@ -16,6 +16,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\kontenController;
 use App\Http\Controllers\handbookController;
 use App\Http\Controllers\DashboardController;
+use App\Models\endors;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
@@ -66,25 +67,25 @@ Route::prefix('faq')->group(function () {
 });
 
 // punya konten
-Route::get('konten', [kontenController::class, "index"]);
-Route::get('/{id}/al/', [kontenController::class, 'al'])->name('konten.al');
-Route::get('/{id}/ccp/', [kontenController::class, 'ccp'])->name('konten.ccp');
-Route::get('/{id}/ac/', [kontenController::class, 'ac'])->name('konten.ac');
+Route::get('konten', [kontenController::class, "index"])->middleware('auth');
+Route::get('/{id}/al/', [kontenController::class, 'al'])->name('konten.al')->middleware('auth');
+Route::get('/{id}/ccp/', [kontenController::class, 'ccp'])->name('konten.ccp')->middleware('auth');
+Route::get('/{id}/ac/', [kontenController::class, 'ac'])->name('konten.ac')->middleware('auth');
 
 // contoroller tambah vidio dan gambar
-Route::get('konten/tambah', [kontenController::class, 'tambah'])->name('konten.tambah');
-Route::get('konten/plus', [kontenController::class, 'plus'])->name('konten.plus');
-Route::post('save', [kontenController::class, "save"]);
-Route::post('toko', [kontenController::class, "toko"]);
+Route::get('konten/tambah', [kontenController::class, 'tambah'])->name('konten.tambah')->middleware('auth');
+Route::get('konten/plus', [kontenController::class, 'plus'])->name('konten.plus')->middleware('auth');
+Route::post('save', [kontenController::class, "save"])->middleware('auth');
+Route::post('toko', [kontenController::class, "toko"])->middleware('auth');
 
 
 // controller edit konten
-Route::get('ubah/{content_id}', [kontenController::class, 'edit']);
-Route::put('storeUbah/{content_id}', [kontenController::class, 'edit_store']);
-Route::get('ganti/{content_id}', [kontenController::class, 'ganti']);
-Route::put('storeGanti/{content_id}', [kontenController::class, 'edit_ganti']);
-Route::get('delete/{content_id}', [kontenController::class, "destroy_content"]);
-Route::get('unduh/{id}', [kontenController::class, "download_konten"]);
+Route::get('ubah/{content_id}', [kontenController::class, 'edit'])->middleware('auth');
+Route::put('storeUbah/{content_id}', [kontenController::class, 'edit_store'])->middleware('auth');
+Route::get('ganti/{content_id}', [kontenController::class, 'ganti'])->middleware('auth');
+Route::put('storeGanti/{content_id}', [kontenController::class, 'edit_ganti'])->middleware('auth');
+Route::get('delete/{content_id}', [kontenController::class, "destroy_content"])->middleware('auth');
+Route::get('unduh/{id}', [kontenController::class, "download_konten"])->middleware('auth');
 
 
 //ROUTE PRODUCT
@@ -94,57 +95,81 @@ Route::post('store', [produkController::class, "store_product"]);
 Route::get('edit/{id}', [produkController::class, 'edit_product']);
 Route::put('storeEdit/{id}', [produkController::class, 'store_edit_product']);
 Route::get('hapus/{id}', [produkController::class, "destroy_product"]);
-Route::get('download/{id}', [produkController::class, "download_product"]);
 
-// ROUTE  BANK KNOWLADGE
+// ROUTE BANK KNOWLADGE
 Route::get('knowladge', [knowladgeController::class, "index"]);
 Route::get('tambahKnowladge', [knowladgeController::class, "tambah_knowladge"]);
 Route::post('storeKnowladge', [knowladgeController::class, "store_knowladge"]);
 Route::get('show/{id}', [knowladgeController::class, 'show_knowladge']);
 Route::get('editKnowladge/{id}', [knowladgeController::class, 'edit_knowladge']);
 Route::put('storeEditKnowladge/{id}', [knowladgeController::class, 'store_edit_knowladge']);
+
+
 // punya hadnbook
-Route::get('handbook', [handbookController::class, "index"]);
+Route::get('handbook', [handbookController::class, "index"])->middleware('auth');
 // handbookwa
-Route::get('/{id}/handbook/wa', [handbookController::class, 'wa'])->name('handbook.wa.index');
-Route::get('handbook/wa/tambah', [handbookController::class, 'tambah'])->name('handbook.wa.tambah');
-Route::post('saveWa', [handbookController::class, "saveWa"]);
-Route::get('wa/detail/{id}', [handbookController::class, 'detail'])->name('handbook.wa.detail');
-Route::get('whapus/{id}', [handbookController::class, "destroy_wa"]);
-Route::get('wchange/{id}', [handbookController::class, 'edit_wa']);
-Route::put('wstoreChange/{id}', [handbookController::class, 'edit_store_wa']);
+Route::get('/{id}/handbook/wa', [handbookController::class, 'wa'])->name('handbook.wa.index')->middleware('auth');
+Route::get('handbook/wa/tambah', [handbookController::class, 'tambah'])->name('handbook.wa.tambah')->middleware('auth');
+Route::post('saveWa', [handbookController::class, "saveWa"])->middleware('auth');
+Route::get('wa/detail/{id}', [handbookController::class, 'detail'])->name('handbook.wa.detail')->middleware('auth');
+Route::get('whapus/{id}', [handbookController::class, "destroy_wa"])->middleware('auth');
+Route::get('wchange/{id}', [handbookController::class, 'edit_wa'])->middleware('auth');
+Route::put('wstoreChange/{id}', [handbookController::class, 'edit_store_wa'])->middleware('auth');
 // handbookweb
-Route::get('/{id}/handbook/web', [handbookController::class, 'web'])->name('handbook.web.index');
-Route::get('handbook/web/tambah', [handbookController::class, 'plus'])->name('handbook.web.tambah');
-Route::post('saveWeb', [handbookController::class, "saveWeb"]);
-Route::get('web/detail/{id}', [handbookController::class, 'lengkap'])->name('handbook.web.detail');
-Route::get('wbhapus/{id}', [handbookController::class, "destroy_web"]);
-Route::get('wbchange/{id}', [handbookController::class, 'edit_web']);
-Route::put('wbstoreChange/{id}', [handbookController::class, 'edit_store_web']);
+Route::get('/{id}/handbook/web', [handbookController::class, 'web'])->name('handbook.web.index')->middleware('auth');
+Route::get('handbook/web/tambah', [handbookController::class, 'plus'])->name('handbook.web.tambah')->middleware('auth');
+Route::post('saveWeb', [handbookController::class, "saveWeb"])->middleware('auth');
+Route::get('web/detail/{id}', [handbookController::class, 'lengkap'])->name('handbook.web.detail')->middleware('auth');
+Route::get('wbhapus/{id}', [handbookController::class, "destroy_web"])->middleware('auth');
+Route::get('wbchange/{id}', [handbookController::class, 'edit_web'])->middleware('auth');
+Route::put('wbstoreChange/{id}', [handbookController::class, 'edit_store_web'])->middleware('auth');
+
 
 Route::prefix('kol')->group(function () {
     Route::get('/', [KolController::class, 'index'])->name('kol')->middleware('auth');
     Route::get('tambahKOL', [KolController::class, 'tambahKOL'])->name('kol.tambah')->middleware('auth');
     Route::post('store', [KolController::class, 'store'])->name('kol.store')->middleware('auth');
     Route::get('detail/{id}', [KolController::class, 'detail'])->name('kol.detail')->middleware('auth');
-    Route::post('/upload-gambar', [KolController::class, 'uploadGambar'])->name('upload.gambar');
-    Route::post('/upload-video', [KolController::class, 'uploadVideo'])->name('upload.video');
+    Route::post('/upload-gambar', [KolController::class, 'uploadGambar'])->name('upload.gambar')->middleware('auth');
+    Route::post('/upload-video', [KolController::class, 'uploadVideo'])->name('upload.video')->middleware('auth');
 });
-Route::get('kedit/{id}', [KolController::class, 'edit_kol']);
-Route::put('kstoreEdit/{id}', [KolController::class, 'edit_store_kol']);
-Route::get('khapus/{id}', [KolController::class, "destroy_kol"]);
-Route::get('kdelete/{id}', [KolController::class, "destroy_content"]);
-Route::get('kunduh/{id}', [KolController::class, "download_konten"]);
+Route::get('kedit/{id}', [KolController::class, 'edit_kol'])->middleware('auth');
+Route::put('kstoreEdit/{id}', [KolController::class, 'edit_store_kol'])->middleware('auth');
+Route::get('khapus/{id}', [KolController::class, "destroy_kol"])->middleware('auth');
+Route::get('kdelete/{id}', [KolController::class, "destroy_content"])->middleware('auth');
+Route::get('kunduh/{id}', [KolController::class, "download_konten"])->middleware('auth');
 
 // punya affiliatpr
-Route::get('affiliator', [AffiliatorController::class, "index"]);
-Route::get('affiliator/tambah', [AffiliatorController::class, "tambah"]);
-Route::post('asave', [AffiliatorController::class, "asave"]);
-Route::get('detail/{id}', [AffiliatorController::class, 'adetail'])->name('affiliator.detail')->middleware('auth');
-Route::get('change/{id}', [AffiliatorController::class, 'edit']);
-Route::put('storeChange/{id}', [AffiliatorController::class, 'edit_store']);
-Route::get('ahapus/{id}', [AffiliatorController::class, "destroy_affiliator"]);
+Route::get('affiliator', [AffiliatorController::class, "index"])->middleware('auth');
+Route::get('affiliator/tambah', [AffiliatorController::class, "tambah"])->middleware('auth');
+Route::post('asave', [AffiliatorController::class, "asave"])->middleware('auth');
+Route::get('detail/{id}', [AffiliatorController::class, 'adetail'])->name('affiliator.detail')->middleware('auth')->middleware('auth');
+Route::get('change/{id}', [AffiliatorController::class, 'edit'])->middleware('auth');
+Route::put('storeChange/{id}', [AffiliatorController::class, 'edit_store'])->middleware('auth');
+Route::get('ahapus/{id}', [AffiliatorController::class, "destroy_affiliator"])->middleware('auth');
 // affiliator cilacap
-Route::get('/{id}/affiliator/cilacap', [AffiliatorController::class, 'cilacap'])->name('affiliator.cilacap.index');
+Route::get('/{id}/affiliator/cilacap', [AffiliatorController::class, 'cilacap'])->name('affiliator.cilacap.index')->middleware('auth');
 // affiliator purwokerto
-Route::get('/{id}/affiliator/purwokerto', [AffiliatorController::class, 'purwokerto'])->name('affiliator.purwokerto.index');
+Route::get('/{id}/affiliator/purwokerto', [AffiliatorController::class, 'purwokerto'])->name('affiliator.purwokerto.index')->middleware('auth');
+
+
+//ROUTE LIST ENDORSE
+Route::get('endorse', [endorseController::class, "index"]);
+//Route List Endorse(Instagram)
+Route::get('endorse(instagram)', [endorseController::class, 'instagram_index']);
+Route::get('tambahEndorse(instagram)', [endorseController::class, 'tambah_EndorseInstagram']);
+Route::post('storeEndorse(instagram)', [endorseController::class, 'store_EndorseInstagram']);
+Route::get('detailEndoser/{id}', [endorseController::class, 'detail_Endoser']);
+Route::get('editEndorse(instagram)/{id}', [endorseController::class, 'edit_EndorseInstagram']);
+Route::post('storeEditEndorse(instagram)/{id}', [endorseController::class, 'store_editEndorseInstagram']);
+Route::get('hpsEndorse(instagram)/{id}', [endorseController::class, 'hapus_EndorseInstagram']);
+//Route File Gambar Endorse(Instagram)  
+Route::get('tambahFile(instagram)/{id}', [fileEndorseController::class, 'tambah_fileInstagram']);
+Route::post('storeFile/{id}', [fileEndorseController::class, 'store_fileInstagram']);
+Route::get('download_file/{id}', [fileEndorseController::class, 'download_file']);
+Route::get('hapus_file/{id}', [fileEndorseController::class, 'hapus_file']);
+//Route File Video Endorse(Instagram)
+Route::get('tambahVideo/{id}', [fileVideoEndorseController::class, 'tambah_fileVideo']);
+Route::post('storeFileVideo/{id}', [fileVideoEndorseController::class, 'store_fileVideo']);
+Route::get('download_fileVideo/{id}', [fileVideoEndorseController::class, 'download_fileVideo']);
+Route::get('hapus_fileVideo/{id}', [fileVideoEndorseController::class, 'hapus_fileVideo']);

@@ -57,7 +57,9 @@
                                                             <h3 class="card-title">{{$k->title}}</h3>
                                                             <div class="row g-2 justify-content-center">
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success">
+                                                                        <i class="fa fa-download"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
                                                                     <a href="/ubah/{{ $k->content_id }}" class="btn btn-primary">

@@ -13,14 +13,13 @@ class product extends Model
 
     protected $fillable = ['nm_product', 'file'];
 
-    protected $dates = ['created_at', 'updated_at'];
-
-    public  function knowladge()
+    public function knowladge()
     {
         return  $this->hasOne(knowladge::class);
     }
-    public  function Konten()
+
+    public function endors()
     {
-        return  $this->hasOne(Konten::class);
+        return $this->hasOne(endors::class);
     }
 }

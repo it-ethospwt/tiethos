@@ -136,9 +136,7 @@
                                                     <label class="form-label">Gambar</label>
                                                     <input type="file" name="gambar" class="form-control">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <progress id="fileProgress" value="0" max="100">0%</progress>
-                                                </div>
+                                                <div class="progress"></div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button id="uploadButton" type="submit" class="btn btn-primary ms-auto">Upload</button>
@@ -181,10 +179,14 @@
                             <div class="page-body">
                                 <div class="container-xl">
                                     <div class="row row-cards" id="masonry-container">
+                                        <div class="col-12 text-center my-4">
+                                            <h2>GAMBAR</h2>
+                                        </div>
+                                        <!-- Menampilkan gambar -->
                                         @foreach ($filekols as $fk)
+                                        @if(isset($imageUrls[$fk->id]))
                                         <div class="col-sm-6 col-lg-4 masonry-item">
                                             <div class="card card-sm">
-                                                @if(isset($imageUrls[$fk->id]))
                                                 <a href="{{ $imageUrls[$fk->id] }}" download>
                                                     <img src="{{ $imageUrls[$fk->id] }}" class="card-img-top">
                                                 </a>
@@ -198,7 +200,24 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @elseif(isset($videoUrls[$fk->id]))
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @endforeach
+
+                                        <!-- Garis pemisah -->
+                                        <div class="col-12">
+                                            <hr style="border-top: 2px solid #ccc;">
+                                        </div>
+                                        <div class="col-12 text-center my-4">
+                                            <h2>VIDEO</h2>
+                                        </div>
+
+                                        <!-- Menampilkan video -->
+                                        @foreach ($filekols as $fk)
+                                        @if(isset($videoUrls[$fk->id]))
+                                        <div class="col-sm-6 col-lg-4 masonry-item">
+                                            <div class="card card-sm">
                                                 <video width="100%" controls>
                                                     <source src="{{ $videoUrls[$fk->id] }}" type="video/mp4">
                                                     Your browser does not support the video tag.
@@ -213,13 +232,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endif
                                             </div>
                                         </div>
+                                        @endif
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -282,94 +302,52 @@
 @endif
 
 <script>
-    document.getElementById('uploadForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+    document.getElementById('submit-button').addEventListener('click', function() {
+        var fileInput = document.getElementById('gambar');
+        var file = fileInput.files[0];
+        if (file) {
+            var formData = new FormData();
+            formData.append('file', file);
 
-        var form = this;
-        var formData = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'url/to/upload/endpoint', true);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', form.action, true);
+            xhr.upload.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    var percentComplete = (e.loaded / e.total) * 100;
+                    document.getElementById('progress').style.display = 'block';
+                    document.getElementById('progress-bar').style.width = percentComplete + '%';
+                    document.getElementById('progress-bar').innerHTML = percentComplete.toFixed(2) + '%';
+                }
+            };
 
-        // Update progress on upload
-        xhr.upload.onprogress = function(event) {
-            if (event.lengthComputable) {
-                var percentComplete = (event.loaded / event.total) * 100;
-                document.getElementById('fileProgress').value = percentComplete;
-                document.getElementById('fileProgress').innerText = percentComplete.toFixed(2) + '%';
-            }
-        };
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // File uploaded successfully
+                    console.log('File uploaded successfully');
+                    // Add code here to submit the form
+                    document.getElementById('submit-button').closest('form').submit();
+                } else {
+                    // Error uploading file
+                    console.error('Error uploading file');
+                }
+            };
 
-        xhr.onload = function() {
-            // Handle response after upload
-            if (xhr.status === 200) {
-                // Success, close modal and refresh page
-                var modal = document.getElementById('modal-gambar');
-                var modalInstance = bootstrap.Modal.getInstance(modal);
-                modalInstance.hide();
-                location.reload();
-            } else {
-                // Error, do something
-            }
-        };
-
-        xhr.send(formData);
-    });
-
-    // Show progress when upload button clicked
-    document.getElementById('uploadButton').addEventListener('click', function(event) {
-        var progressBar = document.getElementById('fileProgress');
-        progressBar.style.display = 'block';
-    });
-
-    // Video upload form
-    document.getElementById('uploadVideoForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
-
-        var form = this;
-        var formData = new FormData(form);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', form.action, true);
-
-        // Update progress on upload
-        xhr.upload.onprogress = function(event) {
-            if (event.lengthComputable) {
-                var percentComplete = (event.loaded / event.total) * 100;
-                document.getElementById('videoProgress').value = percentComplete;
-                document.getElementById('videoProgress').innerText = percentComplete.toFixed(2) + '%';
-            }
-        };
-
-        xhr.onload = function() {
-            // Handle response after upload
-            if (xhr.status === 200) {
-                // Success, close modal and refresh page
-                var modal = document.getElementById('modal-video');
-                var modalInstance = bootstrap.Modal.getInstance(modal);
-                modalInstance.hide();
-                location.reload();
-            } else {
-                // Error, do something
-            }
-        };
-
-        xhr.send(formData);
-    });
-
-    // Show progress when upload button clicked for video
-    document.getElementById('uploadVideoButton').addEventListener('click', function(event) {
-        var progressBar = document.getElementById('videoProgress');
-        progressBar.style.display = 'block';
+            xhr.send(formData);
+        } else {
+            // No file selected
+            console.error('No file selected');
+        }
     });
 </script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
 <script>
     var masonry = new Masonry('#masonry-container', {
         itemSelector: '.masonry-item',
         columnWidth: '.col-lg-4',
         percentPosition: true
     });
-</script>
+</script> -->

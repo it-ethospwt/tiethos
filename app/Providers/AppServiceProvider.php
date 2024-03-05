@@ -27,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
 
         // Menambahkan  Bootsrtap
         Paginator::useBootstrap();
+
     }
 }

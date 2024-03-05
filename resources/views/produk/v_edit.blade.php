@@ -47,16 +47,24 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group mb-3">
-                                    <label for="nm_product" class="mb-3">Nama Product<span
-                                            style="color:red">*</span></label>
-                                    <input type="text" name="nm_product" id="nm_product" value="{{ $data->nm_product }}"
-                                        class="form-control">
+                                    <label for="nm_product" class="mb-3">Nama Product<span style="color:red">*</span></label>
+                                    <input type="text" name="nm_product" id="nm_product" value="{{ $data->nm_product }}" class="form-control">
                                     @if($errors->has('nm_product'))
                                     <div class="text-danger">
                                         {{ $errors->first('nm_product') }}
                                     </div>
                                     @endif
                                 </div>
+                                <div class="form-group mb-3">
+                                    <label for="file" class="mb-3">Gambar Produk</label>
+                                    <input type="file" name="file" id="file" class="form-control">
+                                    <label style="font-size: 13px;margin-top:10px">File maksimal 5MB(PNG,JPG,JPEG,WPEG)</label>
+                                    @if($errors->has('file'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('file') }}
+                                    </div>
+                                    @endif
+                                </div> 
                                 <div class="form-group">
                                     <input type="submit" value="Update" class="btn btn-Success btn-pill">
                                     <a href="/produk" class="btn btn-dark btn-pill">Kembali</a>

@@ -22,6 +22,36 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
+
+        .card{
+            display: flex;
+            border-radius: 35px;
+            border:1px solid #DCE0E5;
+            width:70%;
+            margin: auto;
+        }
+
+        .hero-login{
+            display: flex;
+            align-items: flex-end;
+        }
+        
+
+        input[type=text]{
+            border-radius: 10px;
+        }
+
+        input[type=password]{
+            border-radius: 10px;
+        }
+
+        .btn-primary{
+            background-color: #FF8B03;
+        }
+
+        .btn-primary:hover{
+            background-color: #FF8B03;
+        }
     </style>
 </head>
 
@@ -30,22 +60,21 @@
     <div class="page page-center">
         <div class="container py-4">
             {{-- <div class="text-center mb-4">
-                <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
-                        alt=""></a>
+                <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="25" alt=""></a>
             </div> --}}
-            <div class="card card-md" style="border-radius: 50px 20px;">
+            <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-5">
-                        <img src="./dist/img/icon_login.png" class="" alt="">
+                    <div class="col-md-5 hero-login">
+                        <img src="./dist/img/Hero-Login.png" class="" alt="">
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
-                            <h2 class="h2 text-center mt-7 mb-4">Login</h2>
+                            <h1 class="text-center mt-6 mb-4">LOGIN</h1>
                             <form action="{{ route('login-proses') }}" method="post">
                                 @csrf
-                                <div class="mb-2">
+                                <div class="mb-5">
                                     <label class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Username"
+                                    <input type="text" name="username" class="form-control" placeholder=" Input Username Anda"
                                         autocomplete="off" value="{{ old('username') }}">
                                 </div>
                                 @error('username')
@@ -55,10 +84,9 @@
                                     <label class="form-label">Password</label>
                                     <div class="input-group input-group-flat">
                                         <input id="passwordInput" type="password" name="password" class="form-control"
-                                            placeholder="Your password" autocomplete="off">
-                                        <span class="input-group-text">
-                                            <a href="#" class="link-secondary" title="Show password" id="showPassword"
-                                                data-bs-toggle="tooltip">
+                                            placeholder="Input password Anda" autocomplete="off">
+                                        <span class="input-group-text" style="border-radius:0px 10px 10px 0px;">
+                                            <a href="#" class="link-secondary" title="Show password" id="showPassword" data-bs-toggle="tooltip">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
                                                     height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -76,8 +104,8 @@
                                 @error('password')
                                 <small>{{ $message }}</small>
                                 @enderror
-                                <div class="form-footer">
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                <div class="form-footer mb-5">
+                                    <button type="submit" class="btn btn-primary">Masuk</button>
                                 </div>
                             </form>
                         </div>

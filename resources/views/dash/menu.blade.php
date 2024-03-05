@@ -55,7 +55,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{ request()->is('konten*') ? 'active' : '' }}">
                         <a class="nav-link" href="/konten" data-bs-toggle="" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/star -->
@@ -91,7 +91,7 @@
                                     <a class="dropdown-item" href="{{ route('kol') }}">
                                         Contect KOL
                                     </a>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="/endorse">
                                         List Endorse
                                     </a>
                                     <a class="dropdown-item" href="/affiliator">
@@ -121,7 +121,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('handbook*') ? 'active' : '' }}">
                         <a class="nav-link" href="/handbook" data-bs-toggle="" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
