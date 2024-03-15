@@ -51,7 +51,8 @@
                                                     <div class="card">
                                                         <!-- Photo -->
                                                         @if(isset($imageUrls[$k->content_id ]))
-                                                        <div class="img-responsive img-responsive-21x9 card-img-top" style="background-image: url('{{ $imageUrls[$k->content_id] }}'); height: 150px;"></div>
+                                                        <div class="img-responsive img-responsive-21x9 card-img-top" style="background-image: url('{{ $imageUrls[$k->content_id] }}'); height: 150px;">
+                                                        </div>
                                                         @endif
                                                         <div class="card-body">
                                                             <h3 class="card-title">{{$k->title}}</h3>
@@ -61,8 +62,9 @@
                                                                         <i class="fa fa-download"></i>
                                                                     </a>
                                                                 </div>
+                                                                @can('admin-only')
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ route('konten.edit', $k->content_id) }}" class="btn btn-primary btn-pill">
+                                                                    <a href="/ganti/{{ $k->content_id }}" class="btn btn-primary btn-pill">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
@@ -71,6 +73,7 @@
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
+                                                                @endcan
                                                             </div>
                                                         </div>
 
@@ -103,18 +106,26 @@
 
                                                             <div class="row g-2 justify-content-center">
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success btn-pill"><i class="fa fa-download"></i></a>
+                                                                    <<<<<<< HEAD <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success btn-pill"><i class="fa fa-download"></i></a>
+                                                                        =======
+                                                                        <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                        >>>>>>> 22203b777cf2eea44d895bca34242467088dcb80
                                                                 </div>
+                                                                @can('admin-only')
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ route('konten.ganti', $k->content_id) }}" class="btn btn-primary btn-pill">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </a>
+                                                                    <<<<<<< HEAD <a href="{{ route('konten.ganti', $k->content_id) }}" class="btn btn-primary btn-pill">
+                                                                        =======
+                                                                        <a href="/ganti/{{ $k->content_id }}" class="btn btn-primary">
+                                                                            >>>>>>> 22203b777cf2eea44d895bca34242467088dcb80
+                                                                            <i class="fas fa-edit"></i>
+                                                                        </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
                                                                     <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
+                                                                @endcan
                                                             </div>
                                                         </div>
                                                     </div>

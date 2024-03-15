@@ -58,8 +58,11 @@
                         <h2 class="page-title">
                             {{$jdl}}
                         </h2>
+                        @can('admin-only')
                         <div class="col col-sm-2 col-md-1 col-xl py-3">
-                            <a href="#navbar-help" class="btn btn-warning btn-pill" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Konten</a>
+                            <a href="#navbar-help" class="btn btn-warning btn-pill" data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside" role="button" aria-expanded="false"> <span
+                                    style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Konten</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/konten/tambah">
                                     Gambar
@@ -69,6 +72,7 @@
                                 </a>
                             </div>
                         </div>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -84,35 +88,38 @@
                                         @foreach ($product as $p)
                                         <?php $hasKONTEN = false; ?>
                                         <?php foreach ($contents as $k) : ?>
-                                            <?php if ($k['product_id'] == $p['id']) {
+                                        <?php if ($k['product_id'] == $p['id']) {
                                                 $hasKONTEN = true;
                                                 break;
                                             } ?>
                                         <?php endforeach; ?>
 
                                         <?php if ($hasKONTEN) : ?>
-                                            <div class="col-sm-6 col-lg-3 mb-3">
-                                                <div class="card">
-                                                    <div class="image-container">
-                                                        @if(isset($imageUrls[$p->id ]))
-                                                        <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
-                                                        @endif
+                                        <div class="col-sm-6 col-lg-3 mb-3">
+                                            <div class="card">
+                                                <div class="image-container">
+                                                    @if(isset($imageUrls[$p->id ]))
+                                                    <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
+                                                    @endif
+                                                </div>
+                                                <div class="card-body text-center">
+                                                    <h3 class="card-title">{{$p->nm_product}}</h3>
+                                                    <!-- Wrap each button in a separate div for vertical layout -->
+                                                    <div class="button-container">
+                                                        <a href="{{ route('konten.al', $p->id) }}"
+                                                            class="btn btn-primary btn-pill mt-2">Agency Luar</a>
                                                     </div>
-                                                    <div class="card-body text-center">
-                                                        <h3 class="card-title">{{$p->nm_product}}</h3>
-                                                        <!-- Wrap each button in a separate div for vertical layout -->
-                                                        <div class="button-container">
-                                                            <a href="{{ route('konten.al', $p->id) }}" class="btn btn-primary btn-pill mt-2">Agency Luar</a>
-                                                        </div>
-                                                        <div class="button-container">
-                                                            <a href="{{ route('konten.ccp', $p->id) }}" class="btn btn-info btn-pill mt-2">CCP</a>
-                                                        </div>
-                                                        <div class="button-container">
-                                                            <a href="{{ route('konten.ac', $p->id) }}" class="btn btn-success btn-pill mt-2">ADV/CWM</a>
-                                                        </div>
+                                                    <div class="button-container">
+                                                        <a href="{{ route('konten.ccp', $p->id) }}"
+                                                            class="btn btn-info btn-pill mt-2">CCP</a>
+                                                    </div>
+                                                    <div class="button-container">
+                                                        <a href="{{ route('konten.ac', $p->id) }}"
+                                                            class="btn btn-success btn-pill mt-2">ADV/CWM</a>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                         <?php endif; ?>
                                         @endforeach
                                     </div>

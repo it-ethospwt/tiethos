@@ -33,9 +33,12 @@
                             <h3 class="card-title">Data Content KOL</h3>
                         </div>
                         <div class="card-body">
+                            @can('admin-only')
                             <div class="btn-tambahUser mt-2 mb-5">
-                                <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
+                                <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span
+                                        style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
                             </div>
+                            @endcan
                             <!-- Table -->
                             <table id="table-kol" class="display nowrap" style="width:100%">
                                 <thead>
@@ -73,12 +76,14 @@
                                             <a href="{{ route('kol.detail', $k->id)}}" class="btn btn-primary btn-pill">
                                                 <span class="ti ti-search" style="color: white;"></span>
                                             </a>
+                                            @can('admin-only')
                                             <a href="/kedit/{{ $k->id }}" class="btn btn-success btn-pill">
                                                 <span class="ti ti-edit" style="color: white;"></span>
                                             </a>
                                             <a href="/khapus/{{ $k->id }}" class="btn btn-danger btn-pill">
                                                 <span class="ti ti-trash" style="color: white;"></span>
                                             </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                     @endforeach
