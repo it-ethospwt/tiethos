@@ -142,4 +142,29 @@ class FaqController extends Controller
             return redirect()->back()->withInput()->with('error', 'Gagal menambahkan FAQ. Silakan coba lagi.');
         }
     }
+
+    public function listFAQ()
+    {
+        $jdl = 'List FAQ & Keluhan';
+        $faq = faq::all();
+        $keluhan = keluhan::all();
+
+        return view('faq.listFaq', compact('faq', 'jdl', 'keluhan'));
+    }
+
+    public function keluhan_delete($id)
+    {
+        $keluhan = keluhan::findOrFail($id);
+        $keluhan->delete();
+
+        return redirect()->route('listFaq')->with('success', 'Keluhan deleted successfully');
+    }
+
+    public function faq_delete($id)
+    {
+        $faq = faq::findOrFail($id);
+        $faq->delete();
+
+        return redirect()->route('listFaq')->with('success', 'FAQ deleted successfully');
+    }
 }

@@ -18,7 +18,7 @@
                     <div class="col">
                         <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Content KOL
+                            Keluhan + FAQ
                         </h2>
                     </div>
                 </div>
@@ -30,36 +30,23 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Content KOL</h3>
+                            <h3 class="card-title">Data Keluhan</h3>
                         </div>
                         <div class="card-body">
-                            @can('admin-only')
-                            <div class="btn-tambahUser mt-2 mb-5">
-                                <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span
-                                        style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
-                            </div>
-                            @endcan
                             <!-- Table -->
-                            <table id="table-kol" class="display nowrap" style="width:100%">
+                            <table id="table-keluhan" class="display nowrap" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama KOL</th>
-                                        <th>Tanggal Tayang</th>
-                                        <th>Owning</th>
-                                        <th>Produk</th>
-                                        <th>Data User</th>
-                                        <th>Dibuat Pada</th>
+                                        <th>Nama Produk</th>
+                                        <th>Keluhan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($kol as $k)
+                                    @foreach ($keluhan as $k)
                                     <tr style="font-size: 90%;">
                                         <td scope="row">{{ $loop->iteration }}.</td>
-                                        <td>{{ $k->nama }}</td>
-                                        <td>{{ $k->tanggal_tayang }}</td>
-                                        <td>{{ $k->owning }}</td>
                                         <td>
                                             @php
                                             $product = App\Models\Product::find($k->id_produk);
@@ -70,20 +57,79 @@
                                             }
                                             @endphp
                                         </td>
-                                        <td>{{ $k->user }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($k->created_at)->format('d-m-Y | H:m') }}</td>
+                                        <td>{{ $k->nama }}</td>
                                         <td>
-                                            <a href="{{ route('kol.detail', $k->id)}}" class="btn btn-primary btn-pill">
-                                                <span class="ti ti-search" style="color: white;"></span>
-                                            </a>
-                                            @can('admin-only')
-                                            <a href="/kedit/{{ $k->id }}" class="btn btn-success btn-pill">
-                                                <span class="ti ti-edit" style="color: white;"></span>
-                                            </a>
-                                            <a href="/khapus/{{ $k->id }}" class="btn btn-danger btn-pill">
-                                                <span class="ti ti-trash" style="color: white;"></span>
-                                            </a>
-                                            @endcan
+                                            <form action="{{ route('keluhan.delete', $k->id)}}" method="POST"
+                                                id="deleteForm" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-pill deleteButton">
+                                                    <span class="ti ti-trash" style="color: white;"></span>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <!-- /Table -->
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">FAQ</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Table -->
+                            <table id="table-kol" class="display nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Produk</th>
+                                        <th>Keluhan</th>
+                                        <th>Pertanyaan</th>
+                                        <th>Jawaban</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($faq as $f)
+                                    <tr style="font-size: 90%;">
+                                        <td scope="row">{{ $loop->iteration }}.</td>
+                                        <td>
+                                            @php
+                                            $product = App\Models\Product::find($f->id_produk);
+                                            if ($product) {
+                                            echo $product->nm_product;
+                                            } else {
+                                            echo "Product not found";
+                                            }
+                                            @endphp
+                                        </td>
+                                        <td>
+                                            @php
+                                            $keluhan = App\Models\Keluhan::find($f->id_keluhan);
+                                            if ($keluhan) {
+                                            echo $keluhan->nama;
+                                            } else {
+                                            echo "Keluhan not found";
+                                            }
+                                            @endphp
+                                        </td>
+                                        <td>{{ $f->pertanyaan }}</td>
+                                        <td>{{ $f->jawaban }}</td>
+                                        <td>
+                                            <form action="{{ route('faq.delete', $f->id)}}" method="POST"
+                                                id="deleteForm" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-pill deleteButton">
+                                                    <span class="ti ti-trash" style="color: white;"></span>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -162,6 +208,15 @@
     });
 </script>
 @endif
+
+<script>
+    new DataTable('#table-keluhan', {
+        responsive: true,
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        }
+    });
+</script>
 
 <script>
     new DataTable('#table-kol', {
