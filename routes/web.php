@@ -67,26 +67,24 @@ Route::prefix('faq')->group(function () {
 });
 
 // punya konten
-Route::get('konten', [kontenController::class, "index"])->middleware('auth');
-Route::get('/{id}/al/', [kontenController::class, 'al'])->name('konten.al')->middleware('auth');
-Route::get('/{id}/ccp/', [kontenController::class, 'ccp'])->name('konten.ccp')->middleware('auth');
-Route::get('/{id}/ac/', [kontenController::class, 'ac'])->name('konten.ac')->middleware('auth');
-
+Route::prefix('konten')->group(function () {
+    Route::get('/', [kontenController::class, "index"])->name('konten')->middleware('auth');
+    Route::get('/{id}/al/', [kontenController::class, 'al'])->name('konten.al')->middleware('auth');
+    Route::get('/{id}/ccp/', [kontenController::class, 'ccp'])->name('konten.ccp')->middleware('auth');
+    Route::get('/{id}/ac/', [kontenController::class, 'ac'])->name('konten.ac')->middleware('auth');
+    Route::get('tambah', [kontenController::class, 'tambah'])->name('konten.tambah')->middleware('auth');
+    Route::get('plus', [kontenController::class, 'plus'])->name('konten.plus')->middleware('auth');
+    Route::get('edit/{content_id}', [kontenController::class, 'edit'])->name('konten.edit')->middleware('auth');
+    Route::get('ganti/{content_id}', [kontenController::class, 'ganti'])->name('konten.ganti')->middleware('auth');
+});
 // contoroller tambah vidio dan gambar
-Route::get('konten/tambah', [kontenController::class, 'tambah'])->name('konten.tambah')->middleware('auth');
-Route::get('konten/plus', [kontenController::class, 'plus'])->name('konten.plus')->middleware('auth');
 Route::post('save', [kontenController::class, "save"])->middleware('auth');
 Route::post('toko', [kontenController::class, "toko"])->middleware('auth');
-
-
 // controller edit konten
-Route::get('ubah/{content_id}', [kontenController::class, 'edit'])->middleware('auth');
 Route::put('storeUbah/{content_id}', [kontenController::class, 'edit_store'])->middleware('auth');
-Route::get('ganti/{content_id}', [kontenController::class, 'ganti'])->middleware('auth');
 Route::put('storeGanti/{content_id}', [kontenController::class, 'edit_ganti'])->middleware('auth');
 Route::get('delete/{content_id}', [kontenController::class, "destroy_content"])->middleware('auth');
 Route::get('unduh/{id}', [kontenController::class, "download_konten"])->middleware('auth');
-
 
 //ROUTE PRODUCT
 Route::get('produk', [produkController::class, "index"]);
@@ -108,18 +106,18 @@ Route::put('storeEditKnowladge/{id}', [knowladgeController::class, 'store_edit_k
 // punya hadnbook
 Route::get('handbook', [handbookController::class, "index"])->middleware('auth');
 // handbookwa
-Route::get('/{id}/handbook/wa', [handbookController::class, 'wa'])->name('handbook.wa.index')->middleware('auth');
+Route::get('handbook/{id}/handbook/wa', [handbookController::class, 'wa'])->name('handbook.wa.index')->middleware('auth');
 Route::get('handbook/wa/tambah', [handbookController::class, 'tambah'])->name('handbook.wa.tambah')->middleware('auth');
 Route::post('saveWa', [handbookController::class, "saveWa"])->middleware('auth');
-Route::get('wa/detail/{id}', [handbookController::class, 'detail'])->name('handbook.wa.detail')->middleware('auth');
+Route::get('handbook/wa/detail/{id}', [handbookController::class, 'detail'])->name('handbook.wa.detail')->middleware('auth');
 Route::get('whapus/{id}', [handbookController::class, "destroy_wa"])->middleware('auth');
 Route::get('wchange/{id}', [handbookController::class, 'edit_wa'])->middleware('auth');
 Route::put('wstoreChange/{id}', [handbookController::class, 'edit_store_wa'])->middleware('auth');
 // handbookweb
-Route::get('/{id}/handbook/web', [handbookController::class, 'web'])->name('handbook.web.index')->middleware('auth');
+Route::get('handbook/{id}/handbook/web', [handbookController::class, 'web'])->name('handbook.web.index')->middleware('auth');
 Route::get('handbook/web/tambah', [handbookController::class, 'plus'])->name('handbook.web.tambah')->middleware('auth');
 Route::post('saveWeb', [handbookController::class, "saveWeb"])->middleware('auth');
-Route::get('web/detail/{id}', [handbookController::class, 'lengkap'])->name('handbook.web.detail')->middleware('auth');
+Route::get('handbook/web/detail/{id}', [handbookController::class, 'lengkap'])->name('handbook.web.detail')->middleware('auth');
 Route::get('wbhapus/{id}', [handbookController::class, "destroy_web"])->middleware('auth');
 Route::get('wbchange/{id}', [handbookController::class, 'edit_web'])->middleware('auth');
 Route::put('wbstoreChange/{id}', [handbookController::class, 'edit_store_web'])->middleware('auth');
@@ -143,14 +141,14 @@ Route::get('kunduh/{id}', [KolController::class, "download_konten"])->middleware
 Route::get('affiliator', [AffiliatorController::class, "index"])->middleware('auth');
 Route::get('affiliator/tambah', [AffiliatorController::class, "tambah"])->middleware('auth');
 Route::post('asave', [AffiliatorController::class, "asave"])->middleware('auth');
-Route::get('detail/{id}', [AffiliatorController::class, 'adetail'])->name('affiliator.detail')->middleware('auth')->middleware('auth');
-Route::get('change/{id}', [AffiliatorController::class, 'edit'])->middleware('auth');
+Route::get('affiliator/detail/{id}', [AffiliatorController::class, 'adetail'])->name('affiliator.detail')->middleware('auth')->middleware('auth');
+Route::get('affiliator/change/{id}', [AffiliatorController::class, 'edit'])->name('affiliator.edit')->middleware('auth');
 Route::put('storeChange/{id}', [AffiliatorController::class, 'edit_store'])->middleware('auth');
 Route::get('ahapus/{id}', [AffiliatorController::class, "destroy_affiliator"])->middleware('auth');
 // affiliator cilacap
-Route::get('/{id}/affiliator/cilacap', [AffiliatorController::class, 'cilacap'])->name('affiliator.cilacap.index')->middleware('auth');
+Route::get('/affiliator/cilacap/{id}/', [AffiliatorController::class, 'cilacap'])->name('affiliator.cilacap.index')->middleware('auth');
 // affiliator purwokerto
-Route::get('/{id}/affiliator/purwokerto', [AffiliatorController::class, 'purwokerto'])->name('affiliator.purwokerto.index')->middleware('auth');
+Route::get('/affiliator/purwokerto/{id}/', [AffiliatorController::class, 'purwokerto'])->name('affiliator.purwokerto.index')->middleware('auth');
 
 
 //ROUTE LIST ENDORSE

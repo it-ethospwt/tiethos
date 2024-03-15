@@ -7,7 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/static/photo_profile/default.png">
+    <link rel="shortcut icon" type="image/png" href="/static/photo_profile/l.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/photo_profile/l.png">
     <title>Tiethos - {{$jdl}}</title>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css?1684106062') }} " rel="stylesheet" />
@@ -45,13 +46,12 @@
 <body>
     <header class="navbar navbar-expand-md d-print-none">
         <div class="container-xl">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-                aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                 <a href=".">
-                    <img src="{{ asset('static/logo.png') }}" class="navbar-brand-image" style="width: 110;height:50">
+                    <img src="{{ asset('2.png') }}" class="navbar-brand-image" style="width: 100%">
                 </a>
             </h1>
             <div class="navbar-nav flex-row order-md-last">
@@ -86,10 +86,8 @@
                 </div> --}}
                 {{-- Dark Mode End --}}
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
-                        aria-label="Open user menu">
-                        <img class="avatar avatar-sm" src="{{asset('./static/avatars/000m.jpg')}}" width="110"
-                            height="32" alt="Tabler" class="navbar-brand-image">
+                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                        <img class="avatar avatar-sm" src="{{asset('./static/avatars/000m.jpg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="mt-1 small text-muted">{{ Auth::user()->role }}

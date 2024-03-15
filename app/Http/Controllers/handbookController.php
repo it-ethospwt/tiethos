@@ -91,7 +91,6 @@ class handbookController extends Controller
             $gmr_h  = $request->file('gambar');
             $gmr_h_nama = $gmr_h->getClientOriginalName();
 
-            //Menyimpan  file  kedalam bucket 'bankcont'  didalam folder /produk
             $gmr_h->storeAs('handbook', $gmr_h_nama, 's3');
         }
         //membuat nama  produk 
@@ -100,7 +99,14 @@ class handbookController extends Controller
 
         Wa::create($data);
 
-        return redirect('/handbook')->with('success', 'Tambah Handbook Interaksi Berhasil!!');
+
+?>
+        <script>
+            window.history.go(-2);
+        </script>
+    <?php
+        exit();
+        return redirect()->back()->with('success', 'Edit Affiliator Berhasil!!');
     }
 
     // edit
@@ -260,7 +266,14 @@ class handbookController extends Controller
 
         Web::create($data);
 
-        return redirect('/handbook')->with('success', 'Tambah Handbook Konversi Web Berhasil!!');
+
+    ?>
+        <script>
+            window.history.go(-2);
+        </script>
+<?php
+        exit();
+        return redirect()->back()->with('success', 'Edit Affiliator Berhasil!!');
     }
     // edit web
     public function edit_web($web_id)

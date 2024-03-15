@@ -9,12 +9,8 @@ use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\File;
 use Aws\s3\S3Client;
 use Illuminate\Support\Facades\Storage;
-
-//memanggil  model product
 use App\Models\product;
-//memanggil  model knowladge
 use App\Models\knowladge;
-//memanggil model endors
 use App\Models\endors;
 
 use App\Models\Konten;

@@ -57,15 +57,15 @@
                                                             <h3 class="card-title">{{$k->title}}</h3>
                                                             <div class="row g-2 justify-content-center">
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success btn-pill"><i class="fa fa-download"></i></a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/ubah/{{ $k->content_id }}" class="btn btn-primary">
+                                                                    <a href="{{ route('konten.edit', $k->content_id) }}" class="btn btn-primary btn-pill">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
+                                                                    <a href="/delete/{{ $k->content_id }}" class="btn btn-danger btn-pill">
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>
@@ -99,15 +99,15 @@
                                                             <h3 class="card-title">{{$k->title}}</h3>
                                                             <div class="row g-2 justify-content-center">
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success btn-pill"><i class="fa fa-download"></i></a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/ganti/{{ $k->content_id }}" class="btn btn-primary">
+                                                                    <a href="{{ route('konten.ganti', $k->content_id) }}" class="btn btn-primary btn-pill">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
-                                                                    <a href="/delete/{{ $k->content_id }}" class="btn btn-danger">
+                                                                    <a href="/delete/{{ $k->content_id }}" class="btn btn-danger btn-pill">
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </div>

@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown {{ request()->is('konten*') ? 'active' : '' }}">
-                        <a class="nav-link" href="/konten" data-bs-toggle="" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                        <a class="nav-link" href="{{ route('konten') }}" data-bs-toggle="" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/star -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -69,7 +69,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown {{ request()->is('kol*') ? 'active' : '' }}">
+                    <li class="nav-item dropdown {{ request()->is('kol*','endorse*', 'affiliator*') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
@@ -88,13 +88,13 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item" href="{{ route('kol') }}">
+                                    <a class="dropdown-item {{ request()->is('kol*') ? 'active' : '' }}" href="{{ route('kol') }}">
                                         Contect KOL
                                     </a>
-                                    <a class="dropdown-item" href="/endorse">
+                                    <a class="dropdown-item {{ request()->is('endorse*') ? 'active' : '' }}" href="/endorse">
                                         List Endorse
                                     </a>
-                                    <a class="dropdown-item" href="/affiliator">
+                                    <a class="dropdown-item {{ request()->is('affiliator*') ? 'active' : '' }}" href="/affiliator">
                                         List Affiliator
                                     </a>
                                 </div>
@@ -104,7 +104,7 @@
                     @endif
                     @if (Auth::check() && (Auth::user()->role == 'Admin' || Auth::user()->role == 'ADV' ||
                     Auth::user()->role == 'CS'))
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('knowladge*') ? 'active' : '' }}">
                         <a class="nav-link" href="/knowladge">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/ghost -->

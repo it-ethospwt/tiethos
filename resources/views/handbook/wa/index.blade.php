@@ -123,3 +123,11 @@
     // Update the href attribute of the link
     document.getElementById("tambahHandbook").setAttribute("href", tambahHandbookURL);
 </script>
+
+@if(session('success') && session('refresh'))
+<script>
+    setTimeout(function() {
+        location.reload();
+    }, 1000); // Auto-refresh halaman setelah 1 detik
+</script>
+@endif

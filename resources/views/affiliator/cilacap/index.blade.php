@@ -76,7 +76,7 @@
                                         <td>{{ $a->updated_at->format('d-m-Y H:i') }}</td>
                                         <td>
                                             <a href="{{ route('affiliator.detail', $a->id)}}" class="btn btn-primary"><i class="fa fa-search"></i></a>
-                                            <a href="/change/{{ $a->id }}" class="btn btn-success btn-pill "><i class="fa fa-edit"> </i></a>
+                                            <a href="{{ route('affiliator.edit', $a->id)}}" class="btn btn-success btn-pill "><i class="fa fa-edit"> </i></a>
                                             <a href="/ahapus/{{ $a->id }}" class="btn btn-danger btn-pill"><i class="fa fa-trash"> </i></a>
                                         </td>
                                     </tr>
