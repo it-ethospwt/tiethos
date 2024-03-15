@@ -60,17 +60,12 @@
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
                                                                     <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success btn-pill"><i class="fa fa-download"></i></a>
 
-                                                                    <a href="{{ url('unduh/'.$k->content_id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
-
                                                                 </div>
                                                                 @can('admin-only')
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
                                                                     <a href="{{ route('konten.edit', $k->content_id) }}" class="btn btn-primary btn-pill">
-
-                                                                        <a href="/ubah/{{ $k->content_id }}" class="btn btn-primary">
-
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <div class="col-6 col-sm-4 col-md-2 col-xl-auto py-3">
                                                                     <a href="/delete/{{ $k->content_id }}" class="btn btn-danger btn-pill">
