@@ -157,6 +157,12 @@ class handbookController extends Controller
 
         // Save the changes to the database
         $data_edit->save();
+    ?>
+        <script>
+            window.history.go(-2);
+        </script>
+    <?php
+        exit();
 
         return redirect()->back()->with('success', 'Edit Affiliator Berhasil!!');
     }
@@ -271,7 +277,7 @@ class handbookController extends Controller
         <script>
             window.history.go(-2);
         </script>
-<?php
+    <?php
         exit();
         return redirect()->back()->with('success', 'Edit Affiliator Berhasil!!');
     }
@@ -323,6 +329,12 @@ class handbookController extends Controller
 
         // Save the changes to the database
         $data_edit->save();
+    ?>
+        <script>
+            window.history.go(-2);
+        </script>
+<?php
+        exit();
 
         return redirect()->back()->with('success', 'Edit Handbook Konversi Web Berhasil!!');
     }

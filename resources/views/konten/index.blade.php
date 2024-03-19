@@ -60,9 +60,7 @@
                         </h2>
                         @can('admin-only')
                         <div class="col col-sm-2 col-md-1 col-xl py-3">
-                            <a href="#navbar-help" class="btn btn-warning btn-pill" data-bs-toggle="dropdown"
-                                data-bs-auto-close="outside" role="button" aria-expanded="false"> <span
-                                    style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Konten</a>
+                            <a href="#navbar-help" class="btn btn-warning btn-pill" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Konten</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/konten/tambah">
                                     Gambar
@@ -86,48 +84,58 @@
                                 <div class="card-body">
                                     <div class="row">
                                         @foreach ($product as $p)
-                                        <?php $hasKONTEN = false; ?>
                                         <?php foreach ($contents as $k) : ?>
-                                        <?php if ($k['product_id'] == $p['id']) {
+                                            <?php if ($k['product_id'] == $p['id']) {
                                                 $hasKONTEN = true;
                                                 break;
                                             } ?>
                                         <?php endforeach; ?>
 
                                         <?php if ($hasKONTEN) : ?>
-                                        <div class="col-sm-6 col-lg-3 mb-3">
-                                            <div class="card">
-                                                <div class="image-container">
-                                                    @if(isset($imageUrls[$p->id ]))
-                                                    <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
-                                                    @endif
-                                                </div>
-                                                <div class="card-body text-center">
-                                                    <h3 class="card-title">{{$p->nm_product}}</h3>
-                                                    <!-- Wrap each button in a separate div for vertical layout -->
-                                                    <div class="button-container">
-                                                        <a href="{{ route('konten.al', $p->id) }}"
-                                                            class="btn btn-primary btn-pill mt-2">Agency Luar</a>
+                                            <div class="col-sm-6 col-lg-3 mb-3">
+                                                <div class="card">
+                                                    <div class="image-container">
+                                                        @if(isset($imageUrls[$p->id ]))
+                                                        <img src="{{ $imageUrls[$p->id] }}" alt="Gambar Produk">
+                                                        @endif
                                                     </div>
-                                                    <div class="button-container">
-                                                        <a href="{{ route('konten.ccp', $p->id) }}"
-                                                            class="btn btn-info btn-pill mt-2">CCP</a>
-                                                    </div>
-                                                    <div class="button-container">
-                                                        <a href="{{ route('konten.ac', $p->id) }}"
-                                                            class="btn btn-success btn-pill mt-2">ADV/CWM</a>
+                                                    <div class="card-body text-center">
+                                                        <h3 class="card-title">{{$p->nm_product}}</h3>
+                                                        <div class="button-container">
+                                                            <a href="{{ route('konten.al', $p->id) }}" class="btn btn-primary btn-pill mt-2">
+                                                                Agency Luar
+                                                                @if(isset($countKontenByProduk[$p->id]['Agency Luar']) && $countKontenByProduk[$p->id]['Agency Luar'] > 0)
+                                                                [{{ $countKontenByProduk[$p->id]['Agency Luar'] }}]
+                                                                @endif
+                                                            </a>
+                                                        </div>
+                                                        <div class="button-container">
+                                                            <a href="{{ route('konten.ccp', $p->id) }}" class="btn btn-info btn-pill mt-2">
+                                                                CCP
+                                                                @if(isset($countKontenByProduk[$p->id]['ccp']) && $countKontenByProduk[$p->id]['ccp'] > 0)
+                                                                [{{ $countKontenByProduk[$p->id]['ccp'] }}]
+                                                                @endif
+                                                            </a>
+                                                        </div>
+                                                        <div class="button-container">
+                                                            <a href="{{ route('konten.ac', $p->id) }}" class="btn btn-success btn-pill mt-2">
+                                                                ADV/CWM
+                                                                @if(isset($countKontenByProduk[$p->id]['cwm']) && $countKontenByProduk[$p->id]['cwm'] > 0)
+                                                                [{{ $countKontenByProduk[$p->id]['cwm'] }}]
+                                                                @endif
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         <?php endif; ?>
                                         @endforeach
                                     </div>
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-12">
-                                            {{ $product->links('pagination::bootstrap-5') }}
+                                           
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

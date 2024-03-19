@@ -49,7 +49,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
-                                <textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="{{ $web->deskripsi }}" value="{{ $web->deskripsi }}"></textarea>
+                                <textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="{{ $web->deskripsi }}">{{ $web->deskripsi }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required">Upload Foto Profil</label>

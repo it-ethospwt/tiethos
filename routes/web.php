@@ -86,6 +86,10 @@ Route::put('storeGanti/{content_id}', [kontenController::class, 'edit_ganti'])->
 Route::get('delete/{content_id}', [kontenController::class, "destroy_content"])->middleware('auth');
 Route::get('unduh/{id}', [kontenController::class, "download_konten"])->middleware('auth');
 
+Route::get('konten/{id}/al/filterByMonth/', [kontenController::class, 'filterByMonth'])->name('filterByMonth');
+Route::get('konten/{id}/ccp/fbm/', [kontenController::class, 'fbm'])->name('fbm');
+Route::get('konten/{id}/ac/frbm/', [kontenController::class, 'frbm'])->name('frbm');
+
 //ROUTE PRODUCT
 Route::get('produk', [produkController::class, "index"]);
 Route::get('tambah', [produkController::class, "tambah_product"]);
