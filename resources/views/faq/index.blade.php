@@ -23,6 +23,8 @@
                     </div>
                     @can('admin-only')
                     <div class="btn-tambahUser mt-4 mb-2">
+                        <a href="{{ route('listFaq') }}" class="btn btn-dark btn-pill"> <span
+                                style="margin-right: 8px;"><i class="fa fa-list"></i></span>List Faq & Keluhan</a>
                         <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-warning btn-pill"> <span
                                 style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
                         <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-warning btn-pill"> <span

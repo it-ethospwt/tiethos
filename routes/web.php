@@ -64,6 +64,9 @@ Route::prefix('faq')->group(function () {
     Route::get('tambahFaqDetail', [FaqController::class, 'tambahFaqDetail'])->name('faq.tambahFaqDetail')->middleware('auth');
     Route::get('tambahFaqDetail/{id}', [FaqController::class, 'getKeluhan'])->name('faq.getKeluhan')->middleware('auth');
     Route::post('storeFaq', [FaqController::class, 'storeFaq'])->name('storeFaq')->middleware('auth');
+    Route::get('listFAQ', [FaqController::class, 'listFaq'])->name('listFaq')->middleware('auth');
+    Route::delete('keluhanDelete/{id}', [FaqController::class, 'keluhan_delete'])->name('keluhan.delete')->middleware('auth');
+    Route::delete('faqDelete/{id}', [FaqController::class, 'faq_delete'])->name('faq.delete')->middleware('auth');
 });
 
 // punya konten
