@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contents', function (Blueprint $table) {
-            $table->content_id();
+            $table->bigIncrements('content_id');
             $table->bigInteger('product_id');
             $table->string('title');
             $table->enum('konten', ['Agency Luar', 'ccp', 'cwm']);
-            $table->string('gambar');
-            $table->string('video');
+            $table->string('gambar')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
         });
     }

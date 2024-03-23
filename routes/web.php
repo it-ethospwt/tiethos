@@ -16,6 +16,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\kontenController;
 use App\Http\Controllers\handbookController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ManageAdminController;
 use App\Models\endors;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -56,6 +57,7 @@ Route::prefix('users')->middleware(['isadmin'])->group(function () {
     Route::post('update/{id}', [AdminController::class, 'users_update'])->name('admin.users.update')->middleware('auth');
     Route::delete('delete/{id}', [AdminController::class, 'users_delete'])->name('admin.users.delete')->middleware('auth');
 });
+
 
 Route::prefix('faq')->group(function () {
     Route::get('/', [FaqController::class, 'index'])->name('faq')->middleware('auth');
