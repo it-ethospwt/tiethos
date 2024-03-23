@@ -141,3 +141,4 @@
     })
 </script> -->
 @include('dash.footer')
+@include('sweetalert::alert')
