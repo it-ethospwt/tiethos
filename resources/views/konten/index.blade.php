@@ -58,7 +58,6 @@
                         <h2 class="page-title">
                             {{$jdl}}
                         </h2>
-                        @can('admin-only')
                         <div class="col col-sm-2 col-md-1 col-xl py-3">
                             <a href="#navbar-help" class="btn btn-warning btn-pill" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false"> <span style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Konten</a>
                             <div class="dropdown-menu">
@@ -70,7 +69,6 @@
                                 </a>
                             </div>
                         </div>
-                        @endcan
                     </div>
                 </div>
             </div>
@@ -84,6 +82,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         @foreach ($product as $p)
+                                        <?php $hasKONTEN = false; ?>
                                         <?php foreach ($contents as $k) : ?>
                                             <?php if ($k['product_id'] == $p['id']) {
                                                 $hasKONTEN = true;
@@ -131,11 +130,11 @@
                                       
                                         @endforeach
                                     </div>
-                                    <!-- <div class="row">
-                                        <div class="col-md-12">
-                                           
-                                        </div>
-                                    </div> -->
+                                    <!--<div class="row">-->
+                                    <!--    <div class="col-md-12">-->
+                                    <!--        
+                                    <!--    </div>-->
+                                    <!--</div>-->
                                 </div>
                             </div>
                         </div>
