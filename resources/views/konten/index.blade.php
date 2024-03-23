@@ -91,7 +91,7 @@
                                             } ?>
                                         <?php endforeach; ?>
 
-                                        <?php if ($hasKONTEN) : ?>
+                                      
                                             <div class="col-sm-6 col-lg-3 mb-3">
                                                 <div class="card">
                                                     <div class="image-container">
@@ -128,7 +128,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php endif; ?>
+                                      
                                         @endforeach
                                     </div>
                                     <!-- <div class="row">
