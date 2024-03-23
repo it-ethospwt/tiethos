@@ -9,13 +9,11 @@ use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\File;
 use Aws\s3\S3Client;
 use Illuminate\Support\Facades\Storage;
-
-//memanggil  model product
 use App\Models\product;
-//memanggil  model knowladge
 use App\Models\knowladge;
-//memanggil model endors
 use App\Models\endors;
+
+use App\Models\Konten;
 use Nette\Utils\Strings;
 
 class produkController extends Controller
@@ -146,13 +144,13 @@ class produkController extends Controller
             //Check  Jika  Gambar ada
             if ($data_edit->file) {
                 //Hapus  Gambar  Produk dari Bucket  S3
-                Storage::disk('s3')->delete('produk/'.$data_edit->file);
+                Storage::disk('s3')->delete('produk/' . $data_edit->file);
             }
             // Simpan  Gambar pada baru pada  bucket S3
-            $gmr_pdk->storeAs('produk/',$gmr_pdk_nama,'s3');
-            
+            $gmr_pdk->storeAs('produk/', $gmr_pdk_nama, 's3');
+
             //Upadate nama  gambar  pada  database
-            $data_edit->file = $gmr_pdk_nama; 
+            $data_edit->file = $gmr_pdk_nama;
         }
 
         $data_edit->save();
@@ -195,17 +193,31 @@ class produkController extends Controller
         }
 
         //Hapus data yang terkait dari table 'endors'
-        $endor  = endors::where('product_id', $id)->get(); 
-        foreach($endor as $e){
+        $endor  = endors::where('product_id', $id)->get();
+        foreach ($endor as $e) {
             $bucketName = 'bankcont';
-            $objectKey  = 'endorse/instagram/foto_profile/'.$e->foto;
+            $objectKey  = 'endorse/instagram/foto_profile/' . $e->foto;
 
-                $s3->deleteObject([
+            $s3->deleteObject([
                 'Bucket' => $bucketName,
                 'Key'   =>  $objectKey
             ]);
 
             $e->delete();
+        }
+
+        //Hapus data yang terkait dari table 'endors'
+        $konten  = Konten::where('content_id', $id)->get();
+        foreach ($konten as $kt) {
+            $bucketName = 'bankcont';
+            $objectKey  = 'konten/gambar/' . $kt->gambar;
+
+            $s3->deleteObject([
+                'Bucket' => $bucketName,
+                'Key'   =>  $objectKey
+            ]);
+
+            $kt->delete();
         }
 
         //Hapus  produk itu Sendiri

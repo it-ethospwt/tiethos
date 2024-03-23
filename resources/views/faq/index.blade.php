@@ -21,12 +21,16 @@
                             List FAQ
                         </h2>
                     </div>
+                    @can('admin-only')
                     <div class="btn-tambahUser mt-4 mb-2">
+                        <a href="{{ route('listFaq') }}" class="btn btn-dark btn-pill"> <span
+                                style="margin-right: 8px;"><i class="fa fa-list"></i></span>List Faq & Keluhan</a>
                         <a href="{{ route('faq.tambahKeluhan') }}" class="btn btn-warning btn-pill"> <span
                                 style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tag Keluhan</a>
                         <a href="{{ route('faq.tambahFaqDetail') }}" class="btn btn-warning btn-pill"> <span
                                 style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tambah FAQ</a>
                     </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -71,7 +75,7 @@
     </div>
     @include('dash.footer')
 </div>
-
+@include('dash.footer')
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/rowreorder/1.4.1/js/dataTables.rowReorder.min.js"></script>
@@ -132,6 +136,6 @@
     Toast.fire({
         icon: "success",
         title: "{{$message}}"
-        });
+    });
 </script>
 @endif

@@ -9,8 +9,11 @@ class Konten extends Model
     protected $table =  'contents';
     protected $primaryKey = 'content_id';
     protected $fillable = [
-        'product_id', 'title', 'konten', 'gambar', 'video' // Add other fields as needed
+        'product_id', 'title', 'konten', 'gambar', 'video'
     ];
 
-    // You can define relationships, scopes, or other model methods here
+    public function product()
+    {
+        return $this->belongsTo(product::class);
+    }
 }

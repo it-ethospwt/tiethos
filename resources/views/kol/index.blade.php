@@ -33,10 +33,12 @@
                             <h3 class="card-title">Data Content KOL</h3>
                         </div>
                         <div class="card-body">
+                            @can('admin-only')
                             <div class="btn-tambahUser mt-2 mb-5">
                                 <a href="{{route ('kol.tambah')}}" class="btn btn-warning btn-pill"> <span
                                         style="margin-right: 8px;"><i class="fa fa-plus"></i></span> Content KOL</a>
                             </div>
+                            @endcan
                             <!-- Table -->
                             <table id="table-kol" class="display nowrap" style="width:100%">
                                 <thead>
@@ -47,7 +49,7 @@
                                         <th>Owning</th>
                                         <th>Produk</th>
                                         <th>Data User</th>
-                                        <th>Update</th>
+                                        <th>Dibuat Pada</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -69,21 +71,19 @@
                                             @endphp
                                         </td>
                                         <td>{{ $k->user }}</td>
-                                        <td>{{ $k->updated_at }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($k->created_at)->format('d-m-Y | H:m') }}</td>
                                         <td>
                                             <a href="{{ route('kol.detail', $k->id)}}" class="btn btn-primary btn-pill">
                                                 <span class="ti ti-search" style="color: white;"></span>
                                             </a>
-                                            <a href="" class="btn btn-success btn-pill">
+                                            @can('admin-only')
+                                            <a href="/kedit/{{ $k->id }}" class="btn btn-success btn-pill">
                                                 <span class="ti ti-edit" style="color: white;"></span>
                                             </a>
-                                            <form action="" method="POST" id="deleteForm" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-pill deleteButton">
-                                                    <span class="ti ti-trash" style="color: white;"></span>
-                                                </button>
-                                            </form>
+                                            <a href="/khapus/{{ $k->id }}" class="btn btn-danger btn-pill">
+                                                <span class="ti ti-trash" style="color: white;"></span>
+                                            </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                     @endforeach
@@ -159,15 +159,15 @@
     Toast.fire({
         icon: "success",
         title: "{{$message}}"
-        });
+    });
 </script>
 @endif
 
 <script>
     new DataTable('#table-kol', {
-                    responsive: true,
-                    rowReorder: {
-                        selector: 'td:nth-child(2)'
-                    }
-                });
+        responsive: true,
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        }
+    });
 </script>

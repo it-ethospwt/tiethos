@@ -35,11 +35,6 @@
                         <h2 class="page-title">
                             {{$jdl}}
                         </h2>
-                        <div class="col col-sm-2 col-md-2 col-xl py-3">
-                            <a href="javascript:history.back()" class="btn btn-ghost-warning active w-100">
-                                <span style="margin-right: 8px;"></span>Kembali
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -51,8 +46,13 @@
                             <div class="card card-lg">
                                 <div class="card-body markdown">
                                     <h1 id="whos-that-then"> {{ $web->sub }}</h1>
-                                    <p><img src="{{ asset('/public_imgTest/' . $web->gambar) }}" alt="Image Alt" /></p>
+                                    @if(isset($imageUrls[$web->web_id ]))
+                                    <p><img src="{{ $imageUrls[$web->web_id] }}" alt="Image Alt" /></p>
+                                    @endif
                                     <p>{!! $web->deskripsi !!}</p>
+                                    <div class="btn-tambahUser mt-4">
+                                        <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,3 +60,6 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+@include('dash.footer')

@@ -13,16 +13,13 @@
             <div class="container-xl">
                 <div class="row g-2 align-items-center">
                     <div class="col">
-                        <!-- Page pre-title -->
                         <h2 class="page-title">
-                            Edit
+                            {{$jdl}}
                         </h2>
                     </div>
                 </div>
-                <div class="col col-sm-2 col-md-2 col-xl py-3">
-                    <a href="javascript:history.back()" class="btn btn-ghost-warning active w-100">
-                        <span style="margin-right: 8px;"></span>Kembali
-                    </a>
+                <div class="btn-tambahUser mt-4 mb-2">
+                    <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                 </div>
             </div>
         </div>
@@ -43,9 +40,9 @@
                             </div> -->
                             <div class="mb-3">
                                 <label class="form-label required">Produk</label>
-                                <select class="form-control" name="product_id" id="product_id" value="{{ $contents->product_id }}">
+                                <select class="form-control" name="product_id" id="product_id">
                                     @foreach ($product as $p)
-                                    <option value="<?= $p['id']; ?>"><?= $p['nm_Product']; ?></option>
+                                    <option value="{{ $p->id }}" {{ $p->id == $contents->product_id ? 'selected' : '' }}>{{ $p->nm_product }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -65,20 +62,29 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required">Upload Konten Gambar</label>
-                                <div>
-                                    <input type="file" class="form-control-file" id="gambar" name="gambar">
-                                    <small class="form-hint">File max 2mb dengan format PNG,JPG,JPEG</small>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="gambar" name="gambar" accept="image/png, image/jpeg">
+                                    <button class="btn btn-outline-secondary" type="button" id="upload-button">Upload</button>
                                 </div>
+                                <small class="form-hint">File max 2mb dengan format PNG, JPG, JPEG</small>
                             </div>
                             <div class="row">
                                 <div class="col-6 col-sm-4 col-md-2 col-l py-3">
-                                    <button type="submit" class="btn btn-success w-100">Simpan</button>
-                                </div>
-                                <div class="col-6 col-sm-4 col-md-2 col-l py-3">
-                                    <!-- <button type="submit" class="btn btn-secondary w-100">Reset</button> -->
+                                    <button type="submit" class="btn btn-success btn-pill">Simpan</button>
                                 </div>
                             </div>
                         </div>
                     </form>
 
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+@include('sweetalert::alert')
+
+<!-- <script src="/dist/js/tabler.min.js?1684106062" defer></script>
+<script src="/dist/js/demo.min.js?1684106062" defer></script> -->
+
+
+@include('dash.footer')

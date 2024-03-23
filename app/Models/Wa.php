@@ -11,6 +11,4 @@ class Wa extends Model
     protected $fillable = [
         'product_id', 'sub', 'deskripsi', 'gambar' // Add other fields as needed
     ];
-
-    // You can define relationships, scopes, or other model methods here
 }

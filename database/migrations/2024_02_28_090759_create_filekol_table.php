@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('product', function (Blueprint $table) {
-            $table->renameColumn('gmr_product', 'file');
+        Schema::create('filekol', function (Blueprint $table) {
+            $table->id();
+            $table->string('kol_id');
+            $table->string('gambar');
+            $table->string('video');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('product', function (Blueprint $table) {
-            $table->renameColumn('gmr_product', 'file');
-        });
+        Schema::dropIfExists('filekol');
     }
 };

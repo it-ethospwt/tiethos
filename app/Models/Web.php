@@ -9,8 +9,6 @@ class Web extends Model
     protected $table =  'web';
     protected $primaryKey = 'web_id';
     protected $fillable = [
-        'product_id', 'sub', 'deskripsi', 'gambar' // Add other fields as needed
+        'product_id', 'sub', 'deskripsi', 'gambar'
     ];
-
-    // You can define relationships, scopes, or other model methods here
 }

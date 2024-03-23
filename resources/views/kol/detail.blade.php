@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 
-
 <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
 <div class="page">
     <!-- Navbar -->
@@ -20,13 +19,9 @@
                         <h2 class="page-title mb-3">
                             Detail KOL
                         </h2>
-                        <button type="button" class="btn btn-warning btn-pill" onclick="" data-bs-toggle="modal"
-                            data-bs-target="#modal-gambar"
-                            data-url="{{ route('upload.gambar', ['id' => $kol->id]) }}">Tambah
+                        <button type="button" class="btn btn-warning btn-pill" onclick="" data-bs-toggle="modal" data-bs-target="#modal-gambar" data-url="{{ route('upload.gambar', ['id' => $kol->id]) }}">Tambah
                             Gambar</button>
-                        <button type="button" class="btn btn-warning btn-pill" onclick="" data-bs-toggle="modal"
-                            data-bs-target="#modal-video"
-                            data-url="{{ route('upload.video', ['id' => $kol->id]) }}">Tambah
+                        <button type="button" class="btn btn-warning btn-pill" onclick="" data-bs-toggle="modal" data-bs-target="#modal-video" data-url="{{ route('upload.video', ['id' => $kol->id]) }}">Tambah
                             Video</button>
                     </div>
                 </div>
@@ -114,78 +109,133 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Gambar Content KOL</td>
+                                        <td>List Content KOL</td>
                                     </tr>
-                                    <td class="text-muted">
-                                        @if(isset($imageUrls[$kol->id ]))
-                                        <img src="{{ $imageUrls[$kol->id] }}" alt="Gambar Produk" width="400px">
-                                        @endif
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                                     </td>
-                                    <tr>
-                                        <td>Video Content KOL</td>
-                                    <tr class="text-muted">
-                                    </tr>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <button type="button" class="btn btn-danger btn-pill"
-                                                onclick="window.history.back()">Back</button>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
-                            <div class="modal modal-blur fade" id="modal-gambar" tabindex="-1" role="dialog"
-                                aria-hidden="true">
+                            <div class="modal modal-blur fade" id="modal-gambar" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
-                                        <form action="{{ route('upload.gambar', ['id' => $kol->id]) }}" method="post"
-                                            enctype="multipart/form-data">
+                                        <form id="uploadForm" action="{{ route('upload.gambar') }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Upload File Gambar</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="mb-3" style="display: none;">
+                                                <label class="form-label">Judul</label>
+                                                <div>
+                                                    <input type="text" name="kol_id" class="form-control" aria-describedby="emailHelp" placeholder="Input Judul" value="{{ $kol->id }}">
+                                                </div>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label class="form-label">Gambar</label>
                                                     <input type="file" name="gambar" class="form-control">
                                                 </div>
+                                                <div class="progress"></div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-link link-secondary"
-                                                    data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary ms-auto">Upload</button>
+                                                <button id="uploadButton" type="submit" class="btn btn-primary ms-auto">Upload</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="modal modal-blur fade" id="modal-video" tabindex="-1" role="dialog"
-                                aria-hidden="true">
+                            <div class="modal modal-blur fade" id="modal-video" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
-                                        <form action="{{ route('upload.video', ['id' => $kol->id]) }}" method="post"
-                                            enctype="multipart/form-data">
+                                        <form action="{{ route('upload.video')}}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Upload File Video</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="mb-3" style="display: none;">
+                                                <label class="form-label">Judul</label>
+                                                <div>
+                                                    <input type="text" name="kol_id" class="form-control" aria-describedby="emailHelp" placeholder="Input Judul" value="{{ $kol->id }}">
+                                                </div>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label class="form-label">Video</label>
                                                     <input type="file" name="video" class="form-control">
                                                 </div>
+                                                <div class="mb-3">
+                                                    <progress id="fileProgress" value="0" max="100">0%</progress>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-link link-secondary"
-                                                    data-bs-dismiss="modal">Cancel</button>
                                                 <button type="submit" class="btn btn-primary ms-auto">Upload</button>
                                             </div>
                                         </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="page-body">
+                                <div class="container-xl">
+                                    <div class="row row-cards" id="masonry-container">
+                                        <div class="col-12 text-center my-4">
+                                            <h2>GAMBAR</h2>
+                                        </div>
+                                        <!-- Menampilkan gambar -->
+                                        @foreach ($filekols as $fk)
+                                        @if(isset($imageUrls[$fk->id]))
+                                        <div class="col-sm-6 col-lg-4 masonry-item">
+                                            <div class="card card-sm">
+                                                <a href="{{ $imageUrls[$fk->id] }}" download>
+                                                    <img src="{{ $imageUrls[$fk->id] }}" class="card-img-top">
+                                                </a>
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="ms-auto">
+                                                            <a href="{{ url('kunduh/'.$fk->id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                            <a href="/kdelete/{{ $fk->id }}" class="btn btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @endforeach
+
+                                        <!-- Garis pemisah -->
+                                        <div class="col-12">
+                                            <hr style="border-top: 2px solid #ccc;">
+                                        </div>
+                                        <div class="col-12 text-center my-4">
+                                            <h2>VIDEO</h2>
+                                        </div>
+
+                                        <!-- Menampilkan video -->
+                                        @foreach ($filekols as $fk)
+                                        @if(isset($videoUrls[$fk->id]))
+                                        <div class="col-sm-6 col-lg-4 masonry-item">
+                                            <div class="card card-sm">
+                                                <video width="100%" controls>
+                                                    <source src="{{ $videoUrls[$fk->id] }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="ms-auto">
+                                                            <a href="{{ url('kunduh/'.$fk->id) }}" class="btn btn-success"><i class="fa fa-download"></i></a>
+                                                            <a href="/kdelete/{{ $fk->id }}" class="btn btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +256,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
 <script type="text/javascript">
     $(function() {
         $(document).on('click', '.deleteButton', function(e) {
@@ -221,20 +272,7 @@
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Di sini Anda bisa melakukan ajax request untuk menghapus data atau submit form secara langsung.
-                    // Misalnya:
-                    // $.ajax({
-                    //     type: "DELETE",
-                    //     url: formAction,
-                    //     success: function(data) {
-                    //         Swal.fire("Deleted!", "Your file has been deleted.", "success");
-                    //     },
-                    //     error: function(data) {
-                    //         Swal.fire("Error!", "An error occurred while deleting the file.", "error");
-                    //     }
-                    // });
 
-                    // Atau, jika Anda ingin langsung submit form:
                     $(this).closest('form').submit();
                 }
             });
@@ -259,6 +297,57 @@
     Toast.fire({
         icon: "success",
         title: "{{$message}}"
-        });
+    });
 </script>
 @endif
+
+<script>
+    document.getElementById('submit-button').addEventListener('click', function() {
+        var fileInput = document.getElementById('gambar');
+        var file = fileInput.files[0];
+        if (file) {
+            var formData = new FormData();
+            formData.append('file', file);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'url/to/upload/endpoint', true);
+
+            xhr.upload.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    var percentComplete = (e.loaded / e.total) * 100;
+                    document.getElementById('progress').style.display = 'block';
+                    document.getElementById('progress-bar').style.width = percentComplete + '%';
+                    document.getElementById('progress-bar').innerHTML = percentComplete.toFixed(2) + '%';
+                }
+            };
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // File uploaded successfully
+                    console.log('File uploaded successfully');
+                    // Add code here to submit the form
+                    document.getElementById('submit-button').closest('form').submit();
+                } else {
+                    // Error uploading file
+                    console.error('Error uploading file');
+                }
+            };
+
+            xhr.send(formData);
+        } else {
+            // No file selected
+            console.error('No file selected');
+        }
+    });
+</script>
+
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+<script>
+    var masonry = new Masonry('#masonry-container', {
+        itemSelector: '.masonry-item',
+        columnWidth: '.col-lg-4',
+        percentPosition: true
+    });
+</script> -->

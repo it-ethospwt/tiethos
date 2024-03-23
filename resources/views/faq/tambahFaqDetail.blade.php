@@ -37,7 +37,7 @@
                                                 <select id="produk" name="produk" class="form-select">
                                                     <option value="">Pilih</option>
                                                     @foreach ($produk as $p)
-                                                    <option value="{{ $p->id }}">{{ $p->nm_Product }}</option>
+                                                    <option value="{{ $p->id }}">{{ $p->nm_product }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -53,21 +53,18 @@
                                         <div class="mb-3">
                                             <label class="form-label required">Pertanyaan</label>
                                             <div>
-                                                <input type="text" name="pertanyaan" class="form-control"
-                                                    placeholder="Enter Pertanyaan">
+                                                <input type="text" name="pertanyaan" class="form-control" placeholder="Enter Pertanyaan">
                                             </div>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label required">Jawaban</label>
                                             <div>
-                                                <textarea rows="5" type="text" name="jawaban" class="form-control"
-                                                    placeholder="Enter Jawaban"></textarea>
+                                                <textarea rows="5" type="text" name="jawaban" class="form-control" placeholder="Enter Jawaban"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer text-end">
-                                        <button type="button" class="btn btn-danger btn-pill"
-                                            onclick="window.history.back()">Back</button>
+                                        <button type="button" class="btn btn-danger btn-pill" onclick="window.history.back()">Back</button>
                                         <button type="submit" class="btn btn-primary btn-pill">Submit</button>
                                     </div>
                                 </form>
@@ -82,36 +79,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-        $('#produk').on('change', function(){
-            var id_produk = $(this).val();
-            if (id_produk) {
-                $.ajax({
-                    url: '/faq/tambahFaqDetail/' + id_produk,
-                    type: 'GET',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    dataType: 'json',
-                    success: function(data){
-                        if (data && data.length > 0) {
-                            $('#keluhan').empty();
-                            $('#keluhan').append('<option value="">-PILIH KELUHAN-</option>');
-                            $.each(data, function(key, keluhan){
-                                $('#keluhan').append($('<option>').val(keluhan.id).text(keluhan.nama));    
-                            });
-                        } else {
-                            $('#keluhan').empty();
+            $('#produk').on('change', function() {
+                var id_produk = $(this).val();
+                if (id_produk) {
+                    $.ajax({
+                        url: '/faq/tambahFaqDetail/' + id_produk,
+                        type: 'GET',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data && data.length > 0) {
+                                $('#keluhan').empty();
+                                $('#keluhan').append('<option value="">-PILIH KELUHAN-</option>');
+                                $.each(data, function(key, keluhan) {
+                                    $('#keluhan').append($('<option>').val(keluhan.id).text(keluhan.nama));
+                                });
+                            } else {
+                                $('#keluhan').empty();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
                         }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            } else {
-                $('#keluhan').empty();
-            }
-        })
-    });
+                    });
+                } else {
+                    $('#keluhan').empty();
+                }
+            })
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
