@@ -46,7 +46,8 @@
 <body>
     <header class="navbar navbar-expand-md d-print-none">
         <div class="container-xl">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+                aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
@@ -86,8 +87,11 @@
                 </div> --}}
                 {{-- Dark Mode End --}}
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        <img class="avatar avatar-sm" src="{{asset('./static/avatars/000m.jpg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                        aria-label="Open user menu">
+                        <img class="avatar avatar-sm"
+                            src="{{ asset('static/photo_profile/' . Auth::user()->user_image) }}" width="110"
+                            height="32" alt="Tabler" class="navbar-brand-image">
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="mt-1 small text-muted">{{ Auth::user()->role }}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
@@ -74,6 +75,12 @@ class AdminController extends Controller
     public function users_delete($id)
     {
         $user = User::findOrFail($id);
+        if (!empty($user->user_image)) {
+            $imagePath = public_path('static/photo_profile/' . $user->user_image);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+        }
         $user->delete();
 
         return redirect()->route('admin.users')->with('success', 'User deleted successfully');

@@ -77,6 +77,9 @@
                                             <div>
                                                 <select name="role" class="form-select">
                                                     <option>Admin</option>
+                                                    <option>Admin Internal</option>
+                                                    <option>Admin External</option>
+                                                    <option>CWM</option>
                                                     <option>ADV</option>
                                                     <option>CS</option>
                                                 </select>

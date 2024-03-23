@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\knowladgeController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\produkController;
-use App\Http\Controllers\fileEndorseController;
-use App\Http\Controllers\fileVideoEndorseController;
+use App\Models\endors;
 use App\Models\product;
-use App\Http\Controllers\endorseController;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\KolController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AffiliatorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\kontenController;
+use App\Http\Controllers\produkController;
+use App\Http\Controllers\endorseController;
 use App\Http\Controllers\handbookController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Models\endors;
+use App\Http\Controllers\knowladgeController;
+use App\Http\Controllers\AffiliatorController;
+use App\Http\Controllers\fileEndorseController;
+use App\Http\Controllers\fileVideoEndorseController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
@@ -32,14 +33,12 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('login-proses', [LoginController::class, 'proses'])->name('login-proses');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('register', [RegisterController::class, 'index'])->name('register');
+Route::post('register-proses', [RegisterController::class, 'register'])->name('register-proses');
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

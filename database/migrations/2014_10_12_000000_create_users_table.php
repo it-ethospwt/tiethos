@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->enum('jenis_kelamin', ['Laki - Laki', 'Perempuan']);
-            $table->enum('role', ['Admin', 'ADV', 'CS']);
+            $table->enum('role', ['Superadmin', 'ADV', 'CS', 'CWM', 'Admin External', 'Admin Internal']);
             $table->string('user_image')->default('default.svg');
             $table->timestamp('last_seen')->nullable();
             $table->rememberToken();
