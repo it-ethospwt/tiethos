@@ -75,5 +75,8 @@ class Kernel extends HttpKernel
         'isadmin' => \App\Http\Middleware\IsAdmin::class,
         'isadv' => \App\Http\Middleware\IsAdv::class,
         'iscs' => \App\Http\Middleware\IsCs::class,
+        'iscwm' => \App\Http\Middleware\IsCWM::class,
+        'isadmininternal' => \App\Http\Middleware\IsAdminInternal::class,
+        'isadminexternal' => \App\Http\Middleware\IsAdminExternal::class,
     ];
 }
