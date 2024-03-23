@@ -39,10 +39,11 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('login-proses', [LoginController::class, 'proses'])->name('login-proses');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+
+
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
-
 
 Route::prefix('users')->middleware(['isadmin'])->group(function () {
     Route::get('/', [AdminController::class, 'users'])->name('admin.users')->middleware('auth');

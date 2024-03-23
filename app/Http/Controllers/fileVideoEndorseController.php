@@ -23,7 +23,7 @@ class fileVideoEndorseController extends Controller
         set_time_limit(180);
 
         $this->validate($request,[
-            'file' => 'mimes:mp4,mov|max:500048|required',            
+            'file' => 'mimes:mp4,movphp|max:1024000|required',            
         ],
         [
             'file.required' =>  'Gambar Harus Diisi!',

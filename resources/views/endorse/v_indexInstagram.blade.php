@@ -58,7 +58,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Endoser Instagram  @if($endor->isNotEmpty()) Produk {{$endor[0]->product->nm_product }} @endif</h3>
+                            <div class="tittle">
+                                <h3>Data Endoser Instagram  @if($endor->isNotEmpty()) Produk {{$endor[0]->product->nm_product }} @endif</h3>
+                            </div>
                         </div>
                         <div class="card-body">
                             <!-- Table -->
@@ -70,6 +72,7 @@
                                         <th>Kontak Person</th>
                                         <th>Link Akun Sosmed</th>
                                         <th>Owning</th>
+                                        <th>Created_at</th>
                                         <th style="width:18%;">Aksi</th>
                                     </tr>
                                 </thead>
@@ -82,6 +85,7 @@
                                         <td>{{ $e->kontak_person }}</td>
                                         <td><em><a href="{{ $e->link_akun }}" target="_blank" >{{ $e->link_akun }}</a></em></td>
                                         <td>{{ $e->owning }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($e->created_at)->format('d-m-Y | H:m') }}</td>
                                         <td>
                                             <a href="/detailEndoser/{{ $e->id }}" class="btn btn-search btn-pill"><i class="fa fa-search" style="color: #fff;"></i></a>
                                             <a href="/editEndorse/{{ $e->id }}" class="btn btn-success btn-pill "><i class="fa fa-edit"></i></a>
