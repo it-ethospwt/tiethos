@@ -35,40 +35,42 @@ class kontenController extends Controller
                 ->count();
         }
 
-        // Sisipkan konfigurasi AWS S3
         $config = [
             'region' => 'ap-southeast-1',
             'version' => 'latest',
             'credentials' => [
-                'key' => 'YOUR_ACCESS_KEY',
-                'secret' => 'YOUR_SECRET_ACCESS_KEY',
+                'key' =>  'AKIAZI2LDMSP6E5M4TFK',
+                'secret' =>  'POnrZk6DhdYWjIhHgiaoI0dehzT+2fGFRFA+xkpZ',
             ],
         ];
 
-        // Buat instance dari S3Client
-        $s3 = new S3Client($config);
+        //membuat instansiasi  S3
+        $S3 = new S3Client($config);
 
+        //Nama Bucket dan Folder
         $bucketName = 'bankcont';
         $folderName = 'produk/';
 
-        // Array untuk menyimpan URL gambar
-        $imageUrls = [];
+        //Arary untuk  menyimpan gambar
+        $imageUrls =  [];
 
-        // Loop melalui setiap produk
+        //Loop melalui setiap data  produk
         foreach ($p as $product) {
-            $fileName = $product->file;
+            //Mendapatkan nama file dari field 'file' dalam  record product 
+            $fileName =  $product->file;
 
-            // Dapatkan URL gambar dari AWS S3 jika file ada
-            $imageUrl = $s3->getObjectUrl($bucketName, $folderName . $fileName);
+            //mendapatkan URL gambar dari AWS S3 jika file tersebut ada
+            $imageUrl = $S3->getObjectUrl($bucketName, $folderName . $fileName);
 
-            // Tambahkan URL gambar ke dalam array jika tersedia
+            //Menambahkan  URL  gambar  kedalam  array jika URL tersedia
             if ($imageUrl) {
                 $imageUrls[$product->id] = $imageUrl;
             }
         }
 
-        return view('konten.index', ['product' => $p, 'contents' => $k, 'jdl' => $jdl, 'imageUrls' => $imageUrls, 'countKontenByProduk' => $countKontenByProduk]);
+        return  view('konten.index', ['product' => $p, 'contents' => $k, 'jdl' => $jdl, 'imageUrls' => $imageUrls, 'countKontenByProduk' => $countKontenByProduk]);
     }
+
 
 
     public function al($product_id)
@@ -230,10 +232,10 @@ class kontenController extends Controller
         $this->validate(
             $request,
             [
-                'gambar' => 'mimes:jpg,jpeg,png,gif|max:2048|required',
+                'gambar' => 'mimes:jpg,jpeg,png,gif|max:5000|required',
             ],
             [
-                'gambar' => 'Ukuran Gambar product Tidak Boleh Melebihi dari 2 MB!',
+                'gambar' => 'Ukuran Gambar product Tidak Boleh Melebihi dari 5 MB!',
             ]
         );
 
