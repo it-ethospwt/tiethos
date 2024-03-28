@@ -22,4 +22,5 @@ class product extends Model
     {
         return $this->hasOne(endors::class);
     }
+    
 }

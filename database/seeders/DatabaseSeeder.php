@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => 'development2023',
             'jenis_kelamin' => 'Laki - Laki',
-            'role' => 'Admin',
+            'role' => 'Superadmin',
         ]);
     }
 }

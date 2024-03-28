@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sign in</title>
+    <title>Kontenpedia - Register</title>
     <!-- CSS files -->
     <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
@@ -33,9 +33,9 @@
 
         .hero-login {
             display: flex;
-            align-items: flex-end;
+            flex-direction: column;
+            justify-content: center;
         }
-
 
         input[type=text] {
             border-radius: 10px;
@@ -65,24 +65,59 @@
             </div> --}}
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-5 hero-login">
-                        <img src="./dist/img/Hero-Login.png" class="" alt="">
-                    </div>
                     <div class="col-md-7">
                         <div class="card-body">
-                            <h1 class="text-center mt-6 mb-4">LOGIN</h1>
-                            <form action="{{ route('login-proses') }}" method="post">
+                            <h1 class="text-center mt-6 mb-4">REGISTER</h1>
+                            <form action="{{ route('register-proses') }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                <div class="mb-5">
+                                <div class="mb-3">
+                                    <label class="form-label ">Email</label>
+                                    <div>
+                                        <input type="email" name="email" class="form-control"
+                                            aria-describedby="emailHelp" placeholder="Enter email">
+                                    </div>
+                                    @error('email')
+                                    <small>{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label ">Nama</label>
+                                    <div>
+                                        <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                                    </div>
+                                    @error('name')
+                                    <small>{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Jenis Kelamin</label>
+                                    <div>
+                                        <select name="jenis_kelamin" class="form-select">
+                                            <option>Laki - Laki</option>
+                                            <option>Perempuan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Posisi</label>
+                                    <div>
+                                        <select name="role" class="form-select">
+                                            <option>ADV</option>
+                                            <option>CWM</option>
+                                            <option>CS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label">Username</label>
                                     <input type="text" name="username" class="form-control"
                                         placeholder=" Input Username Anda" autocomplete="off"
                                         value="{{ old('username') }}">
+                                    @error('username')
+                                    <small>{{ $message }}</small>
+                                    @enderror
                                 </div>
-                                @error('username')
-                                <small>{{ $message }}</small>
-                                @enderror
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label class="form-label">Password</label>
                                     <div class="input-group input-group-flat">
                                         <input id="passwordInput" type="password" name="password" class="form-control"
@@ -103,22 +138,35 @@
                                             </a>
                                         </span>
                                     </div>
+                                    <small class="form-hint">Minimal 8 Karakter</small>
+                                    @error('password')
+                                    <small>{{ $message }}</small>
+                                    @enderror
                                 </div>
-                                @error('password')
-                                <small>{{ $message }}</small>
-                                @enderror
+                                <div class="mb-3">
+                                    <div class="form-label">Foto Profil</div>
+                                    <input type="file" class="form-control" name="user_image">
+                                    <small class="form-hint">Maksimal Size 2MB, Harus Berekstensi: jpg, jpeg,
+                                        png</small>
+                                    @error('user_image')
+                                    <small>{{ $message }}</small>
+                                    @enderror
+                                </div>
                                 <div class="form-footer mb-5">
-                                    <button type="submit" class="btn btn-primary">Masuk</button>
+                                    <button type="submit" class="btn btn-primary">Daftar</button>
                                 </div>
                             </form>
                         </div>
+                    </div>
+                    <div class="col-md-5 hero-login">
+                        <img src="./dist/img/Hero-Login.png" class="" alt="">
                     </div>
 
                 </div>
             </div>
 
             <div class="text-center text-muted mt-3">
-                Belum Punya Akun? <a href="{{ route('register')}}" tabindex="-1">Daftar</a>
+                Sudah Punya Akun? <a href="{{ route('login') }}" tabindex="-1">Masuk</a>
             </div>
         </div>
     </div>

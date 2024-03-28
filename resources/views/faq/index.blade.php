@@ -73,7 +73,6 @@
             </div>
         </div>
     </div>
-    @include('dash.footer')
 </div>
 @include('dash.footer')
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>

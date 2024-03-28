@@ -44,11 +44,6 @@
         object-fit: cover;
     }
 
-    #tes{
-        background-color: none;
-        border: 1px solid #e5e5e5;
-        border-radius: 20px;
-    }
 </style>
 <!-- <script src="./dist/js/demo-theme.min.js?1684106062"></script>  -->
 <div class="page">
@@ -74,72 +69,7 @@
                                     Vidio
                                 </a>
                             </div>
-                            <a href="#" class="btn btn-outline-success btn-pill"><span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Tim Baru</a>
-                            <a href="#" class="btn btn-pill btn-outline-primary"><span style="margin-right: 8px;"><i class="fa fa-plus"></i></span>Anggota</a>
                         </div>
-
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col py-0">
-                                        <div class="col-md-12 py-1">
-                                            Nama Tim     : <span class="fw-medium">Kembang Pacar</span>
-                                        </div>
-                                        <div class="col-md-12 py-1">
-                                            Nama Leader  : <span class="fw-medium">Sarwo GA</span>
-                                        </div>
-                                        <div class="col-md-12 py-3">
-                                                <div class="accordion accordion-flush" id="accordionFlushExample">
-                                                <div class="accordion-item"  id="tes">
-                                                    <h5 class="accordion-header">
-                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                            <span class="fw-medium">Total Anggota : 12</span>    
-                                                        </button>
-                                                    </h5>
-                                                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                                            <div class="accordion-body">
-                                                                <div class="cont mb-3" style="display: flex; flex-direction:row; align-items:center; gap:8px;">
-                                                                    <div class="foto-profile">
-                                                                        <img src="{{ asset('dist/img/users.png')}}" class="rounded-circle" alt="..." width="45" height="45" style="border: 1px solid #e5e5e5;">
-                                                                    </div>
-                                                                    <div class="nama-anggota">
-                                                                        Afan Drakness
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont mb-3" style="display: flex; flex-direction:row; align-items:center; gap:8px">
-                                                                    <div class="foto-profile">
-                                                                        <img src="{{ asset('dist/img/users.png')}}" class="rounded-circle" alt="..." width="45" height="45" style="border: 1px solid #e5e5e5;">
-                                                                    </div>
-                                                                    <div class="nama-anggota">
-                                                                        Afan Drakness
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont mb-3" style="display: flex; flex-direction:row; align-items:center; gap:8px">
-                                                                    <div class="foto-profile">
-                                                                        <img src="{{ asset('dist/img/users.png')}}" class="rounded-circle" alt="..." width="45" height="45" style="border: 1px solid #e5e5e5;">
-                                                                    </div>
-                                                                    <div class="nama-anggota">
-                                                                        Afan Drakness
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cont" style="display: flex; flex-direction:row; align-items:center; gap:8px">
-                                                                    <div class="foto-profile">
-                                                                        <img src="{{ asset('dist/img/users.png')}}" class="rounded-circle" alt="..." width="45" height="45" style="border: 1px solid #e5e5e5;">
-                                                                    </div>
-                                                                    <div class="nama-anggota">
-                                                                        Afan Drakness
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                            </div> 
-                                        </div>     
-                                    </div>
-                                </div>
-                            </div>        
-                        </div>
-
                     </div>
                 </div>
             </div>
